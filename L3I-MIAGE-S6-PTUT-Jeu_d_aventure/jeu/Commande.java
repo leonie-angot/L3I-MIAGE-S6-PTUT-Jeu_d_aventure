@@ -23,6 +23,10 @@ public enum Commande {
 	OUEST("O", "O (aller a la sortie ouest)"),
 	TABLEAU("N", "T (aller au tableau)"), 
 	PARLER("P", "P (parler avec un pnj)"),
+	CARTE("C","C(afficher la carte du rez-de-chaussée)"),
+	SOUSSOL("-1","-1 (affiche la carte du sous-sol"),
+	PREMIERETAGE("1","1(affiche la carte du premier étage)"),
+	SECONDETAGE("2","2(affiche la carte du 2eme étage)"),
 	AIDE("?", "? (aide)"), 
 	QUITTER("Q", "Q (quitter)");
 

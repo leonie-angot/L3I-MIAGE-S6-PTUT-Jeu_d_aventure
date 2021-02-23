@@ -26,6 +26,9 @@ public class Jeu {
 	 * Cree la carte du jeu avec ses differentes zones.
 	 * initialise l'interface utilisateur graphique avec null.
 	 */
+	private Zone precedent;
+	private boolean a=true;
+	
     public Jeu() {
         creerCarte();
         gui = null;
@@ -45,7 +48,7 @@ public class Jeu {
 	 * @author Léonie A.
      */
     private void creerCarte() {
-        Zone [] zones = new Zone [20];
+        Zone [] zones = new Zone [24];
         zones[0] = new Zone("Tableau", "0-Tableau.jpg" );
         zones[1] = new Zone("Entree", "1-Entree.jpg" );
         zones[2] = new Zone("Couloir Ouest", "2-CouloirWest .jpg" );
@@ -66,8 +69,11 @@ public class Jeu {
         zones[17] = new Zone("Grenier", "17-Grenier.jpg" );
         zones[18] = new Zone("Chambre du Majordome", "18-ChambreDuMajordome.jpg" );
         zones[19] = new Zone("Maison du Gardien", "19-MaisonDuGardien.jpg" );
+        zones[20] = new Zone("Plan du Sous Sol", "20-PlanMaisonSousSol.jpg");
+        zones[21] = new Zone("Plan du Rez de Chaussée", "21-PlanMaisonRezDeChaussee.jpg");
+        zones[22] = new Zone("Plan du Sous Sol", "22-PlanMaison2emeEtage.jpg");
+        zones[23] = new Zone("Plan du Second etage","23-PlanMaison2emeEtage.jpg");
         
-
         zones[0].ajouteSortie(Sortie.SUD, zones[1]); 	// Depuis le Tableau aller dans l'Entrée
         
         zones[1].ajouteSortie(Sortie.OUEST, zones[2]); 	// Depuis l'Entrée aller dans le couloir Ouest
@@ -129,6 +135,25 @@ public class Jeu {
         zones[19].ajouteSortie(Sortie.SUD, zones[15]);	// Depuis la Maison du Gardien pour aller le Jardin
         
         zoneCourante = zones[1]; 
+        
+        /**
+         * Plan de la maison
+         */
+        
+        
+        zoneCourante.ajouteSortie(Sortie.REZDECHAUSSE, zones[21]); //Depuis n'importe ou vers la carte
+       
+        zones[21].ajouteSortie(Sortie.SOUSSOL, zones[20]);
+        zones[21].ajouteSortie(Sortie.PREMIERETAGE, zones[22]);
+        zones[21].ajouteSortie(Sortie.SECONDETAGE, zones[23]);
+        
+        zones[22].ajouteSortie(Sortie.SOUSSOL, zones[20]);
+        zones[22].ajouteSortie(Sortie.REZDECHAUSSE, zones[21]);
+        zones[22].ajouteSortie(Sortie.SECONDETAGE, zones[23]);
+
+        zones[23].ajouteSortie(Sortie.SOUSSOL, zones[20]);
+        zones[23].ajouteSortie(Sortie.REZDECHAUSSE, zones[21]);
+        zones[23].ajouteSortie(Sortie.PREMIERETAGE, zones[22]);
     }
 
     /**
@@ -182,6 +207,23 @@ public class Jeu {
         case "T" : case "TABLEAU" :
         	allerEn( "TABLEAU"); 
         	break;
+        	/**
+        	 * Carte
+        	 */
+        case "-1": case "SOUSSOL":
+        	Carte("SOUSSOL");
+        	break;
+        case "C" : case "REZDECHAUSSE" : case "0" : case "CARTE":
+        	Carte("REZDECHAUSSE");
+        	break;
+        case "1" : case "PREMIERETAGE":
+        	Carte("PREMIERETAGE");
+        	break;
+        case "2" : case "SECONDETAGE":
+        	Carte("SECONDETAGE");
+        	break;
+        case "XC" : case "XCARTE":
+        	Carte("XCARTE");
         case "Q" : case "QUITTER" :
         	terminer();
         	break;
@@ -191,6 +233,37 @@ public class Jeu {
         }
     }
 
+    private void Carte(String commandeCarte)
+    {
+    	if(a==true)
+    	{
+    	precedent=zoneCourante;
+    	a=false;
+    	}
+    	switch(commandeCarte)
+    	{
+    	case "-1": case "SOUSSOL":
+    		allerEn("SOUSSOL");
+    		break;
+    	case "0": case "REZDECHAUSSE":
+    		allerEn("REZDECHAUSSE");
+    		break;
+    	case "1": case "PREMIERETAGE":
+    		allerEn("PREMIERETAGE");
+    		break;
+    	case "2": case "SECONDETAGE":
+    		allerEn("SECONDETAGE");
+    		break;
+    	case "XC": case "XCARTE":
+    		a=true;
+    		zoneCourante=precedent;
+    		gui.afficher(zoneCourante.descriptionLongue());
+        	gui.afficher();
+        	gui.afficheImage(zoneCourante.nomImage());
+    		break;
+    	
+    	}
+    }
     /**
      * Affiche la description de chaque commande autorisée
      */
@@ -207,6 +280,7 @@ public class Jeu {
      * Affiche la localisation du joueur
      * @author Léonie A.
      */
+    /**
     private void dialogues(String direction) {
     	Zone nouvelle = zoneCourante.obtientSortie( direction);
     	switch (zones[]) {
@@ -214,7 +288,7 @@ public class Jeu {
     		gui.afficher("Parler au majordome :");
     	}
     }
-    
+    */
     /**
      * Changement de la localisation du joueur si la sortie demandée existe
      * @param direction La sortie demandée par le joueur
