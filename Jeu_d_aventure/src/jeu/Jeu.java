@@ -19,9 +19,16 @@ public class Jeu {
 	
 	ArrayList<Indices> tabIndice = new ArrayList<Indices>();
 	
+	/*
+	 * Initialisation des variables pour la Téléportation et l'Affichage du Plan de la maison
+	 */
 	boolean tpPossible = false;
 	boolean visionCartePossible = false;
+	private Zone zonePrecedente;
 
+	/*
+	 * 
+	 */
 	public void creerIndices() {
 		Indices[] tab = new Indices[10];
 		
@@ -50,6 +57,9 @@ public class Jeu {
      */
     public void setGUI( GUI g) { gui = g; afficherMessageDeBienvenue(); }
     
+    /*
+     * 
+     */
     Zone [] zones = new Zone [24];
     
     /**
@@ -82,8 +92,8 @@ public class Jeu {
         zones[19] = new Zone("Maison du Gardien", "19-MaisonDuGardien.jpg" );
         zones[20] = new Zone("Plan du Sous Sol", "20-PlanMaisonSousSol.jpg");
         zones[21] = new Zone("Plan du Rez de Chaussée", "21-PlanMaisonRezDeChaussee.jpg");
-        zones[22] = new Zone("Plan du Sous Sol", "22-PlanMaison1erEtage.jpg");
-        zones[23] = new Zone("Plan du Second etage","23-PlanMaison2emeEtage.jpg");
+        zones[22] = new Zone("Plan du Premier Étage", "22-PlanMaison1erEtage.jpg");
+        zones[23] = new Zone("Plan du Second Étage","23-PlanMaison2emeEtage.jpg");
 
         zones[0].ajouteSortie(Sortie.SUD, zones[1]); 	// Depuis le Tableau aller dans l'Entrée
         
@@ -94,8 +104,8 @@ public class Jeu {
         zones[1].ajouteSortie(Sortie.TABLEAU, zones[0]); 	// Depuis l'Entrée aller sur le Tableau
         
         zones[2].ajouteSortie(Sortie.EST, zones[1]);  	// Depuis le couloir Ouest aller dans l'Entrée
-        zones[2].ajouteSortie(Sortie.OUEST, zones[7]);	// Depuis le couloir Ouest aller dans la Cuisine
-        zones[2].ajouteSortie(Sortie.NORD, zones[6]);	// Depuis le couloir Ouest aller dans la Salle à Manger
+        zones[2].ajouteSortie(Sortie.OUEST, zones[6]);	// Depuis le couloir Ouest aller dans la Cuisine
+        zones[2].ajouteSortie(Sortie.NORD, zones[7]);	// Depuis le couloir Ouest aller dans la Salle à Manger
         
         zones[3].ajouteSortie(Sortie.OUEST, zones[1]); 	// Depuis le couloir Est aller dans l'Entrée
         zones[3].ajouteSortie(Sortie.EST, zones[9]);	// Depuis le couloir Est aller dans le Bureau
@@ -145,7 +155,7 @@ public class Jeu {
         
         zones[19].ajouteSortie(Sortie.SUD, zones[15]);	// Depuis la Maison du Gardien pour aller le Jardin
         
-        zones[20].ajouteSortie(Sortie.SOUSSOL, zones[21]);
+        zones[20].ajouteSortie(Sortie.REZDECHAUSSEE, zones[21]);
         zones[20].ajouteSortie(Sortie.PREMIERETAGE, zones[22]);
         zones[20].ajouteSortie(Sortie.SECONDETAGE, zones[23]);
         
@@ -154,11 +164,11 @@ public class Jeu {
         zones[21].ajouteSortie(Sortie.SECONDETAGE, zones[23]);
 
         zones[22].ajouteSortie(Sortie.SOUSSOL, zones[20]);
-        zones[22].ajouteSortie(Sortie.REZDECHAUSSE, zones[21]);
+        zones[22].ajouteSortie(Sortie.REZDECHAUSSEE, zones[21]);
         zones[22].ajouteSortie(Sortie.SECONDETAGE, zones[23]);
 
         zones[23].ajouteSortie(Sortie.SOUSSOL, zones[20]);
-        zones[23].ajouteSortie(Sortie.REZDECHAUSSE, zones[21]);
+        zones[23].ajouteSortie(Sortie.REZDECHAUSSEE, zones[21]);
         zones[23].ajouteSortie(Sortie.PREMIERETAGE, zones[22]);
         
         zoneCourante = zones[1]; 
@@ -212,6 +222,115 @@ public class Jeu {
     	gui.afficheImage(zoneCourante.nomImage());
     }
     
+    /*
+     * Permet de retenir dans quelle Zone le joueur se trouvait avant de regarder le plan du manoir
+     */
+    private void retenirZone() {
+    	if (zoneCourante == zones[1]) {
+    		zonePrecedente = zones[1];
+    	} else if (zoneCourante == zones[2]) {
+    		zonePrecedente = zones[2];
+    	} else if (zoneCourante == zones[3]) {
+    		zonePrecedente = zones[3];
+    	} else if (zoneCourante == zones[4]) {
+    		zonePrecedente = zones[4];
+    	} else if (zoneCourante == zones[5]) {
+    		zonePrecedente = zones[5];
+    	} else if (zoneCourante == zones[6]) {
+    		zonePrecedente = zones[6];
+    	} else if (zoneCourante == zones[7]) {
+    		zonePrecedente = zones[7];
+    	} else if (zoneCourante == zones[8]) {
+    		zonePrecedente = zones[8];
+    	} else if (zoneCourante == zones[9]) {
+    		zonePrecedente = zones[9];
+    	} else if (zoneCourante == zones[10]) {
+    		zonePrecedente = zones[10];
+    	} else if (zoneCourante == zones[11]) {
+    		zonePrecedente = zones[11];
+    	} else if (zoneCourante == zones[12]) {
+    		zonePrecedente = zones[12];
+    	} else if (zoneCourante == zones[13]) {
+    		zonePrecedente = zones[13];
+    	} else if (zoneCourante == zones[14]) {
+    		zonePrecedente = zones[14];
+    	} else if (zoneCourante == zones[15]) {
+    		zonePrecedente = zones[15];
+    	} else if (zoneCourante == zones[16]) {
+    		zonePrecedente = zones[16];
+    	} else if (zoneCourante == zones[17]) {
+    		zonePrecedente = zones[17];
+    	} else if (zoneCourante == zones[18]) {
+    		zonePrecedente = zones[18];
+    	} else if (zoneCourante == zones[19]) {
+    		zonePrecedente = zones[19];
+    	}
+    }
+    
+    /*
+     * Permet de faire retourner le joueur à sa position initiale avant de consulter le plan du manoir
+     */
+    private void revenirZonePrecedente() {
+    	if (zonePrecedente == zones[1]) {
+    		zoneCourante = zones[1];
+            montrerCarteJoueur(1);
+    	} else if (zonePrecedente == zones[2]) {
+    		zoneCourante = zones[2];
+            montrerCarteJoueur(2);
+    	} else if (zonePrecedente == zones[3]) {
+    		zoneCourante = zones[3];
+            montrerCarteJoueur(3);
+    	} else if (zonePrecedente == zones[4]) {
+    		zoneCourante = zones[4];
+            montrerCarteJoueur(4);
+    	} else if (zonePrecedente == zones[5]) {
+    		zoneCourante = zones[5];
+            montrerCarteJoueur(5);
+    	} else if (zonePrecedente == zones[6]) {
+    		zoneCourante = zones[6];
+            montrerCarteJoueur(6);
+    	} else if (zonePrecedente == zones[7]) {
+    		zoneCourante = zones[7];
+            montrerCarteJoueur(7);
+    	} else if (zonePrecedente == zones[8]) {
+    		zoneCourante = zones[8];
+            montrerCarteJoueur(8);
+    	} else if (zonePrecedente == zones[9]) {
+    		zoneCourante = zones[9];
+            montrerCarteJoueur(9);
+    	} else if (zonePrecedente == zones[10]) {
+    		zoneCourante = zones[10];
+            montrerCarteJoueur(10);
+    	} else if (zonePrecedente == zones[11]) {
+    		zoneCourante = zones[11];
+            montrerCarteJoueur(11);
+    	} else if (zonePrecedente == zones[12]) {
+    		zoneCourante = zones[12];
+            montrerCarteJoueur(12);
+    	} else if (zonePrecedente == zones[13]) {
+    		zoneCourante = zones[13];
+            montrerCarteJoueur(13);
+    	} else if (zonePrecedente == zones[14]) {
+    		zoneCourante = zones[14];
+            montrerCarteJoueur(14);
+    	} else if (zonePrecedente == zones[15]) {
+    		zoneCourante = zones[15];
+            montrerCarteJoueur(15);
+    	} else if (zonePrecedente == zones[16]) {
+    		zoneCourante = zones[16];
+            montrerCarteJoueur(16);
+    	} else if (zonePrecedente == zones[17]) {
+    		zoneCourante = zones[17];
+            montrerCarteJoueur(17);
+    	} else if (zonePrecedente == zones[18]) {
+    		zoneCourante = zones[18];
+            montrerCarteJoueur(18);
+    	} else if (zonePrecedente == zones[19]) {
+    		zoneCourante = zones[19];
+            montrerCarteJoueur(19);
+    	}
+    }
+    
     /**
      * Affiche la localisation du joueur
      */
@@ -238,39 +357,52 @@ public class Jeu {
      */
     public void traiterCommande(String commandeLue) {
     	gui.afficher( "> "+ commandeLue + "\n");
-    	if (!tpPossible) {
+    	if (!tpPossible && !visionCartePossible) {
     		switch (commandeLue.toUpperCase()) {
             case "?" : case "AIDE" : 
                 afficherAide(); 
             	break;
             case "N" : case "NORD" :
-            	allerEn( "NORD"); 
+            	allerEn( "NORD" ); 
             	break;
            case "S" : case "SUD" :
-            	allerEn( "SUD"); 
+            	allerEn( "SUD" ); 
             	break;
             case "E" : case "EST" :
-            	allerEn( "EST"); 
+            	allerEn( "EST" ); 
             	break;
             case "O" : case "OUEST" :
-            	allerEn( "OUEST"); 
+            	allerEn( "OUEST" ); 
             	break;
             case "NO" : case "NORDOUEST" :
-            	allerEn( "NORDOUEST"); 
+            	allerEn( "NORDOUEST" ); 
             	break;
             case "NE" : case "NORDEST" :
-            	allerEn( "NORDEST"); 
+            	allerEn( "NORDEST" ); 
             	break;
             case "TAB" : case "TABLEAU" :
-            	allerEn( "TABLEAU"); 
+            	allerEn( "TABLEAU" ); 
             	break;
             case "C" : case "CARTE" : 
-            	permettreCarte();
-            	gui.afficher("Tu peux maintenant voir la carte, pour changer de plan utilise les commandes [SOUSSOL, REZDECHAUSSE, 1ERETAGE, 2EMEETAGE]");
+            	retenirZone(); // Permet de retenir dans quelle zone on était pour y retourner quand on sortira de l'affichage du plan de la maison
+            	permettreCarte(); // Permet d'activer la vision du plan de la maison
+            	gui.afficher("Tu peux maintenant voir la carte, pour changer de plan utilise les commandes [SOUSSOL, REZDECHAUSSEE, 1ERETAGE, 2EMEETAGE]");
+            	gui.afficher(); 
+            	// Pour permettre d'afficher le plan de l'étage où le joueur se trouve
+            	if (zoneCourante == zones[14]) { 
+                    montrerCarteJoueur(20);
+            	} else if (zoneCourante == zones[1] || zoneCourante == zones[2] || zoneCourante == zones[3] || zoneCourante == zones[5] || zoneCourante == zones[6] || zoneCourante == zones[7] || zoneCourante == zones[8] || zoneCourante == zones[9] || zoneCourante == zones[15] || zoneCourante == zones[19]) {
+                    montrerCarteJoueur(21);
+            	} else if (zoneCourante == zones[4] || zoneCourante == zones[10] || zoneCourante == zones[11] || zoneCourante == zones[12] || zoneCourante == zones[16]) {
+                    montrerCarteJoueur(22);
+            	} else if (zoneCourante == zones[13] || zoneCourante == zones[17] || zoneCourante == zones[18]) {
+                    montrerCarteJoueur(23);
+            	}
             	gui.afficher();
+            	break;
             case "TP" : case "TELEPORTATION" :
             	permettreTeleportation();
-            	//gui.afficher("Tu peux maintenant te téléporter dans tout le manoir, pour sortir de ce mode entre à nouveau la commande [TP]\nTu peux te servir du plan avec la commande [CARTE] pour savoir où aller");
+            	gui.afficher("Tu peux maintenant te téléporter dans tout le manoir sauf les zones auxquelles tu n'as pas accès.\nPour sortir de ce mode entre à nouveau la commande [TP]\nTu peux te servir du plan avec la commande [CARTE] pour savoir où aller, les pièces sont numérotées.\nIl faut donc taper le numéro de la salle désirée pour s'y rendre.");
             	gui.afficher();
             	break;
             case "Q" : case "QUITTER" :
@@ -278,30 +410,37 @@ public class Jeu {
             	break;
            	default : 
                 gui.afficher("Commande inconnue");
+                gui.afficher();
                 break;
             }
-    	} else if (visionCartePossible) {
+    	} else if (visionCartePossible && !tpPossible) {
     		switch (commandeLue.toUpperCase()) {
             case "SS": case "SOUSSOL" :
                 montrerCarteJoueur(20);
                 break;
-            case "RDC" : case "REZDECHAUSSE" :
+            case "RDC" : case "REZDECHAUSSE" : case "REZDECHAUSSEE" :
             	montrerCarteJoueur(21);
             	break;
-            case "1ER" : case "1ERETAGE" :
+            case "1ER" : case "1ERETAGE" : case "PREMIERETAGE" :
             	montrerCarteJoueur(22);
             	break;
-            case "2EME" : case "2EMEETAGE" :
+            case "2EME" : case "2EMEETAGE" : case "SECONDETAGE" :
             	montrerCarteJoueur(23);
             	break;
             case "C" : case "CARTE" :
+            	revenirZonePrecedente();
             	desactiverCarte();
             	gui.afficher();
-            default : 
+            	break;
+            case "Q" : case "QUITTER" :
+            	terminer();
+            	break;
+           	default : 
                 gui.afficher("Commande inconnue");
+                gui.afficher();
                 break;
     		}
-    	} else if (tpPossible) {
+    	} else if (tpPossible && !visionCartePossible) {
     		switch (commandeLue.toUpperCase()) {
             case "1":
                 teleporterJoueur(1);
@@ -364,6 +503,9 @@ public class Jeu {
             	desactiverTeleportation();
             	gui.afficher("On arrête enfin de tricher ?");
             	gui.afficher();
+            	break;
+            case "Q" : case "QUITTER" :
+            	terminer();
             	break;
            	default : 
                 gui.afficher("Commande inconnue");

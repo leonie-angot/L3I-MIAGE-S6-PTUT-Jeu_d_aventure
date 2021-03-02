@@ -38,12 +38,12 @@ public class Zone
     /*
      * Permet de récupérer l'id de la zone 
      */
-    public int getZone(String image) {
+    /*public int getZone(String image) {
     	char valeur;
     	valeur = image.charAt(0);
     	int idZone = Character.getNumericValue(valeur);
     	return idZone;
-    }
+    }*/
     
     /**
      * Ajoute une sortie à notre Zone dont la sortie et la zone voisine sont donnee en parametre.
