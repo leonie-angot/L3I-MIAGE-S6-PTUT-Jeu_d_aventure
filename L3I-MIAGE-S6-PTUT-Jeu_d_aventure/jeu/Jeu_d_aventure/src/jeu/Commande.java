@@ -21,7 +21,10 @@ public enum Commande {
 	SUD("S", "S (aller à la sortie sud)"), 
 	EST("E", "E (aller à la sortie est)"), 
 	OUEST("O", "O (aller à la sortie ouest)"),
-	TABLEAU("N", "T (aller au tableau)"), 
+	TABLEAU("N", "T (aller au tableau)"),
+	INVENTAIRE("I", "I (afficher votre inventaire)"),
+	RECUPERER("R", "R (recuperer l\'objet)"),
+	PARLER("P", "P (parler avec la personne)"),
 	AIDE("?", "? (aide)"), 
 	QUITTER("Q", "Q (quitter)");
 

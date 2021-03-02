@@ -17,6 +17,7 @@ public class Zone
 {
     private String description;
     private String nomImage;
+    private Personne personne;
     /**
      * Les sorties de notre zone avec un clé de type String représente le nom de la sortie 
      * et une valeur de type Zone représente la zone voisine.
@@ -82,6 +83,10 @@ public class Zone
      */
     public Zone obtientSortie(String direction) {
     	return sorties.get(direction);
+    }
+    
+    public Personne getPersonne() {
+    	return personne;
     }
 }
 

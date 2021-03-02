@@ -17,12 +17,12 @@ import java.util.ArrayList;
 public class Jeu {
 	
 	
-	ArrayList<Indices> tabIndice = new ArrayList<Indices>();
-	
+	ArrayList<Indices> inventaire = new ArrayList<Indices>();
+	Indices[] tabIndices;
 	
 
 	public void creerIndices() {
-		Indices[] tab = new Indices[10];
+		tabIndices = new Indices[10];
 		
 		//Initialisez les indices
 	}
@@ -194,6 +194,9 @@ public class Jeu {
         case "T" : case "TABLEAU" :
         	allerEn( "TABLEAU"); 
         	break;
+        case "P" : case "PARLER" :
+        	parler();
+        	break;
         case "Q" : case "QUITTER" :
         	terminer();
         	break;
@@ -230,6 +233,7 @@ public class Jeu {
         	gui.afficher(zoneCourante.descriptionLongue());
         	gui.afficher();
         	gui.afficheImage(zoneCourante.nomImage());
+        
         }
     }
     
@@ -240,5 +244,74 @@ public class Jeu {
     private void terminer() {
     	gui.afficher( "Au revoir...");
     	gui.enable( false);
+    }
+    
+    public void parler() {
+    
+    Personne personne = zoneCourante.getPersonne();
+    
+    if(personne.getName().equals("Chef cuisinier")) {
+
+        for(int i = 0; i < inventaire.size(); i++) {
+        	//if(personne.premierObjet)
+        }
+    }else {
+
+        for(int i = 0; i < inventaire.size(); i++) {
+        	if(personne.premierObjet.equals(inventaire.get(i))) {
+	        		for(int j = 0;j < tabIndices.length; j++) {
+		        			if(tabIndices[j].getClass().getName().equals("Dialogue")) {
+				        			Dialogue dialogue = ((Dialogue) tabIndices[j]);
+				        			if(personne.equals(dialogue.recepteur())) {
+				        				dialogue.toString();
+				        			}
+		        			}
+	        		}
+        	}
+        		
+        }
+        
+    }
+    	
+    /*ArrayList<Indices> ids = new ArrayList<Indices>();
+	for(int i = 0; i<tabIndices.length;i++) {
+		
+		if(tabIndices[i].zoneIndice.equals(zoneCourante)) {
+			
+			for(int j = 0; j < inventaire.size(); j++) {
+				if(tabIndices[i].equals(inventaire.get(j))) {
+					
+				}
+			}
+			
+		}
+		
+	}
+	
+	for(Indices indice : ids) {
+		if(indice.getClass().getName().equals("Dialogue")) {
+			Dialogue dialogue = ((Dialogue) indice);
+			if(dialogue.recepteur().equals()) {
+				
+			}
+		}
+	}*/
+	
+    }
+    
+    public void prendre() {
+    	
+    	
+    	for(int i = 0; i<tabIndices.length;i++) {
+    		
+	    		if(tabIndices[i].zoneIndice.equals(zoneCourante) && tabIndices[i].getClass().getName().equals("Objet")) {
+	    			inventaire.add(tabIndices[i]);
+	    			tabIndices[i].recuperer = true;
+	    			gui.afficher(tabIndices[i].toString());
+	    		}
+	    		
+    	}
+    	
+	
     }
 }
