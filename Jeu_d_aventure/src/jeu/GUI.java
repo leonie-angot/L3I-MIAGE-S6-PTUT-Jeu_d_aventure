@@ -19,18 +19,22 @@ import java.net.URL;
 public class GUI implements ActionListener
 {
 	private Jeu jeu;
+	
     /**
      * Fenêtre principale qui possède un titre, une taille modifiable et éventuellement un menu.
      */
     private JFrame fenetre;
+    
     /**
      * Zone d'édition de texte comportant une seule ligne.
      */
     private JTextField entree;
+    
     /**
      * Composant qui permet la saisie en mode multiligne de texte simple.
      */
     private JTextArea texte;
+    
     /**
      * Composant qui est capable d'afficher du texte aussi que une image.
      */
