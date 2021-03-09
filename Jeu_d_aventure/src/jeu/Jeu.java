@@ -12,30 +12,36 @@ import java.util.ArrayList;
  * 
  * Date : 06/02/2021.
  * 
- * @author 
+ * @author Léonie A. et Ylli P. 
  */
 public class Jeu {
 	
+	// ArrayList répertoriant les Objets présents sur la map
 	ArrayList<Objet> tabObjet = new ArrayList<Objet>();
+	
+	
+	ArrayList<Objet> inventaire = new ArrayList<Objet>();
 	
 	/*
 	 * Initialisation des variables pour la Téléportation et l'Affichage du Plan de la maison
 	 */
 	boolean tpPossible = false;
 	boolean visionCartePossible = false;
+	boolean visionInventairePossible = false;
 	private Zone zonePrecedente;
 
 	/*
-	 * 
+	 * Initialisation des objets sur la map
 	 */
 	public void creerObjet() {
-		this.tabObjet.add(new Objet("Bouton", "Ceci est un bouton de veste, à qui peut-il appartenir ?", zones[8]));
-		this.tabObjet.add(new Objet("Clef de la cave", "Ceci est la clef permettant d'ouvrir la porte de la cave", zones[9]));
+		this.tabObjet.add(new Objet("Bouton", "Ceci est un bouton de veste, il semblerait qu'il provient d'un uniforme de travail. Je devrais demander aux employés.", zones[8]));
+		this.tabObjet.add(new Objet("Clef de la cave", "Ceci est la clef permettant d'ouvrir la porte de la cave.", zones[9]));
 		this.tabObjet.add(new Objet("Boucle d'oreille", "Une boucle d'oreille, à qui peut-elle être ? Je devrais interroger la Mère ou la Femme de Chambre... ", zones[10]));
-		this.tabObjet.add(new Objet("Lettre Compromettante", "Lettre dévoilant une relation adultère entre le Père et la Femme de Chambre", zones[17]));
-		this.tabObjet.add(new Objet("Lettre d'Amour", "Lettre de déclaration d'amour du Cuisiner envers la Femme de Chambre", zones[18]));
+		this.tabObjet.add(new Objet("Lettre Compromettante", "Lettre dévoilant une relation adultère entre le Père et la Femme de Chambre.", zones[17]));
+		this.tabObjet.add(new Objet("Lettre d'Amour", "Lettre de déclaration d'amour du Cuisiner envers la Femme de Chambre. Il semblerait qu'il avait des sentiments pour elle...", zones[18]));
 		this.tabObjet.add(new Objet("Clef du coffre de la cave", "Ceci est la clef permettant d'ouvrir le coffre situé dans la cave. Que peut-il bien y avoir dedans ?", zones[15]));
-		this.tabObjet.add(new Objet("Couteau", "Ce couteau est couvert de sang. Peut-être l'arme du crime ? Il faut l'Examiner !", zones[14]));
+		this.tabObjet.add(new Objet("Couteau", "Les seules empreintes trouvées sur le couteau sont celles du Cuisiner.", zones[14]));
+		this.tabObjet.add(new Objet("Lettre de Licenciement", "Lettre de licenciement du Cuisinier rédigée par le Père", zones[1]));
 	}
 	
 	/**
@@ -66,7 +72,7 @@ public class Jeu {
     /*
      * 
      */
-    Zone [] zones = new Zone [24];
+    Zone [] zones = new Zone [25];
     
     /**
      * Cree et initialise les zones.
@@ -77,29 +83,30 @@ public class Jeu {
      */
     private void creerCarte() {
         zones[0] = new Zone("Tableau", "0-Tableau.jpg" );
-        zones[1] = new Zone("Entree", "1-Entree.jpg" );
-        zones[2] = new Zone("Couloir Ouest", "2-CouloirWest.jpg" );
-        zones[3] = new Zone("Couloir Est", "3-CouloirEast.jpg" );
-        zones[4] = new Zone("Couloir Nord", "4-CouloirNorth.jpg" );
-        zones[5] = new Zone("Garage", "5-Garage.jpg" );
-        zones[6] = new Zone("Salle a manger", "6-SalleAManger.jpg" );
-        zones[7] = new Zone("Cuisine", "7-Cuisine.jpg" );
-        zones[8] = new Zone("Salon", "8-Salon.jpg" );
-        zones[9] = new Zone("Bureau", "9-Bureau.jpg" );
-        zones[10] = new Zone("Chambre Parentale", "10-ChambreParentale.jpg" );
-        zones[11] = new Zone("Chambre de la Fille", "11-ChambreDeLaFille.jpg" );
-        zones[12] = new Zone("Chambre du Fils", "12-ChambreDuFils.jpg" );
-        zones[13] = new Zone("Escalier avec couloir", "13-EscalierAvecCouloir.jpg" );
-        zones[14] = new Zone("Cave", "14-Cave.jpg" );
-        zones[15] = new Zone("Jardin", "15-Jardin.jpg" );
-        zones[16] = new Zone("Salle de Bain", "16-SalleDeBain.jpg" );
-        zones[17] = new Zone("Grenier", "17-Grenier.jpg" );
-        zones[18] = new Zone("Chambre du Majordome", "18-ChambreDuMajordome.jpg" );
-        zones[19] = new Zone("Maison du Gardien", "19-MaisonDuGardien.jpg" );
-        zones[20] = new Zone("Plan du Sous Sol", "20-PlanMaisonSousSol.jpg");
-        zones[21] = new Zone("Plan du Rez de Chaussée", "21-PlanMaisonRezDeChaussee.jpg");
-        zones[22] = new Zone("Plan du Premier Étage", "22-PlanMaison1erEtage.jpg");
-        zones[23] = new Zone("Plan du Second Étage","23-PlanMaison2emeEtage.jpg");
+        zones[1] = new Zone("l'Entree", "1-Entree.jpg" );
+        zones[2] = new Zone("le Couloir Ouest", "2-CouloirWest.jpg" );
+        zones[3] = new Zone("le Couloir Est", "3-CouloirEast.jpg" );
+        zones[4] = new Zone("le Couloir Nord", "4-CouloirNorth.jpg" );
+        zones[5] = new Zone("le Garage", "5-Garage.jpg" );
+        zones[6] = new Zone("la Salle a manger", "6-SalleAManger.jpg" );
+        zones[7] = new Zone("la Cuisine", "7-Cuisine.jpg" );
+        zones[8] = new Zone("le Salon", "8-Salon.jpg" );
+        zones[9] = new Zone("le Bureau", "9-Bureau.jpg" );
+        zones[10] = new Zone("la Chambre Parentale", "10-ChambreParentale.jpg" );
+        zones[11] = new Zone("la Chambre de la Fille", "11-ChambreDeLaFille.jpg" );
+        zones[12] = new Zone("la Chambre du Fils", "12-ChambreDuFils.jpg" );
+        zones[13] = new Zone("l'Escalier avec couloir", "13-EscalierAvecCouloir.jpg" );
+        zones[14] = new Zone("la Cave", "14-Cave.jpg" );
+        zones[15] = new Zone("le Jardin", "15-Jardin.jpg" );
+        zones[16] = new Zone("la Salle de Bain", "16-SalleDeBain.jpg" );
+        zones[17] = new Zone("le Grenier", "17-Grenier.jpg" );
+        zones[18] = new Zone("la Chambre du Majordome", "18-ChambreDuMajordome.jpg" );
+        zones[19] = new Zone("la Maison du Gardien", "19-MaisonDuGardien.jpg" );
+        zones[20] = new Zone("le Plan du Sous Sol", "20-PlanMaisonSousSol.jpg");
+        zones[21] = new Zone("le Plan du Rez de Chaussée", "21-PlanMaisonRezDeChaussee.jpg");
+        zones[22] = new Zone("le Plan du Premier Étage", "22-PlanMaison1erEtage.jpg");
+        zones[23] = new Zone("le Plan du Second Étage","23-PlanMaison2emeEtage.jpg");
+        zones[24] = new Zone("l'Inventaire","24-Inventaire.jpg");
 
         zones[0].ajouteSortie(Sortie.SUD, zones[1]); 	// Depuis le Tableau aller dans l'Entrée
         
@@ -183,17 +190,14 @@ public class Jeu {
     }
 
     /*
-     * Donne la permission au joueur de se téléporter dans la map de son choix
+     * Donne ou enlève la permission au joueur de se téléporter dans la map de son choix
      */
-    private void permettreTeleportation() {
-    	tpPossible = true;
-    }
-    
-    /*
-     * Enlève la permission au joueur de se téléporter dans la map de son choix
-     */
-    private void desactiverTeleportation() {
-    	tpPossible = false;
+    private void permissionTeleportation() {
+    	if (tpPossible) {
+        	tpPossible = false;
+    	} else {
+        	tpPossible = true;
+    	}
     }
     
     /*
@@ -207,17 +211,25 @@ public class Jeu {
     }
     
     /*
-     * Donne la permission au joueur de voir la carte
+     * Donne ou enlève la permission au joueur de voir la carte
      */
-    private void permettreCarte() {
-    	visionCartePossible = true;
+    private void permissionCarte() {
+    	if (visionCartePossible) {
+        	visionCartePossible = false;
+    	} else {
+        	visionCartePossible = true;
+    	}
     }
     
     /*
-     * Enlève la permission au joueur de voir la carte
+     * Donne ou enlève la permission au joueur de voir son inventaire
      */
-    private void desactiverCarte() {
-    	visionCartePossible = false;
+    private void permissionInventaire() {
+    	if (visionInventairePossible) {
+    		visionInventairePossible = false;
+    	} else {
+    		visionInventairePossible = true;
+    	}
     }
     
     /*
@@ -234,44 +246,10 @@ public class Jeu {
      * Permet de retenir dans quelle Zone le joueur se trouvait avant de regarder le plan du manoir
      */
     private void retenirZone() {
-    	if (zoneCourante == zones[1]) {
-    		zonePrecedente = zones[1];
-    	} else if (zoneCourante == zones[2]) {
-    		zonePrecedente = zones[2];
-    	} else if (zoneCourante == zones[3]) {
-    		zonePrecedente = zones[3];
-    	} else if (zoneCourante == zones[4]) {
-    		zonePrecedente = zones[4];
-    	} else if (zoneCourante == zones[5]) {
-    		zonePrecedente = zones[5];
-    	} else if (zoneCourante == zones[6]) {
-    		zonePrecedente = zones[6];
-    	} else if (zoneCourante == zones[7]) {
-    		zonePrecedente = zones[7];
-    	} else if (zoneCourante == zones[8]) {
-    		zonePrecedente = zones[8];
-    	} else if (zoneCourante == zones[9]) {
-    		zonePrecedente = zones[9];
-    	} else if (zoneCourante == zones[10]) {
-    		zonePrecedente = zones[10];
-    	} else if (zoneCourante == zones[11]) {
-    		zonePrecedente = zones[11];
-    	} else if (zoneCourante == zones[12]) {
-    		zonePrecedente = zones[12];
-    	} else if (zoneCourante == zones[13]) {
-    		zonePrecedente = zones[13];
-    	} else if (zoneCourante == zones[14]) {
-    		zonePrecedente = zones[14];
-    	} else if (zoneCourante == zones[15]) {
-    		zonePrecedente = zones[15];
-    	} else if (zoneCourante == zones[16]) {
-    		zonePrecedente = zones[16];
-    	} else if (zoneCourante == zones[17]) {
-    		zonePrecedente = zones[17];
-    	} else if (zoneCourante == zones[18]) {
-    		zonePrecedente = zones[18];
-    	} else if (zoneCourante == zones[19]) {
-    		zonePrecedente = zones[19];
+    	for (int i = 1; i <= 24; i++) {
+    		if (zoneCourante == zones[i]) {
+    			zonePrecedente = zones[i];
+    		}
     	}
     }
     
@@ -279,63 +257,11 @@ public class Jeu {
      * Permet de faire retourner le joueur à sa position initiale avant de consulter le plan du manoir
      */
     private void revenirZonePrecedente() {
-    	if (zonePrecedente == zones[1]) {
-    		zoneCourante = zones[1];
-            montrerCarteJoueur(1);
-    	} else if (zonePrecedente == zones[2]) {
-    		zoneCourante = zones[2];
-            montrerCarteJoueur(2);
-    	} else if (zonePrecedente == zones[3]) {
-    		zoneCourante = zones[3];
-            montrerCarteJoueur(3);
-    	} else if (zonePrecedente == zones[4]) {
-    		zoneCourante = zones[4];
-            montrerCarteJoueur(4);
-    	} else if (zonePrecedente == zones[5]) {
-    		zoneCourante = zones[5];
-            montrerCarteJoueur(5);
-    	} else if (zonePrecedente == zones[6]) {
-    		zoneCourante = zones[6];
-            montrerCarteJoueur(6);
-    	} else if (zonePrecedente == zones[7]) {
-    		zoneCourante = zones[7];
-            montrerCarteJoueur(7);
-    	} else if (zonePrecedente == zones[8]) {
-    		zoneCourante = zones[8];
-            montrerCarteJoueur(8);
-    	} else if (zonePrecedente == zones[9]) {
-    		zoneCourante = zones[9];
-            montrerCarteJoueur(9);
-    	} else if (zonePrecedente == zones[10]) {
-    		zoneCourante = zones[10];
-            montrerCarteJoueur(10);
-    	} else if (zonePrecedente == zones[11]) {
-    		zoneCourante = zones[11];
-            montrerCarteJoueur(11);
-    	} else if (zonePrecedente == zones[12]) {
-    		zoneCourante = zones[12];
-            montrerCarteJoueur(12);
-    	} else if (zonePrecedente == zones[13]) {
-    		zoneCourante = zones[13];
-            montrerCarteJoueur(13);
-    	} else if (zonePrecedente == zones[14]) {
-    		zoneCourante = zones[14];
-            montrerCarteJoueur(14);
-    	} else if (zonePrecedente == zones[15]) {
-    		zoneCourante = zones[15];
-            montrerCarteJoueur(15);
-    	} else if (zonePrecedente == zones[16]) {
-    		zoneCourante = zones[16];
-            montrerCarteJoueur(16);
-    	} else if (zonePrecedente == zones[17]) {
-    		zoneCourante = zones[17];
-            montrerCarteJoueur(17);
-    	} else if (zonePrecedente == zones[18]) {
-    		zoneCourante = zones[18];
-            montrerCarteJoueur(18);
-    	} else if (zonePrecedente == zones[19]) {
-    		zoneCourante = zones[19];
-            montrerCarteJoueur(19);
+    	for (int i = 1; i <= 24; i++) {
+    		if (zonePrecedente == zones[i]) {
+    			zoneCourante = zones[i];
+    			montrerCarteJoueur(i);
+    		}
     	}
     }
     
@@ -349,46 +275,90 @@ public class Jeu {
         	tabObjet.get(0).setObjetRecupere();
         	zones[8].setNomImage("8-Salon_vide.jpg");
         	modifierCarte();
+        	this.inventaire.add(tabObjet.get(0));
     	} else if (zoneCourante == zones[9] && tabObjet.get(1).getObjetRecupere() == false) {
         	gui.afficher("Tu viens de récupérer : " + tabObjet.get(1).getNom()); 
         	gui.afficher();
         	tabObjet.get(1).setObjetRecupere();
         	zones[9].setNomImage("9-Bureau_vide.jpg");
         	modifierCarte();
+        	this.inventaire.add(tabObjet.get(1));
     	} else if (zoneCourante == zones[10] && tabObjet.get(2).getObjetRecupere() == false) {
         	gui.afficher("Tu viens de récupérer : " + tabObjet.get(2).getNom()); 
         	gui.afficher();
         	tabObjet.get(2).setObjetRecupere();
         	zones[10].setNomImage("10-ChambreParentale_vide.jpg");
         	modifierCarte();
+        	this.inventaire.add(tabObjet.get(2));
     	} else if (zoneCourante == zones[17] && tabObjet.get(3).getObjetRecupere() == false) {
         	gui.afficher("Tu viens de récupérer : " + tabObjet.get(3).getNom()); 
         	gui.afficher();
         	tabObjet.get(3).setObjetRecupere();
         	zones[17].setNomImage("17-Grenier_vide.jpg");
         	modifierCarte();
+        	this.inventaire.add(tabObjet.get(3));
     	} else if (zoneCourante == zones[18] && tabObjet.get(4).getObjetRecupere() == false) {
         	gui.afficher("Tu viens de récupérer : " + tabObjet.get(4).getNom()); 
         	gui.afficher();
         	tabObjet.get(4).setObjetRecupere();
         	zones[18].setNomImage("18-ChambreDuMajordome_vide.jpg");
         	modifierCarte();
+        	this.inventaire.add(tabObjet.get(4));
     	} else if (zoneCourante == zones[15] && tabObjet.get(5).getObjetRecupere() == false) {
         	gui.afficher("Tu viens de récupérer : " + tabObjet.get(5).getNom()); 
         	gui.afficher();
         	tabObjet.get(5).setObjetRecupere();
         	zones[15].setNomImage("15-Jardin_vide.jpg");
         	modifierCarte();
+        	this.inventaire.add(tabObjet.get(5));
     	} else if (zoneCourante == zones[14] && tabObjet.get(6).getObjetRecupere() == false) {
         	gui.afficher("Tu viens de récupérer : " + tabObjet.get(6).getNom()); 
+        	gui.afficher();
+        	gui.afficher("Ce couteau est couvert de sang. Peut-être l'arme du crime ? Il faut l'Examiner !"); 
         	gui.afficher();
         	tabObjet.get(6).setObjetRecupere();
         	zones[14].setNomImage("14-Cave_vide.jpg");
         	modifierCarte();
+        	this.inventaire.add(tabObjet.get(6));
     	} else {
         	gui.afficher("Il n'y a rien à récupérer ici");
         	gui.afficher();
     	}
+    }
+    
+    /*
+     * 
+     */
+    private void afficherInventaire() {
+		montrerCarteJoueur(24);
+    	if (!this.inventaire.isEmpty()) {
+        	gui.afficher("Voici le contenu de votre inventaire :");
+        	gui.afficher();
+        	gui.afficher(inventaire.toString());
+        	gui.afficher();
+    	} else {
+        	gui.afficher("Votre inventaire est vide !");
+        	gui.afficher();
+    	}
+    }
+    
+    /*
+     * 
+     */
+    private void verificationObjetRecupere(int j) {
+		boolean objetPresentInventaire = false; // PAS BON CA VERIFIE QUE SI UN SEUL OBJET EST DANS L'INVENTAIRE PAS CELUI EN QUESTION
+		for (int i = 0; i < inventaire.size() && objetPresentInventaire == false; i++) {
+			if (inventaire.get(i) == tabObjet.get(j) ) {
+				objetPresentInventaire = true;
+				for (j = 0; j <= tabObjet.size(); j++) {
+	                gui.afficher(inventaire.get(j).getDescription());
+				}
+			}
+		}
+		if (!objetPresentInventaire) {
+            gui.afficher("Tu n'as pas récupéré cet objet.");
+            gui.afficher();
+		}
     }
     
     /**
@@ -417,7 +387,7 @@ public class Jeu {
      */
     public void traiterCommande(String commandeLue) {
     	gui.afficher( "> "+ commandeLue + "\n");
-    	if (!tpPossible && !visionCartePossible) {
+    	if (!tpPossible && !visionCartePossible && !visionInventairePossible) {
     		switch (commandeLue.toUpperCase()) {
             case "?" : case "AIDE" : 
                 afficherAide(); 
@@ -444,14 +414,19 @@ public class Jeu {
             	allerEn( "TABLEAU" ); 
             	break;
             case "PA" : case "PARLER" :
-            	parler(zones[7],"lol");
+            	//parler(zones[7],"lol");
             	break;
             case "PR" : case "PRENDRE" :
             	prendre();
             	break;
+            case "I" : case "INVENTAIRE" :
+            	retenirZone();
+            	permissionInventaire();
+            	afficherInventaire();
+            	break;
             case "C" : case "CARTE" : 
             	retenirZone(); // Permet de retenir dans quelle zone on était pour y retourner quand on sortira de l'affichage du plan de la maison
-            	permettreCarte(); // Permet d'activer la vision du plan de la maison
+            	permissionCarte(); // Permet d'activer la vision du plan de la maison
             	gui.afficher("Tu peux maintenant voir la carte, pour changer de plan utilise les commandes [SOUSSOL, REZDECHAUSSEE, 1ERETAGE, 2EMEETAGE]");
             	gui.afficher(); 
             	// Pour permettre d'afficher le plan de l'étage où le joueur se trouve
@@ -467,7 +442,7 @@ public class Jeu {
             	gui.afficher();
             	break;
             case "TP" : case "TELEPORTATION" :
-            	permettreTeleportation();
+            	permissionTeleportation();
             	gui.afficher("Tu peux maintenant te téléporter dans tout le manoir sauf les zones auxquelles tu n'as pas accès.\nPour sortir de ce mode entre à nouveau la commande [TP]\nTu peux te servir du plan avec la commande [CARTE] pour savoir où aller, les pièces sont numérotées.\nIl faut donc taper le numéro de la salle désirée pour s'y rendre.");
             	gui.afficher();
             	break;
@@ -479,7 +454,24 @@ public class Jeu {
                 gui.afficher();
                 break;
             }
-    	} else if (visionCartePossible && !tpPossible) {
+    	} else if (visionInventairePossible && !tpPossible && !visionCartePossible) { 
+    		switch (commandeLue.toUpperCase() ) {
+    		case "EX B" : case "EXAMINER BOUTON" :
+    			verificationObjetRecupere(0);
+    			break;
+    		case "EX BO" : case "EXAMINER BOUCLE OREILLE" : case "EXAMINER BOUCLE D'OREILLE" : case "EXAMINER BOUCLE D OREILLE" : case "EXAMINER BOUCLE DOREILLE" :
+    			verificationObjetRecupere(2);
+    			break;
+    		case "I" : case "INVENTAIRE" :
+            	revenirZonePrecedente();
+            	permissionInventaire();
+    			break;
+           	default : 
+                gui.afficher("Commande inconnue");
+                gui.afficher();
+                break;
+    		}
+    	} else if (visionCartePossible && !tpPossible && !visionInventairePossible) {
     		switch (commandeLue.toUpperCase()) {
             case "SS": case "SOUSSOL" :
                 montrerCarteJoueur(20);
@@ -495,7 +487,7 @@ public class Jeu {
             	break;
             case "C" : case "CARTE" :
             	revenirZonePrecedente();
-            	desactiverCarte();
+            	permissionCarte();
             	gui.afficher();
             	break;
             case "Q" : case "QUITTER" :
@@ -506,7 +498,7 @@ public class Jeu {
                 gui.afficher();
                 break;
     		}
-    	} else if (tpPossible && !visionCartePossible) {
+    	} else if (tpPossible && !visionCartePossible && !visionInventairePossible) {
     		switch (commandeLue.toUpperCase()) {
             case "1":
                 teleporterJoueur(1);
@@ -566,7 +558,7 @@ public class Jeu {
                 teleporterJoueur(19);
                 break;
             case "TP" : 
-            	desactiverTeleportation();
+            	permissionTeleportation();
             	gui.afficher("On arrête enfin de tricher ?");
             	gui.afficher();
             	break;
@@ -614,8 +606,6 @@ public class Jeu {
      * 
      */
     private void modifierCarte() {
-    	gui.afficher(zoneCourante.descriptionLongue());
-    	gui.afficher();
     	gui.afficheImage(zoneCourante.nomImage());
     }
     

@@ -41,6 +41,13 @@ public class Objet extends Indice {
 	}
 	
 	/*
+	 * Permet de récupérer le nom de l'Objet
+	 */
+	public String getDescription() {
+		return this.descriptionObjet;
+	}
+	
+	/*
 	 * 
 	 */
 	public void setObjetRecupere() {
@@ -52,7 +59,7 @@ public class Objet extends Indice {
 	 * @see java.lang.Object#toString()
 	 */
     public String toString() {
-    	return "L\'indice numero "+ numeroIndice +" est un "+ nomObjet + " sa description est "+ descriptionObjet;
+    	return nomObjet;
     }
     
 }

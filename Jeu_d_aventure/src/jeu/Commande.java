@@ -25,6 +25,8 @@ public enum Commande {
 	TELEPORTATION("TP", "TP (se teleporter)"),
 	PARLER("PA", "PA (parler avec un pnj)"),
 	PRENDRE("PR", "PR (prendre l'objet)"),
+	INVENTAIRE("I", "I (permet d'afficher l'inventaire"),
+	UTILISER("U", "U (utiliser l'objet)"),
 	CARTE("C", "C (afficher le plan de la maison"),
 	AIDE("?", "? (aide)"), 
 	QUITTER("Q", "Q (quitter)");
