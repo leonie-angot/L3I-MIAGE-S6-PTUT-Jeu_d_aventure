@@ -62,6 +62,13 @@ public class Zone
         return nomImage;
     }
      
+    /*
+     * 
+     */
+    public void setNomImage(String nomNouvelleImage) {
+    	this.nomImage = nomNouvelleImage;
+    }
+    
     /**
      * Renvoie la description de notre Zone.
      */

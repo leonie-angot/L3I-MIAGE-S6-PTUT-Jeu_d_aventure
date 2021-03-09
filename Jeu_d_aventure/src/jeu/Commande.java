@@ -22,7 +22,9 @@ public enum Commande {
 	EST("E", "E (aller à  la sortie est)"), 
 	OUEST("O", "O (aller à  la sortie ouest)"),
 	TABLEAU("TAB", "TAB (aller au tableau)"),
-	TELEPORTATION("TP", "TP (se teleporter"),
+	TELEPORTATION("TP", "TP (se teleporter)"),
+	PARLER("PA", "PA (parler avec un pnj)"),
+	PRENDRE("PR", "PR (prendre l'objet)"),
 	CARTE("C", "C (afficher le plan de la maison"),
 	AIDE("?", "? (aide)"), 
 	QUITTER("Q", "Q (quitter)");

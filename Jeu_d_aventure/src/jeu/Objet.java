@@ -10,22 +10,49 @@ package jeu;
  * 
  * Date : 23/02/2021.
  * 
- * @author Tarik D et Sami B
+ * @author Léonie A., Sami B., Tarik D. et Ylli P.
  */
-public class Objet extends Indices {
-    private String name;
-    private String description;
+public class Objet extends Indice {
+	
+    private String nomObjet ;
+    private String descriptionObjet ;
 
-    public Objet(String nom, String d, Zone z){
-        name=nom;
-        description=d;
-        zoneIndice = z;
-        idIndice = numeroIndices;
-        numeroIndices++;
+    /*
+     * 
+     */
+    public Objet(String nomObjet, String descriptionObjet, Zone zone){
+        this.nomObjet = nomObjet ;
+        this.descriptionObjet = descriptionObjet;
+        this.zoneIndice = zone;
     }
 
+	/*
+	 * 
+	 */
+	public boolean getObjetRecupere() {
+		return this.objetRecupere;
+	}
+	
+	/*
+	 * Permet de récupérer le nom de l'Objet
+	 */
+	public String getNom() {
+		return this.nomObjet;
+	}
+	
+	/*
+	 * 
+	 */
+	public void setObjetRecupere() {
+		this.objetRecupere = true;
+	}
+    
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
     public String toString() {
-    	return "l\'indice numero "+idIndice+" est un "+ name + " sa description est "+ description;
+    	return "L\'indice numero "+ numeroIndice +" est un "+ nomObjet + " sa description est "+ descriptionObjet;
     }
     
 }

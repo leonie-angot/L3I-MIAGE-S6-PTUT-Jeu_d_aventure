@@ -12,7 +12,7 @@ package jeu;
  * 
  * @author Tarik D et Sami B
  */
-public class Dialogue extends Indices{
+public class Dialogue extends Indice{
 
 	private String question;
 	private String reponse;
@@ -25,8 +25,6 @@ public class Dialogue extends Indices{
 		reponse = rep;
 		recepteur = r;
 		zoneIndice = z;
-	    idIndice = numeroIndices;
-        numeroIndices++;
 	}
 	
 	public String question() {
@@ -42,6 +40,6 @@ public class Dialogue extends Indices{
 	}
 	
 	public String toString() {
-		return "J'ai posé la question : "+question()+" à "+ recepteur()+ " et il m'a repondu : "+ reponse();
+		return "J'ai posé la question : " + question() + " à "+ recepteur() + " et il m'a repondu : " + reponse();
 	}
 }

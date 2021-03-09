@@ -16,8 +16,7 @@ import java.util.ArrayList;
  */
 public class Jeu {
 	
-	
-	ArrayList<Indices> tabIndice = new ArrayList<Indices>();
+	ArrayList<Objet> tabObjet = new ArrayList<Objet>();
 	
 	/*
 	 * Initialisation des variables pour la Téléportation et l'Affichage du Plan de la maison
@@ -29,19 +28,26 @@ public class Jeu {
 	/*
 	 * 
 	 */
-	public void creerIndices() {
-		Indices[] tab = new Indices[10];
-		
-		//Initialisez les indices
+	public void creerObjet() {
+		this.tabObjet.add(new Objet("Bouton", "Ceci est un bouton de veste, à qui peut-il appartenir ?", zones[8]));
+		this.tabObjet.add(new Objet("Clef de la cave", "Ceci est la clef permettant d'ouvrir la porte de la cave", zones[9]));
+		this.tabObjet.add(new Objet("Boucle d'oreille", "Une boucle d'oreille, à qui peut-elle être ? Je devrais interroger la Mère ou la Femme de Chambre... ", zones[10]));
+		this.tabObjet.add(new Objet("Lettre Compromettante", "Lettre dévoilant une relation adultère entre le Père et la Femme de Chambre", zones[17]));
+		this.tabObjet.add(new Objet("Lettre d'Amour", "Lettre de déclaration d'amour du Cuisiner envers la Femme de Chambre", zones[18]));
+		this.tabObjet.add(new Objet("Clef du coffre de la cave", "Ceci est la clef permettant d'ouvrir le coffre situé dans la cave. Que peut-il bien y avoir dedans ?", zones[15]));
+		this.tabObjet.add(new Objet("Couteau", "Ce couteau est couvert de sang. Peut-être l'arme du crime ? Il faut l'Examiner !", zones[14]));
 	}
+	
 	/**
 	 * Interface utilisateur graphique.
 	 */
     private GUI gui; 
+    
     /**
 	 * Represente la localisation du joueur.
 	 */
 	private Zone zoneCourante;
+	
 	/**
 	 * Cree la carte du jeu avec ses differentes zones.
 	 * initialise l'interface utilisateur graphique avec null.
@@ -55,7 +61,7 @@ public class Jeu {
      * Initialise le GUI du jeu. 
      * @param g interface utilisateur graphique.
      */
-    public void setGUI( GUI g) { gui = g; afficherMessageDeBienvenue(); }
+    public void setGUI( GUI g ) { gui = g; afficherMessageDeBienvenue(); }
     
     /*
      * 
@@ -172,6 +178,8 @@ public class Jeu {
         zones[23].ajouteSortie(Sortie.PREMIERETAGE, zones[22]);
         
         zoneCourante = zones[1]; 
+        
+        creerObjet();
     }
 
     /*
@@ -331,6 +339,58 @@ public class Jeu {
     	}
     }
     
+    /*
+     * 
+     */
+    private void prendre() {
+    	if (zoneCourante == zones[8] && tabObjet.get(0).getObjetRecupere() == false) {
+        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(0).getNom()); 
+        	gui.afficher();
+        	tabObjet.get(0).setObjetRecupere();
+        	zones[8].setNomImage("8-Salon_vide.jpg");
+        	modifierCarte();
+    	} else if (zoneCourante == zones[9] && tabObjet.get(1).getObjetRecupere() == false) {
+        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(1).getNom()); 
+        	gui.afficher();
+        	tabObjet.get(1).setObjetRecupere();
+        	zones[9].setNomImage("9-Bureau_vide.jpg");
+        	modifierCarte();
+    	} else if (zoneCourante == zones[10] && tabObjet.get(2).getObjetRecupere() == false) {
+        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(2).getNom()); 
+        	gui.afficher();
+        	tabObjet.get(2).setObjetRecupere();
+        	zones[10].setNomImage("10-ChambreParentale_vide.jpg");
+        	modifierCarte();
+    	} else if (zoneCourante == zones[17] && tabObjet.get(3).getObjetRecupere() == false) {
+        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(3).getNom()); 
+        	gui.afficher();
+        	tabObjet.get(3).setObjetRecupere();
+        	zones[17].setNomImage("17-Grenier_vide.jpg");
+        	modifierCarte();
+    	} else if (zoneCourante == zones[18] && tabObjet.get(4).getObjetRecupere() == false) {
+        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(4).getNom()); 
+        	gui.afficher();
+        	tabObjet.get(4).setObjetRecupere();
+        	zones[18].setNomImage("18-ChambreDuMajordome_vide.jpg");
+        	modifierCarte();
+    	} else if (zoneCourante == zones[15] && tabObjet.get(5).getObjetRecupere() == false) {
+        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(5).getNom()); 
+        	gui.afficher();
+        	tabObjet.get(5).setObjetRecupere();
+        	zones[15].setNomImage("15-Jardin_vide.jpg");
+        	modifierCarte();
+    	} else if (zoneCourante == zones[14] && tabObjet.get(6).getObjetRecupere() == false) {
+        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(6).getNom()); 
+        	gui.afficher();
+        	tabObjet.get(6).setObjetRecupere();
+        	zones[14].setNomImage("14-Cave_vide.jpg");
+        	modifierCarte();
+    	} else {
+        	gui.afficher("Il n'y a rien à récupérer ici");
+        	gui.afficher();
+    	}
+    }
+    
     /**
      * Affiche la localisation du joueur
      */
@@ -382,6 +442,12 @@ public class Jeu {
             	break;
             case "TAB" : case "TABLEAU" :
             	allerEn( "TABLEAU" ); 
+            	break;
+            case "PA" : case "PARLER" :
+            	parler(zones[7],"lol");
+            	break;
+            case "PR" : case "PRENDRE" :
+            	prendre();
             	break;
             case "C" : case "CARTE" : 
             	retenirZone(); // Permet de retenir dans quelle zone on était pour y retourner quand on sortira de l'affichage du plan de la maison
@@ -544,7 +610,26 @@ public class Jeu {
         }
     }
     
-
+    /*
+     * 
+     */
+    private void modifierCarte() {
+    	gui.afficher(zoneCourante.descriptionLongue());
+    	gui.afficher();
+    	gui.afficheImage(zoneCourante.nomImage());
+    }
+    
+    /*
+     * 
+     */
+    public void parler(Zone z, String dialogue)
+    {
+        if(z==zoneCourante)
+        {
+            gui.afficher(dialogue);
+        }
+    }
+    
     /**
      * Quitte le jeu
      */
