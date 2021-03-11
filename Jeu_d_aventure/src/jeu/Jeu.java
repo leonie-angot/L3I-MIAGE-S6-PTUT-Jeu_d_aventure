@@ -28,6 +28,13 @@ public class Jeu {
 	boolean tpPossible = false;
 	boolean visionCartePossible = false;
 	boolean visionInventairePossible = false;
+	
+    boolean clefPorteUtilisee = false;
+    boolean clefCoffreUtilisee = false;
+    
+    boolean clefPorteUtilisation = false;
+    boolean clefCoffreUtilisation = false;
+	
 	private Zone zonePrecedente;
 
 	/*
@@ -36,8 +43,8 @@ public class Jeu {
 	public void creerObjet() {
 		this.tabObjet.add(new Objet("Bouton", "Ceci est un bouton de veste, il semblerait qu'il provient d'un uniforme de travail. Je devrais demander aux employés.", zones[8]));
 		this.tabObjet.add(new Objet("Clef de la cave", "Ceci est la clef permettant d'ouvrir la porte de la cave.", zones[9]));
-		this.tabObjet.add(new Objet("Boucle d'oreille", "Une boucle d'oreille, à qui peut-elle être ? Je devrais interroger la Mère ou la Femme de Chambre... ", zones[10]));
-		this.tabObjet.add(new Objet("Lettre Compromettante", "Lettre dévoilant une relation adultère entre le Père et la Femme de Chambre.", zones[17]));
+		this.tabObjet.add(new Objet("Boucle d'oreille", "Une boucle d'oreille, à qui peut-elle appartenir ? Je devrais interroger la Mère ou la Femme de Chambre... ", zones[10]));
+		this.tabObjet.add(new Objet("Lettre Compromettante", "Lettre dévoilant une relation adultère entre le Père et la Femme de Chambre. Je me demande si la Mère était au courant...", zones[17]));
 		this.tabObjet.add(new Objet("Lettre d'Amour", "Lettre de déclaration d'amour du Cuisiner envers la Femme de Chambre. Il semblerait qu'il avait des sentiments pour elle...", zones[18]));
 		this.tabObjet.add(new Objet("Clef du coffre de la cave", "Ceci est la clef permettant d'ouvrir le coffre situé dans la cave. Que peut-il bien y avoir dedans ?", zones[15]));
 		this.tabObjet.add(new Objet("Couteau", "Les seules empreintes trouvées sur le couteau sont celles du Cuisiner.", zones[14]));
@@ -314,7 +321,7 @@ public class Jeu {
     	} else if (zoneCourante == zones[14] && tabObjet.get(6).getObjetRecupere() == false) {
         	gui.afficher("Tu viens de récupérer : " + tabObjet.get(6).getNom()); 
         	gui.afficher();
-        	gui.afficher("Ce couteau est couvert de sang. Peut-être l'arme du crime ? Il faut l'Examiner !"); 
+        	gui.afficher("Ce couteau est couvert de sang. Peut-être l'arme du crime ? Il faut l'examiner, c'est élémentaire mon cher Watson !"); 
         	gui.afficher();
         	tabObjet.get(6).setObjetRecupere();
         	zones[14].setNomImage("14-Cave_vide.jpg");
@@ -346,18 +353,51 @@ public class Jeu {
      * 
      */
     private void verificationObjetRecupere(int j) {
-		boolean objetPresentInventaire = false; // PAS BON CA VERIFIE QUE SI UN SEUL OBJET EST DANS L'INVENTAIRE PAS CELUI EN QUESTION
+		boolean objetPresentInventaire = false; 
 		for (int i = 0; i < inventaire.size() && objetPresentInventaire == false; i++) {
-			if (inventaire.get(i) == tabObjet.get(j) ) {
+			if (inventaire.get(i).getNom() == tabObjet.get(j).getNom() ) {
 				objetPresentInventaire = true;
-				for (j = 0; j <= tabObjet.size(); j++) {
-	                gui.afficher(inventaire.get(j).getDescription());
-				}
+	            gui.afficher(tabObjet.get(j).getDescription());
+	            gui.afficher();
 			}
 		}
 		if (!objetPresentInventaire) {
-            gui.afficher("Tu n'as pas récupéré cet objet.");
+            gui.afficher("Tu n'as pas encore récupéré cet objet.");
             gui.afficher();
+		}
+    }
+   
+    /*
+     * 
+     */
+    private void utiliserClef(int j) {
+    	boolean clefPresenteInventaire = false; 
+		for (int i = 0; i < inventaire.size() && clefPresenteInventaire == false; i++) {
+			if (inventaire.get(i).getNom() == tabObjet.get(1).getNom() && clefPorteUtilisee == false && clefCoffreUtilisee == false && clefPorteUtilisation == true) {
+	        	zones[5].setNomImage("5-Garage_ouvert.jpg");
+	        	modifierCarte();
+				clefPresenteInventaire = true;
+				clefPorteUtilisee = true;
+				gui.afficher("La porte est dévérouillée !");
+				gui.afficher();
+			} else if (inventaire.get(i).getNom() == tabObjet.get(5).getNom() && clefCoffreUtilisee == false && clefPorteUtilisee == true) {
+	        	zones[14].setNomImage("14-Cave_couteau.jpg");
+	        	modifierCarte();
+				clefPresenteInventaire = true;
+				clefCoffreUtilisee = true;
+				gui.afficher("La coffre est dévérouillée !");
+				gui.afficher();
+			} else if (clefPorteUtilisee == true && zoneCourante == zones[5]) {
+				gui.afficher("La porte est déjà dévérouillée ! A quoi bon faire deux fois la même chose ? C'est pas très fut fut quand même...");
+				gui.afficher();
+			} 			
+    	} 
+		if (zoneCourante == zones[5] && clefPresenteInventaire == false) {
+			gui.afficher("La porte est vérouillée, il faut trouver la clef...");
+			gui.afficher();
+		} else if (zoneCourante == zones[14] && clefPresenteInventaire == false) {
+			gui.afficher("Le coffre est vérouillé, il faut trouver la clef. On dirait que quelqu'un essaye de cacher de cacher quelque chose ici...");
+			gui.afficher();
 		}
     }
     
@@ -399,7 +439,12 @@ public class Jeu {
             	allerEn( "SUD" ); 
             	break;
             case "E" : case "EST" :
-            	allerEn( "EST" ); 
+            	if (zoneCourante == zones[5] && clefPorteUtilisee == false) {
+            		gui.afficher("Vous devez ouvrir la porte avec la clef pour y rentrer ! Non mais c'est quoi ces manières ?!");
+            		gui.afficher();
+            	} else {
+                	allerEn( "EST" ); 
+            	}
             	break;
             case "O" : case "OUEST" :
             	allerEn( "OUEST" ); 
@@ -446,6 +491,24 @@ public class Jeu {
             	gui.afficher("Tu peux maintenant te téléporter dans tout le manoir sauf les zones auxquelles tu n'as pas accès.\nPour sortir de ce mode entre à nouveau la commande [TP]\nTu peux te servir du plan avec la commande [CARTE] pour savoir où aller, les pièces sont numérotées.\nIl faut donc taper le numéro de la salle désirée pour s'y rendre.");
             	gui.afficher();
             	break;
+    		case "U CC" : case "U C C" : case "U CLEF CAVE" :case "UTILISER CLEF CAVE" : case "UTILISER CLEF DE LA CAVE" :
+    			if (zoneCourante == zones[5]) {
+                	clefPorteUtilisation = true;
+                	utiliserClef(1);
+    			} else {
+    				gui.afficher("Tu n'es pas dans la bonne zone, tu n'as pas la permission de faire ça !");
+    				gui.afficher();
+    			}
+            	break;
+            case "U CCC" : case "UTILISER" :
+            	if (zoneCourante == zones[14]) {
+                	clefCoffreUtilisation = true;
+                	utiliserClef(5);
+            	} else {
+    				gui.afficher("Tu n'es pas dans la bonne zone, tu n'as pas la permission de faire ça !");
+    				gui.afficher();
+    			}
+            	break;
             case "Q" : case "QUITTER" :
             	terminer();
             	break;
@@ -459,8 +522,26 @@ public class Jeu {
     		case "EX B" : case "EXAMINER BOUTON" :
     			verificationObjetRecupere(0);
     			break;
-    		case "EX BO" : case "EXAMINER BOUCLE OREILLE" : case "EXAMINER BOUCLE D'OREILLE" : case "EXAMINER BOUCLE D OREILLE" : case "EXAMINER BOUCLE DOREILLE" :
+    		case "EX CC" : case "EX C C" : case "EX CLEF CAVE" :case "EXAMINER CLEF CAVE" : case "EXAMINER CLEF DE LA CAVE" :
+    			verificationObjetRecupere(1);
+    			break;
+    		case "EX BO" : case "EX B O" : case "EX BOUCLE OREILLE" : case "EXAMINER BOUCLE OREILLE" : case "EXAMINER BOUCLE DOREILLE" : case "EXAMINER BOUCLE D OREILLE"  : case "EXAMINER BOUCLE D\'OREILLE" :
     			verificationObjetRecupere(2);
+    			break;
+    		case "EX LC" : case "EX L C" : case "EX LETTRE COMPROMETTANTE" : case "EXAMINER LETTRE COMPROMETTANTE" :
+    			verificationObjetRecupere(3);
+    			break;
+    		case "EX LA" : case "EX L A" : case "EX LETTRE AMOUR" : case "EXAMINER LETTRE AMOUR" : case "EXAMINER LETTRE DAMOUR" : case "EXAMINER LETTRE D AMOUR" : case "EXAMINER LETTRE D\'AMOUR" :
+    			verificationObjetRecupere(4);
+    			break;
+    		case "EX CCC" : case "EX C C C" : case "EX CLEF COFFRE" : case "EXAMINER CLEF COFFRE CAVE" : case "EXAMINER CLEF COFFRE" : case "EXAMINER CLEF DU COFFRE DE LA CAVE" :
+    			verificationObjetRecupere(5);
+    			break;
+    		case "EX C" : case "EX COUTEAU" : case "EXAMINER COUTEAU" :
+    			verificationObjetRecupere(6);
+    			break;
+    		case "EX LL" : case "EX L L" : case "EX LETTRE LICENCIEMENT" : case "EXAMINER LETTRE LICENCIEMENT" : case "EXAMINER LETTRE DE LICENCIEMENT" : 
+    			verificationObjetRecupere(7);
     			break;
     		case "I" : case "INVENTAIRE" :
             	revenirZonePrecedente();
@@ -540,7 +621,11 @@ public class Jeu {
                 teleporterJoueur(13);
                 break;
             case "14":
-                teleporterJoueur(14);
+            	if (!clefPorteUtilisee) {
+            		gui.afficher("Tu n'as pas la permission de te téléporter la bas, tu dois d'abord trouver la clef ! Espèce de tricheur !");
+            	} else {
+                    teleporterJoueur(14);
+            	}
                 break;
             case "15":
                 teleporterJoueur(15);
