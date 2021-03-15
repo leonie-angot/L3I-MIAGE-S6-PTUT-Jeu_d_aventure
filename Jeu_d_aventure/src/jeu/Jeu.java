@@ -28,6 +28,7 @@ public class Jeu {
 	boolean tpPossible = false;
 	boolean visionCartePossible = false;
 	boolean visionInventairePossible = false;
+	boolean discussionEnCours = false;
 	
     boolean clefPorteUtilisee = false;
     boolean clefCoffreUtilisee = false;
@@ -79,7 +80,7 @@ public class Jeu {
     /*
      * 
      */
-    Zone [] zones = new Zone [25];
+    Zone [] zones = new Zone [26];
     
     /**
      * Cree et initialise les zones.
@@ -114,66 +115,70 @@ public class Jeu {
         zones[22] = new Zone("le Plan du Premier Étage", "22-PlanMaison1erEtage.jpg");
         zones[23] = new Zone("le Plan du Second Étage","23-PlanMaison2emeEtage.jpg");
         zones[24] = new Zone("l'Inventaire","24-Inventaire.jpg");
+        zones[25] = new Zone("la Poubelle","25-Poubelle.jpg");
 
-        zones[0].ajouteSortie(Sortie.SUD, zones[1]); 	// Depuis le Tableau aller dans l'Entrée
+        zones[0].ajouteSortie(Sortie.SUD, zones[1]); 		// Depuis le Tableau aller dans l'Entrée
         
-        zones[1].ajouteSortie(Sortie.OUEST, zones[2]); 	// Depuis l'Entrée aller dans le couloir Ouest
-        zones[1].ajouteSortie(Sortie.EST, zones[3]); 	// Depuis l'Entrée aller dans le couloir Est
-        zones[1].ajouteSortie(Sortie.NORD, zones[4]); 	// Depuis l'Entrée aller dans le couloir Nord
-        zones[1].ajouteSortie(Sortie.SUD, zones[5]); 	// Depuis l'Entrée aller dans le garage
+        zones[1].ajouteSortie(Sortie.OUEST, zones[2]); 		// Depuis l'Entrée aller dans le couloir Ouest
+        zones[1].ajouteSortie(Sortie.EST, zones[3]); 		// Depuis l'Entrée aller dans le couloir Est
+        zones[1].ajouteSortie(Sortie.NORD, zones[4]); 		// Depuis l'Entrée aller dans le couloir Nord
+        zones[1].ajouteSortie(Sortie.SUD, zones[5]); 		// Depuis l'Entrée aller dans le garage
         zones[1].ajouteSortie(Sortie.TABLEAU, zones[0]); 	// Depuis l'Entrée aller sur le Tableau
+
+        zones[2].ajouteSortie(Sortie.EST, zones[1]);  		// Depuis le couloir Ouest aller dans l'Entrée
+        zones[2].ajouteSortie(Sortie.OUEST, zones[6]);		// Depuis le couloir Ouest aller dans la Cuisine
+        zones[2].ajouteSortie(Sortie.NORD, zones[7]);		// Depuis le couloir Ouest aller dans la Salle à Manger
         
-        zones[2].ajouteSortie(Sortie.EST, zones[1]);  	// Depuis le couloir Ouest aller dans l'Entrée
-        zones[2].ajouteSortie(Sortie.OUEST, zones[6]);	// Depuis le couloir Ouest aller dans la Cuisine
-        zones[2].ajouteSortie(Sortie.NORD, zones[7]);	// Depuis le couloir Ouest aller dans la Salle à Manger
+        zones[3].ajouteSortie(Sortie.OUEST, zones[1]); 		// Depuis le couloir Est aller dans l'Entrée
+        zones[3].ajouteSortie(Sortie.EST, zones[9]);		// Depuis le couloir Est aller dans le Bureau
+        zones[3].ajouteSortie(Sortie.NORD, zones[8]);		// Depuis le couloir Est aller dans le Salon
         
-        zones[3].ajouteSortie(Sortie.OUEST, zones[1]); 	// Depuis le couloir Est aller dans l'Entrée
-        zones[3].ajouteSortie(Sortie.EST, zones[9]);	// Depuis le couloir Est aller dans le Bureau
-        zones[3].ajouteSortie(Sortie.NORD, zones[8]);	// Depuis le couloir Est aller dans le Salon
-        
-        zones[4].ajouteSortie(Sortie.SUD, zones[1]);	// Depuis le couloir Nord aller dans l'Entrée
-        zones[4].ajouteSortie(Sortie.OUEST, zones[10]);	// Depuis le couloir Nord aller dans la Chambre Parentale
+        zones[4].ajouteSortie(Sortie.SUD, zones[1]);		// Depuis le couloir Nord aller dans l'Entrée
+        zones[4].ajouteSortie(Sortie.OUEST, zones[10]);		// Depuis le couloir Nord aller dans la Chambre Parentale
         zones[4].ajouteSortie(Sortie.NORDOUEST, zones[11]);	// Depuis le couloir Nord aller dans la Chambre de la Fille
         zones[4].ajouteSortie(Sortie.NORDEST, zones[12]);	// Depuis le couloir Nord aller dans la Chambre du Fils
-        zones[4].ajouteSortie(Sortie.EST, zones[13]);	// Depuis le couloir Nord aller dans l'Escalier avec le couloir
+        zones[4].ajouteSortie(Sortie.EST, zones[13]);		// Depuis le couloir Nord aller dans l'Escalier avec le couloir
         
-        zones[5].ajouteSortie(Sortie.SUD, zones[1]);	// Depuis le garage pour aller dans l'Entree
-        zones[5].ajouteSortie(Sortie.EST, zones[14]);	// Depuis le garage pour aller dans la Cave
+        zones[5].ajouteSortie(Sortie.SUD, zones[1]);		// Depuis le garage pour aller dans l'Entree
+        zones[5].ajouteSortie(Sortie.EST, zones[14]);		// Depuis le garage pour aller dans la Cave
         
-        zones[6].ajouteSortie(Sortie.SUD, zones[2]);	// Depuis la Salle à Manger pour aller dans le couloir Ouest
+        zones[6].ajouteSortie(Sortie.SUD, zones[2]);		// Depuis la Salle à Manger pour aller dans le couloir Ouest
+
+        zones[7].ajouteSortie(Sortie.SUD, zones[2]);		// Depuis la Cuisine pour aller dans le couloir Ouest
+        zones[7].ajouteSortie(Sortie.EST, zones[15]);		// Depuis la Cuisine pour aller dans le Jardin
+        zones[7].ajouteSortie(Sortie.POUBELLE, zones[25]);	// Depuis la Cuisine pour aller dans le Jardin
+
+        zones[8].ajouteSortie(Sortie.SUD, zones[3]);		// Depuis le Salon pour aller dans le couloir Est
+        zones[8].ajouteSortie(Sortie.NORD, zones[15]);		// Depuis le Salon pour aller dans le Jardin
         
-        zones[7].ajouteSortie(Sortie.SUD, zones[2]);	// Depuis la Cuisine pour aller dans le couloir Ouest
-        zones[7].ajouteSortie(Sortie.EST, zones[15]);	// Depuis la Cuisine pour aller dans le Jardin
+        zones[9].ajouteSortie(Sortie.SUD, zones[3]);		// Depuis le Bureau pour aller dans le couloir Est
+
+        zones[10].ajouteSortie(Sortie.SUD, zones[4]);		// Depuis la Chambre Parentale pour aller dans le couloir Nord
+        zones[10].ajouteSortie(Sortie.NORD, zones[16]);		// Depuis la Chambre Parentale pour aller dans la Salle de Bain
         
-        zones[8].ajouteSortie(Sortie.SUD, zones[3]);	// Depuis le Salon pour aller dans le couloir Est
-        zones[8].ajouteSortie(Sortie.NORD, zones[15]);	// Depuis le Salon pour aller dans le Jardin
+        zones[11].ajouteSortie(Sortie.SUD, zones[4]);		// Depuis la Chambre de la Fille pour aller dans le couloir Nord
+
+        zones[12].ajouteSortie(Sortie.SUD, zones[4]);		// Depuis la Chambre du Fils pour aller dans le couloir Nord
+
+        zones[13].ajouteSortie(Sortie.OUEST, zones[4]);		// Depuis le couloir avec l'escalier pour aller dans le couloir Nord
+        zones[13].ajouteSortie(Sortie.EST, zones[17]);		// Depuis le couloir avec l'escalier pour aller dans le Grenier
+        zones[13].ajouteSortie(Sortie.NORD, zones[18]);		// Depuis le couloir avec l'escalier pour aller dans la Chambre des Domestiques
         
-        zones[9].ajouteSortie(Sortie.SUD, zones[3]);	// Depuis le Bureau pour aller dans le couloir Est
+        zones[14].ajouteSortie(Sortie.OUEST, zones[5]);		// Depuis la Cave pour aller dans le Garage
         
-        zones[10].ajouteSortie(Sortie.SUD, zones[4]);	// Depuis la Chambre Parentale pour aller dans le couloir Nord
-        zones[10].ajouteSortie(Sortie.NORD, zones[16]);	// Depuis la Chambre Parentale pour aller dans la Salle de Bain
+        zones[15].ajouteSortie(Sortie.SUD, zones[7]);		// Depuis le Jardin pour aller dans la Cuisine
+        zones[15].ajouteSortie(Sortie.OUEST, zones[8]);		// Depuis le Jardin pour aller dans le Salon
+        zones[15].ajouteSortie(Sortie.NORD, zones[19]);		// Depuis le Jardin pour aller dans la Maison du Gardien
+
+        zones[16].ajouteSortie(Sortie.SUD, zones[10]);		// Depuis la Salle de Bain pour aller dans la Chambre Parentale
         
-        zones[11].ajouteSortie(Sortie.SUD, zones[4]);	// Depuis la Chambre de la Fille pour aller dans le couloir Nord
+        zones[17].ajouteSortie(Sortie.SUD, zones[13]);		// Depuis le Grenier pour aller dans le couloir avec l'escalier
         
-        zones[12].ajouteSortie(Sortie.SUD, zones[4]);	// Depuis la Chambre du Fils pour aller dans le couloir Nord
+        zones[18].ajouteSortie(Sortie.SUD, zones[13]);		// Depuis la Chambre du Majordome pour aller dans le couloir avec l'escalier
         
-        zones[13].ajouteSortie(Sortie.OUEST, zones[4]);	// Depuis le couloir avec l'escalier pour aller dans le couloir Nord
-        zones[13].ajouteSortie(Sortie.EST, zones[17]);	// Depuis le couloir avec l'escalier pour aller dans le Grenier
-        zones[13].ajouteSortie(Sortie.NORD, zones[18]);	// Depuis le couloir avec l'escalier pour aller dans la Chambre des Domestiques
+        zones[19].ajouteSortie(Sortie.SUD, zones[15]);		// Depuis la Maison du Gardien pour aller le Jardin
         
-        zones[14].ajouteSortie(Sortie.OUEST, zones[5]);	// Depuis la Cave pour aller dans le Garage
-        
-        zones[15].ajouteSortie(Sortie.SUD, zones[7]);	// Depuis le Jardin pour aller dans la Cuisine
-        zones[15].ajouteSortie(Sortie.OUEST, zones[8]);	// Depuis le Jardin pour aller dans le Salon
-        zones[15].ajouteSortie(Sortie.NORD, zones[19]);	// Depuis le Jardin pour aller dans la Maison du Gardien
-        
-        zones[16].ajouteSortie(Sortie.SUD, zones[10]);	// Depuis la Salle de Bain pour aller dans la Chambre Parentale
-        
-        zones[17].ajouteSortie(Sortie.SUD, zones[13]);	// Depuis le Grenier pour aller dans le couloir avec l'escalier
-        
-        zones[18].ajouteSortie(Sortie.SUD, zones[13]);	// Depuis la Chambre du Majordome pour aller dans le couloir avec l'escalier
-        
-        zones[19].ajouteSortie(Sortie.SUD, zones[15]);	// Depuis la Maison du Gardien pour aller le Jardin
+       
         
         zones[20].ajouteSortie(Sortie.REZDECHAUSSEE, zones[21]);
         zones[20].ajouteSortie(Sortie.PREMIERETAGE, zones[22]);
@@ -401,6 +406,67 @@ public class Jeu {
 		}
     }
     
+    /*
+     * 
+     */
+    private void gameOver() {
+    	if (zoneCourante == zones[25]) {
+    		gui.afficher("Mais quelle idée d'aller dans la poubelle aussi ?!");
+    		gui.afficher();
+    		terminer();
+    	}
+    }
+    
+    /*
+     * 
+     */
+    private void parler() {
+    	if (zoneCourante == zones[1]) {
+        	zones[1].setNomImage("1-Entree_Majordome.jpg");
+        	modifierCarte();
+			gui.afficher(" | " + "Bonjour, vous devez être le détective qui travaille sur cette enquête.\n" + " | " + "En quoi puis-je vous aider ?");
+			gui.afficher();
+			gui.afficher(" | " +  "1. Dites m'en plus sur vous.\n");
+			gui.afficher(" | " +  "2. Que saviez-vous sur le père ?\n");
+			gui.afficher(" | " +  "3. Dites m'en plus sur vous.\n");
+			gui.afficher();
+    	} else if (zoneCourante == zones[6]) {
+        	zones[6].setNomImage("6-SalleAManger_FemmeDeMenage.jpg");
+        	modifierCarte();
+        	gui.afficher(" | " + "Bonjour, vous avez attrapé le meurtrier ? Mais quel malheur !\n" + " | " + "Comment est-ce que cela a pu se produire ?!");
+			gui.afficher();
+			gui.afficher(" | " +  "1. Dites m'en plus sur vous.\n");
+			gui.afficher(" | " +  "2. Que savez vous sur cette maison ?\n");
+			gui.afficher();
+    	} else if (zoneCourante == zones[7]) {
+        	zones[7].setNomImage("7-Cuisine_Cuisinier.jpg");
+        	modifierCarte();
+    	} else if (zoneCourante == zones[9]) {
+        	zones[9].setNomImage("9-Bureau_Mere.jpg");
+        	modifierCarte();
+    	} else if (zoneCourante == zones[11]) {
+        	zones[11].setNomImage("11-Chambre_Fille.jpg");
+        	modifierCarte();
+    	} else if (zoneCourante == zones[12]) {
+        	zones[12].setNomImage("12-Chambre_Fils.jpg");
+        	modifierCarte();
+    	} else if (zoneCourante == zones[15]) {
+        	zones[15].setNomImage("15-Jardin_Jardinier.jpg");
+        	modifierCarte();
+    	}
+    }
+    
+    /*
+     * 
+     */
+    public void permissionParler() {
+    	if (discussionEnCours) {
+    		discussionEnCours = false;
+    	} else {
+    		discussionEnCours = true;
+    	}
+    }
+    
     /**
      * Affiche la localisation du joueur
      */
@@ -427,7 +493,7 @@ public class Jeu {
      */
     public void traiterCommande(String commandeLue) {
     	gui.afficher( "> "+ commandeLue + "\n");
-    	if (!tpPossible && !visionCartePossible && !visionInventairePossible) {
+    	if (!tpPossible && !visionCartePossible && !visionInventairePossible && !discussionEnCours) {
     		switch (commandeLue.toUpperCase()) {
             case "?" : case "AIDE" : 
                 afficherAide(); 
@@ -455,11 +521,17 @@ public class Jeu {
             case "NE" : case "NORDEST" :
             	allerEn( "NORDEST" ); 
             	break;
+            case "PO" : case "POUBELLE" :
+            	zoneCourante = zones[25];
+            	modifierCarte();
+            	gameOver();
+            	break;
             case "TAB" : case "TABLEAU" :
             	allerEn( "TABLEAU" ); 
             	break;
             case "PA" : case "PARLER" :
-            	//parler(zones[7],"lol");
+            	parler();
+            	permissionParler();
             	break;
             case "PR" : case "PRENDRE" :
             	prendre();
@@ -491,7 +563,7 @@ public class Jeu {
             	gui.afficher("Tu peux maintenant te téléporter dans tout le manoir sauf les zones auxquelles tu n'as pas accès.\nPour sortir de ce mode entre à nouveau la commande [TP]\nTu peux te servir du plan avec la commande [CARTE] pour savoir où aller, les pièces sont numérotées.\nIl faut donc taper le numéro de la salle désirée pour s'y rendre.");
             	gui.afficher();
             	break;
-    		case "U CC" : case "U C C" : case "U CLEF CAVE" :case "UTILISER CLEF CAVE" : case "UTILISER CLEF DE LA CAVE" :
+    		case "U CC" : case "U C C" : case "UTILISER CC" : case "UTILISER C C" : case "U CLEF CAVE" : case "UTILISER CLEF CAVE" : case "UTILISER CLEF DE LA CAVE" :
     			if (zoneCourante == zones[5]) {
                 	clefPorteUtilisation = true;
                 	utiliserClef(1);
@@ -500,7 +572,7 @@ public class Jeu {
     				gui.afficher();
     			}
             	break;
-            case "U CCC" : case "UTILISER" :
+            case "U CCC" : case "U C C C" : case "UTILISER CCC" : case "UTILISER C C C" : case "U CLEF CAVE COFFRE" : case "UTILISER CLEF CAVE COFFRE" : case "UTILISER CLEF DU COFFRE DE LA CAVE" :
             	if (zoneCourante == zones[14]) {
                 	clefCoffreUtilisation = true;
                 	utiliserClef(5);
@@ -517,7 +589,20 @@ public class Jeu {
                 gui.afficher();
                 break;
             }
-    	} else if (visionInventairePossible && !tpPossible && !visionCartePossible) { 
+    	} else if (discussionEnCours && !visionInventairePossible && !tpPossible && !visionCartePossible) {
+    		if (zoneCourante == zones[1]) {
+    			switch (commandeLue.toUpperCase()) {
+    			case "1" :
+    				gui.afficher(" | " + "Je suis le Majordome, je travaille ici depuis ... 27 ans déjà ? Comme le temps passe vite !\n" + " | " + "Je connais toute cette famille et leurs employés comme s'ils faisaient partie de la mienne !\n" + " | " + "Si vous avez la moindre interrogation n'hésitez pas !\n" + " | " + "Je souhaite vous aider à résoudre cette enquête au plus vite !");
+    				gui.afficher();
+    				break;
+               	default : 
+                    gui.afficher("Commande inconnue");
+                    gui.afficher();
+                    break;
+    			}
+    		}
+    	} else if (visionInventairePossible && !tpPossible && !visionCartePossible && !discussionEnCours) { 
     		switch (commandeLue.toUpperCase() ) {
     		case "EX B" : case "EXAMINER BOUTON" :
     			verificationObjetRecupere(0);
@@ -552,7 +637,7 @@ public class Jeu {
                 gui.afficher();
                 break;
     		}
-    	} else if (visionCartePossible && !tpPossible && !visionInventairePossible) {
+    	} else if (visionCartePossible && !tpPossible && !visionInventairePossible && !discussionEnCours) {
     		switch (commandeLue.toUpperCase()) {
             case "SS": case "SOUSSOL" :
                 montrerCarteJoueur(20);
@@ -579,7 +664,7 @@ public class Jeu {
                 gui.afficher();
                 break;
     		}
-    	} else if (tpPossible && !visionCartePossible && !visionInventairePossible) {
+    	} else if (tpPossible && !visionCartePossible && !visionInventairePossible && !discussionEnCours) {
     		switch (commandeLue.toUpperCase()) {
             case "1":
                 teleporterJoueur(1);
@@ -623,6 +708,7 @@ public class Jeu {
             case "14":
             	if (!clefPorteUtilisee) {
             		gui.afficher("Tu n'as pas la permission de te téléporter la bas, tu dois d'abord trouver la clef ! Espèce de tricheur !");
+            		gui.afficher();
             	} else {
                     teleporterJoueur(14);
             	}

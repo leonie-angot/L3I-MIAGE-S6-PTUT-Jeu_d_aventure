@@ -34,16 +34,6 @@ public class Zone
         nomImage = image;
         sorties = new HashMap<>();
     }
-
-    /*
-     * Permet de récupérer l'id de la zone 
-     */
-    /*public int getZone(String image) {
-    	char valeur;
-    	valeur = image.charAt(0);
-    	int idZone = Character.getNumericValue(valeur);
-    	return idZone;
-    }*/
     
     /**
      * Ajoute une sortie à notre Zone dont la sortie et la zone voisine sont donnee en parametre.
@@ -73,7 +63,7 @@ public class Zone
      * Renvoie la description de notre Zone.
      */
     public String toString() {
-        return description;
+    	return description;
     }
 
     /**
@@ -89,7 +79,7 @@ public class Zone
      * @return les clés representent les noms de la Zone.
      */
     private String sorties() {
-        return sorties.keySet().toString();
+    	return sorties.keySet().toString();
     }
 
     /**
@@ -98,6 +88,6 @@ public class Zone
      * @return la sortie de type Zone
      */
     public Zone obtientSortie(String direction) {
-    	return sorties.get(direction);
+        return sorties.get(direction);
     }
 }
