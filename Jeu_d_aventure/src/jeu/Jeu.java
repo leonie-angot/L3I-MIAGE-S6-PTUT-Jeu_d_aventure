@@ -236,6 +236,7 @@ public class Jeu {
         zones[13].ajouteSortie(Sortie.NORD, zones[18]);		// Depuis le couloir avec l'escalier pour aller dans la Chambre des Domestiques
         
         zones[14].ajouteSortie(Sortie.OUEST, zones[5]);		// Depuis la Cave pour aller dans le Garage
+        zones[14].ajouteSortie(Sortie.POUBELLE, zones[25]);	// Depuis la Cave pour aller dnas la Poubelle
         
         zones[15].ajouteSortie(Sortie.SUD, zones[7]);		// Depuis le Jardin pour aller dans la Cuisine
         zones[15].ajouteSortie(Sortie.OUEST, zones[8]);		// Depuis le Jardin pour aller dans le Salon
@@ -563,7 +564,7 @@ public class Jeu {
         	if (!verifDejaParle(10)) {
             	reponse(10);
             	dejaParleAuPersonnage(10);
-        	} else {
+        	} else if (verifierObjetPresentInventaire(7)){
         		reponse(14);
             	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(7).getNom()); 
         		gui.afficher();
@@ -686,8 +687,13 @@ public class Jeu {
             	gui.afficher();
             	break;
             case "PA" : case "PARLER" :
-            	parler();
-            	permissionParler();
+            	if (zoneCourante == zones[1] || zoneCourante == zones[6] || zoneCourante == zones[7] || zoneCourante == zones[9] || zoneCourante == zones[11] || zoneCourante == zones[12]  || zoneCourante == zones[15]) {
+            		parler();
+                	permissionParler();
+            	} else {
+            		gui.afficher("T'as vu quelqu'un toi ici ? Non je crois pas non, donc pourquoi t'essaye de parler ?!");
+            		gui.afficher();
+            	}
             	break;
             case "PR" : case "PRENDRE" :
             	prendre();
@@ -875,7 +881,7 @@ public class Jeu {
     			case "5" :
     				reponse(95);
     			case "PA" : case "PARLER" : case "RETOUR" :
-    	        	zones[9].setNomImage("9-SalleAManger.jpg");
+    	        	zones[9].setNomImage("9-Bureau.jpg");
     	        	modifierCarte();
                 	permissionParler();
     	        	break;
@@ -982,7 +988,7 @@ public class Jeu {
     		case "EX LL" : case "EX L L" : case "EX LETTRE LICENCIEMENT" : case "EXAMINER LETTRE LICENCIEMENT" : case "EXAMINER LETTRE DE LICENCIEMENT" : 
     			verificationObjetRecupere(7);
     			break;
-    		case "I" : case "INVENTAIRE" :
+    		case "I" : case "INVENTAIRE" : case "RETOUR" :
             	revenirZonePrecedente();
             	permissionInventaire();
     			break;
@@ -1014,7 +1020,7 @@ public class Jeu {
             case "2EME" : case "2EMEETAGE" : case "SECONDETAGE" :
             	montrerCarteJoueur(23);
             	break;
-            case "C" : case "CARTE" :
+            case "C" : case "CARTE" : case "RETOUR" :
             	revenirZonePrecedente();
             	permissionCarte();
             	gui.afficher();
@@ -1097,7 +1103,7 @@ public class Jeu {
             case "19":
                 teleporterJoueur(19);
                 break;
-            case "TP" : 
+            case "TP" : case "TELEPORTATION" : case "RETOUR" :
             	permissionTeleportation();
             	gui.afficher("On arrête enfin de tricher ?");
             	gui.afficher();
