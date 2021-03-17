@@ -16,8 +16,8 @@ public abstract class Indices {
 
 	public static int numeroIndices = 0;
 	public int idIndice;
-	public Zone zoneIndice;
 	public boolean recuperer = false;
 	
 
 }
+
