@@ -16,10 +16,9 @@ public class Objet extends Indices {
     private String name;
     private String description;
 
-    public Objet(String nom, String d, Zone z){
+    public Objet(String nom, String d){
         name=nom;
         description=d;
-        zoneIndice = z;
         idIndice = numeroIndices;
         numeroIndices++;
     }
