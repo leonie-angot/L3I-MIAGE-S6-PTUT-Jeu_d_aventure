@@ -1,6 +1,5 @@
 package jeu;
 
-
 /**
  * Nom de Class : Dialogue.
  * 
@@ -8,38 +7,42 @@ package jeu;
  * 
  * Version : 1.0.
  * 
- * Date : 23/02/2021.
+ * Date : 16/03/2021.
  * 
- * @author Tarik D et Sami B
+ * @author Léonie A. et Ylli P.
  */
-public class Dialogue extends Indice{
 
-	private String question;
-	private String reponse;
+public class Dialogue extends Indice{
 	
-	private Personne recepteur;
-	
-	//Essayez avec StringBuilder
-	public Dialogue(String q, String rep, Personne r, Zone z) {
-		question = q;
-		reponse = rep;
-		recepteur = r;
-		zoneIndice = z;
+	private int numeroDialogue;
+	private String dialogueTexte;
+	boolean dejaParle;
+
+	public Dialogue(int numeroDialogue, String dialogueTexte){
+		this.numeroDialogue = numeroDialogue ;
+	    this.dialogueTexte = " | " + dialogueTexte + "\n";
 	}
 	
-	public String question() {
-		return this.question;
+	public Dialogue(int numeroDialogue, String dialogueTexte, boolean dejaParle){
+		this.numeroDialogue = numeroDialogue ;
+	    this.dialogueTexte = " | " + dialogueTexte + "\n";
+	    this.dejaParle = dejaParle;
 	}
 	
-	public String reponse() {
-		return this.reponse;
+	public int getNumeroDialogue() {
+		return this.numeroDialogue;
 	}
 	
-	public Personne recepteur() {
-		return this.recepteur;
+	public String getDialogueTexte() {
+		return this.dialogueTexte;
 	}
 	
-	public String toString() {
-		return "J'ai posé la question : " + question() + " à "+ recepteur() + " et il m'a repondu : " + reponse();
+	public boolean getDejaParle() {
+		return this.dejaParle;
 	}
+	
+	public void setDejaParle() {
+		this.dejaParle = true;
+	}
+	
 }

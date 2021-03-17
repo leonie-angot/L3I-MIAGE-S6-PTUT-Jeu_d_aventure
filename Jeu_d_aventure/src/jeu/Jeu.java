@@ -19,8 +19,9 @@ public class Jeu {
 	// ArrayList répertoriant les Objets présents sur la map
 	ArrayList<Objet> tabObjet = new ArrayList<Objet>();
 	
-	
 	ArrayList<Objet> inventaire = new ArrayList<Objet>();
+	
+	ArrayList<Dialogue> tabDialogue = new ArrayList<Dialogue>();
 	
 	/*
 	 * Initialisation des variables pour la Téléportation et l'Affichage du Plan de la maison
@@ -29,6 +30,7 @@ public class Jeu {
 	boolean visionCartePossible = false;
 	boolean visionInventairePossible = false;
 	boolean discussionEnCours = false;
+	boolean accuserPossible = false;
 	
     boolean clefPorteUtilisee = false;
     boolean clefCoffreUtilisee = false;
@@ -50,6 +52,74 @@ public class Jeu {
 		this.tabObjet.add(new Objet("Clef du coffre de la cave", "Ceci est la clef permettant d'ouvrir le coffre situé dans la cave. Que peut-il bien y avoir dedans ?", zones[15]));
 		this.tabObjet.add(new Objet("Couteau", "Les seules empreintes trouvées sur le couteau sont celles du Cuisiner.", zones[14]));
 		this.tabObjet.add(new Objet("Lettre de Licenciement", "Lettre de licenciement du Cuisinier rédigée par le Père", zones[1]));
+	}
+	
+	/**
+	 * 
+	 * @author
+	 */
+	public void creerDialogue() { // TODO
+		//Questions
+		this.tabDialogue.add(new Dialogue(1, "1. Dites-m'en plus sur vous."));
+		this.tabDialogue.add(new Dialogue(2, "2. Que saviez-vous sur le Père et cette famille?"));
+		this.tabDialogue.add(new Dialogue(3, "3. Que faisiez-vous hier au moment du meurtre ?"));
+		this.tabDialogue.add(new Dialogue(4, "4. Est-ce que cette boucle d'oreille est à vous ?"));
+		this.tabDialogue.add(new Dialogue(5, "5. "));
+		this.tabDialogue.add(new Dialogue(6, "4. Est-ce que c'est toi qui a écrit sur le tableau dans la Cave ?"));
+		
+		// Majordome
+		this.tabDialogue.add(new Dialogue(10, "Bonjour, vous devez être le détective qui travaille sur cette enquête.\n" + " | " + "En quoi puis-je vous aider ?"));
+		this.tabDialogue.add(new Dialogue(11, "Je suis le Majordome, je travaille ici depuis ... 27 ans déjà ? Comme le temps passe vite !\n" + 
+		" | " + "Je connais toute cette famille et leurs employés comme s'ils faisaient partie de la mienne !\n" + 
+		" | " + "Si vous avez la moindre interrogation n'hésitez pas !\n" + " | " + "Je souhaite vous aider à résoudre cette enquête au plus vite !", false));
+		this.tabDialogue.add(new Dialogue(12, "Il y avait des tensions dans cette famille... Mais comme dans toutes non ?", false));
+		this.tabDialogue.add(new Dialogue(13, "J'étais avec la Femme de Chambre, nous débarassions la table après le souper alors que la famille allait se coucher.", false));
+		this.tabDialogue.add(new Dialogue(14, "Je viens de me rappeler ! J'ai retrouvé ça hier dans le bureau du Père, tenez !", false));
+		
+		// Femme de Chambre
+		this.tabDialogue.add(new Dialogue(60, "Bonjour, vous avez attrapé le meurtrier ? Mais quel malheur !\n" + " | " + "Comment est-ce que cela a pu se produire ?!"));
+		this.tabDialogue.add(new Dialogue(61, "Je suis Femme de Chambre, de Ménage, un peu tout ce que vous voulez. Ca fait presque 2 ans maintenant que je travaille ici... Quel malheur..."));
+		this.tabDialogue.add(new Dialogue(62, "La Père... Il ne méritait pas ça... Il y avait des disputes au sein de ce foyer, mais jamais rien d'aussi grave !"));
+		this.tabDialogue.add(new Dialogue(63, "Hier soir ? J'étais entrain de débarasser la table après le diner et nous rangions la cuisine avant de finir notre service."));
+		this.tabDialogue.add(new Dialogue(64, "Oui... C'est ma boucle d'oreille, je la cherche depuis un moment !\n" + 
+		" | " + "Où l'avez-vous trouvée ?\n" + 
+		" | " + ". . .\n " + 
+		" | " + "Ah dans la chambre parentale ? C'est bizarre, j'ai du la perdre en faisant le ménage."));
+		
+		// Cuisinier
+		this.tabDialogue.add(new Dialogue(70, "Bonjour, je suis le Cuisinier, vous devez être le détective." + " | " + "Que voulez-vous savoir ?"));
+		this.tabDialogue.add(new Dialogue(71, "Comme je l'ai dis, je suis Cuisinier ici depuis 4 ans maintenant..."));
+		this.tabDialogue.add(new Dialogue(72, "Cette famille avait beaucoup de problèmes, vraiment pas un foyer sain..."));
+		this.tabDialogue.add(new Dialogue(73, "J'étais entrain de rentrer chez moi, comme le diner était terminé, javais fini mon service."));
+
+		// Mere
+		this.tabDialogue.add(new Dialogue(90, "Mon cher mari est mort ! Je vous en prie, trouvez l'assassin et mettez-le en prison !!!"));
+		this.tabDialogue.add(new Dialogue(91, "Je suis la Mère et maitenant veuve... Nous nous sommes mariés il y 18 ans... Il est parti bien trop vite... oh mon chéri..."));
+		this.tabDialogue.add(new Dialogue(92, "Nous n'étions pas une famille parfaite, loin de là... Mais nous pouvions toujours compter les uns sur les autres..."));
+		this.tabDialogue.add(new Dialogue(93, "J'étais en train de mettre les enfants au lit au moment où... où... *sanglots*"));
+		this.tabDialogue.add(new Dialogue(94, "Non ce n'est pas ma boucle d'oreille, elle est surement à la Femme de Chambre. Vous devriez-aller lui demander."));
+		
+		// Fille
+		this.tabDialogue.add(new Dialogue(110, "Mon petit Papa... Qui a bien pu lui faire ça ?! Trouvez celui qui a tué mon père !"));
+		this.tabDialogue.add(new Dialogue(111, "Je suis la Fille, j'ai 15 ans. Mon Père était un homme bon, il ne méritait pas de mourir ainsi... *sanglots*"));
+		this.tabDialogue.add(new Dialogue(112, "Mes parents s'aimaient beaucoup, ça n'allait pas toujours entre eux, mais pour j'essayais de ne pas trop y penser..."));
+		this.tabDialogue.add(new Dialogue(113, "Ma mère venait de me mettre au lit, j'étais sur mon téléphone comme à mon habitude avant d'essayer de dormir..."));
+		this.tabDialogue.add(new Dialogue(116, "Ces écritures sur le tableau ? Ca doit être mon Frère qui a écrit ça... Ils ne s'entendaient pas bien avec notre Père...\n" + 
+		" | " + "Il était trop exigeant avec mon frère, il en attendait toujours trop de lui..."));
+		
+		
+		// Fils
+		this.tabDialogue.add(new Dialogue(120, "Qui a bien pu faire ça ? Tuer mon père de sang froid... Comment peut-on faire ça ?"));
+		this.tabDialogue.add(new Dialogue(121, "Je suis le Fils, j'ai 14 ans... Que voulez-vous savoir de plus ?"));
+		this.tabDialogue.add(new Dialogue(122, "Pas grand chose, rien qui pourrait vous intéresser."));
+		this.tabDialogue.add(new Dialogue(123, "Je venais tout juste de me mettre au lit au moment où... l'incident est survenu."));
+		this.tabDialogue.add(new Dialogue(126, "Non ! Enfin... Oui c'est moi, mais c'est pas ce que vous croyez, je l'aimais mon père... Mais parfois il était vraiment difficile à vivre..."));
+		
+		// Jardinier
+		this.tabDialogue.add(new Dialogue(150, "Bonjour, vous êtes le détective qui travaille sur cette enquête ?\n" + " | " + "J'espère que vous allez vite attraper le malade qui a commis ce crime !"));
+		this.tabDialogue.add(new Dialogue(131, "Je suis Jardinier et Gardien dans ce manoir depuis 9 ans maintenant\n " + " | " + "J'habite donc dans cette propriété dans une annexe dans le Jardin qui m'est destinée."));
+		this.tabDialogue.add(new Dialogue(132, "Le Père et la Mère se disputaient souvent, mais il se disputait aussi beaucoup avec son Fils.\n " + " | " + "C'était un homme dur et exigeant, souvent d'humeur éxecrable..."));
+		this.tabDialogue.add(new Dialogue(133, "J'étais dans ma Chambre à mon habitude, entrain de me préparer à manger."));
 	}
 	
 	/**
@@ -80,7 +150,7 @@ public class Jeu {
     /*
      * 
      */
-    Zone [] zones = new Zone [26];
+    Zone [] zones = new Zone [27];
     
     /**
      * Cree et initialise les zones.
@@ -90,7 +160,7 @@ public class Jeu {
 	 * @author Léonie A.
      */
     private void creerCarte() {
-        zones[0] = new Zone("Tableau", "0-Tableau.jpg" );
+        zones[0] = new Zone("le Tableau des Suspects", "0-Tableau.jpg" );
         zones[1] = new Zone("l'Entree", "1-Entree.jpg" );
         zones[2] = new Zone("le Couloir Ouest", "2-CouloirWest.jpg" );
         zones[3] = new Zone("le Couloir Est", "3-CouloirEast.jpg" );
@@ -116,6 +186,7 @@ public class Jeu {
         zones[23] = new Zone("le Plan du Second Étage","23-PlanMaison2emeEtage.jpg");
         zones[24] = new Zone("l'Inventaire","24-Inventaire.jpg");
         zones[25] = new Zone("la Poubelle","25-Poubelle.jpg");
+        zones[26] = new Zone("l'Accueil","26-EcranDAccueil.jpg");
 
         zones[0].ajouteSortie(Sortie.SUD, zones[1]); 		// Depuis le Tableau aller dans l'Entrée
         
@@ -196,20 +267,19 @@ public class Jeu {
         zones[23].ajouteSortie(Sortie.REZDECHAUSSEE, zones[21]);
         zones[23].ajouteSortie(Sortie.PREMIERETAGE, zones[22]);
         
-        zoneCourante = zones[1]; 
+        zones[26].ajouteSortie(Sortie.JOUER, zones[1]);
+        
+        zoneCourante = zones[26];
         
         creerObjet();
+        creerDialogue();
     }
 
     /*
      * Donne ou enlève la permission au joueur de se téléporter dans la map de son choix
      */
     private void permissionTeleportation() {
-    	if (tpPossible) {
-        	tpPossible = false;
-    	} else {
-        	tpPossible = true;
-    	}
+    	tpPossible = (tpPossible) ? false : true;
     }
     
     /*
@@ -226,22 +296,21 @@ public class Jeu {
      * Donne ou enlève la permission au joueur de voir la carte
      */
     private void permissionCarte() {
-    	if (visionCartePossible) {
-        	visionCartePossible = false;
-    	} else {
-        	visionCartePossible = true;
-    	}
+    	visionCartePossible = (visionCartePossible) ? false : true;
     }
     
     /*
      * Donne ou enlève la permission au joueur de voir son inventaire
      */
     private void permissionInventaire() {
-    	if (visionInventairePossible) {
-    		visionInventairePossible = false;
-    	} else {
-    		visionInventairePossible = true;
-    	}
+    	visionInventairePossible = (visionInventairePossible) ? false : true;
+    }
+    
+    /*
+     * 
+     */
+    private void permissionAccuser() {
+    	accuserPossible = (accuserPossible) ? false : true;
     }
     
     /*
@@ -282,49 +351,56 @@ public class Jeu {
      */
     private void prendre() {
     	if (zoneCourante == zones[8] && tabObjet.get(0).getObjetRecupere() == false) {
-        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(0).getNom()); 
+        	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(0).getNom()); 
         	gui.afficher();
         	tabObjet.get(0).setObjetRecupere();
         	zones[8].setNomImage("8-Salon_vide.jpg");
         	modifierCarte();
         	this.inventaire.add(tabObjet.get(0));
     	} else if (zoneCourante == zones[9] && tabObjet.get(1).getObjetRecupere() == false) {
-        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(1).getNom()); 
+        	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(1).getNom()); 
         	gui.afficher();
         	tabObjet.get(1).setObjetRecupere();
         	zones[9].setNomImage("9-Bureau_vide.jpg");
         	modifierCarte();
         	this.inventaire.add(tabObjet.get(1));
     	} else if (zoneCourante == zones[10] && tabObjet.get(2).getObjetRecupere() == false) {
-        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(2).getNom()); 
+        	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(2).getNom()); 
         	gui.afficher();
         	tabObjet.get(2).setObjetRecupere();
         	zones[10].setNomImage("10-ChambreParentale_vide.jpg");
         	modifierCarte();
         	this.inventaire.add(tabObjet.get(2));
-    	} else if (zoneCourante == zones[17] && tabObjet.get(3).getObjetRecupere() == false) {
-        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(3).getNom()); 
+    	} else if (zoneCourante == zones[16] && tabObjet.get(3).getObjetRecupere() == false) {
+        	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(3).getNom()); 
         	gui.afficher();
         	tabObjet.get(3).setObjetRecupere();
-        	zones[17].setNomImage("17-Grenier_vide.jpg");
+        	zones[16].setNomImage("16-SalleDeBain_vide.jpg");
         	modifierCarte();
         	this.inventaire.add(tabObjet.get(3));
+    	} else if (zoneCourante == zones[17] && tabObjet.get(4).getObjetRecupere() == false) {
+        	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(4).getNom()); 
+        	gui.afficher();
+        	tabObjet.get(4).setObjetRecupere();
+        	zones[17].setNomImage("17-Grenier_vide.jpg");
+        	modifierCarte();
+        	this.inventaire.add(tabObjet.get(4));
     	} else if (zoneCourante == zones[18] && tabObjet.get(4).getObjetRecupere() == false) {
-        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(4).getNom()); 
+        	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(4).getNom()); 
         	gui.afficher();
         	tabObjet.get(4).setObjetRecupere();
         	zones[18].setNomImage("18-ChambreDuMajordome_vide.jpg");
         	modifierCarte();
         	this.inventaire.add(tabObjet.get(4));
     	} else if (zoneCourante == zones[15] && tabObjet.get(5).getObjetRecupere() == false) {
-        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(5).getNom()); 
+        	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(5).getNom()); 
         	gui.afficher();
         	tabObjet.get(5).setObjetRecupere();
         	zones[15].setNomImage("15-Jardin_vide.jpg");
         	modifierCarte();
         	this.inventaire.add(tabObjet.get(5));
     	} else if (zoneCourante == zones[14] && tabObjet.get(6).getObjetRecupere() == false) {
-        	gui.afficher("Tu viens de récupérer : " + tabObjet.get(6).getNom()); 
+        	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(6).getNom()); 
         	gui.afficher();
         	gui.afficher("Ce couteau est couvert de sang. Peut-être l'arme du crime ? Il faut l'examiner, c'est élémentaire mon cher Watson !"); 
         	gui.afficher();
@@ -357,19 +433,28 @@ public class Jeu {
     /*
      * 
      */
-    private void verificationObjetRecupere(int j) {
-		boolean objetPresentInventaire = false; 
-		for (int i = 0; i < inventaire.size() && objetPresentInventaire == false; i++) {
-			if (inventaire.get(i).getNom() == tabObjet.get(j).getNom() ) {
-				objetPresentInventaire = true;
-	            gui.afficher(tabObjet.get(j).getDescription());
-	            gui.afficher();
-			}
-		}
-		if (!objetPresentInventaire) {
+    private void verificationObjetRecupere(int numObjet) {
+    	if (verifierObjetPresentInventaire(numObjet)) {
+            gui.afficher(tabObjet.get(numObjet).getDescription());
+            gui.afficher();
+    	} else {
             gui.afficher("Tu n'as pas encore récupéré cet objet.");
             gui.afficher();
 		}
+    }
+    
+    /*
+     * 
+     */
+    private boolean verifierObjetPresentInventaire(int numObjet) {
+		boolean objetPresentInventaire = false; 
+		for (int i = 0; i < inventaire.size() && objetPresentInventaire == false; i++) {
+			if (inventaire.get(i).getNom() == tabObjet.get(numObjet).getNom() ) {
+				objetPresentInventaire = true;
+				return objetPresentInventaire;
+			}
+		}
+		return objetPresentInventaire;
     }
    
     /*
@@ -420,44 +505,110 @@ public class Jeu {
     /*
      * 
      */
-    private void parler() {
-    	if (zoneCourante == zones[1]) {
-        	zones[1].setNomImage("1-Entree_Majordome.jpg");
-        	modifierCarte();
-			gui.afficher(" | " + "Bonjour, vous devez être le détective qui travaille sur cette enquête.\n" + " | " + "En quoi puis-je vous aider ?");
-			gui.afficher();
-			gui.afficher(" | " +  "1. Dites m'en plus sur vous.\n");
-			gui.afficher(" | " +  "2. Que saviez-vous sur le père ?\n");
-			gui.afficher(" | " +  "3. Dites m'en plus sur vous.\n");
-			gui.afficher();
-    	} else if (zoneCourante == zones[6]) {
-        	zones[6].setNomImage("6-SalleAManger_FemmeDeMenage.jpg");
-        	modifierCarte();
-        	gui.afficher(" | " + "Bonjour, vous avez attrapé le meurtrier ? Mais quel malheur !\n" + " | " + "Comment est-ce que cela a pu se produire ?!");
-			gui.afficher();
-			gui.afficher(" | " +  "1. Dites m'en plus sur vous.\n");
-			gui.afficher(" | " +  "2. Que savez vous sur cette maison ?\n");
-			gui.afficher();
-    	} else if (zoneCourante == zones[7]) {
-        	zones[7].setNomImage("7-Cuisine_Cuisinier.jpg");
-        	modifierCarte();
-    	} else if (zoneCourante == zones[9]) {
-        	zones[9].setNomImage("9-Bureau_Mere.jpg");
-        	modifierCarte();
-    	} else if (zoneCourante == zones[11]) {
-        	zones[11].setNomImage("11-Chambre_Fille.jpg");
-        	modifierCarte();
-    	} else if (zoneCourante == zones[12]) {
-        	zones[12].setNomImage("12-Chambre_Fils.jpg");
-        	modifierCarte();
-    	} else if (zoneCourante == zones[15]) {
-        	zones[15].setNomImage("15-Jardin_Jardinier.jpg");
-        	modifierCarte();
+    private void question() {
+    	for (int i = 0; i < tabDialogue.size(); i++) {
+    		if (tabDialogue.get(i).getNumeroDialogue() == 1 || tabDialogue.get(i).getNumeroDialogue() == 2 || tabDialogue.get(i).getNumeroDialogue() == 3) {
+    			gui.afficher(tabDialogue.get(i).getDialogueTexte());
+    		}
     	}
+    	if (zoneCourante == zones[6] && verifierObjetPresentInventaire(2)) {
+    		gui.afficher(tabDialogue.get(3).getDialogueTexte());
+    	} else if (zoneCourante == zones[7]) {
+        	
+        } else if (zoneCourante == zones[9] && verifierObjetPresentInventaire(2)) {
+    		gui.afficher(tabDialogue.get(3).getDialogueTexte());
+    	} else if (zoneCourante == zones[11]) {
+        	
+        } else if (zoneCourante == zones[12]) {
+        	
+        } else if (zoneCourante == zones[15]) {
+        	
+        }
     }
     
     /*
      * 
+     */
+    private void reponse(int numeroDialogue) {
+    	for (int i = 0; i < tabDialogue.size(); i++) {
+    		if (tabDialogue.get(i).getNumeroDialogue() == numeroDialogue)
+    		gui.afficher(tabDialogue.get(i).getDialogueTexte());
+    	}
+    }
+    
+    private void dejaParleAuPersonnage(int numeroDialogue) {
+    	for (int i = 0; i < tabDialogue.size(); i++) {
+    		if (tabDialogue.get(i).getNumeroDialogue() == numeroDialogue)
+    		tabDialogue.get(i).setDejaParle();
+    	}
+    }
+    
+    private boolean verifDejaParle(int numeroDialogue) {
+    	for (int i = 0; i < tabDialogue.size(); i++) {
+    		if (tabDialogue.get(i).getDejaParle() == true) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    /*
+     * Cette méthode permet de parler à un suspect et affiche les choix disponibles de questions
+     */
+    private void parler() { // TODO
+    	// MAJORDOME
+    	if (zoneCourante == zones[1]) { 
+        	zones[1].setNomImage("1-Entree_Majordome.jpg");
+        	modifierCarte();
+        	if (!verifDejaParle(10)) {
+            	reponse(10);
+            	dejaParleAuPersonnage(10);
+        	} else {
+        		reponse(14);
+            	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(7).getNom()); 
+        		gui.afficher();
+            	this.inventaire.add(tabObjet.get(7));
+        	}
+        	question();
+    	} 
+    	// FEMME DE CHAMBRE
+    	else if (zoneCourante == zones[6]) { 
+        	zones[6].setNomImage("6-SalleAManger_FemmeDeMenage.jpg");
+        	modifierCarte();
+        	if (!verifDejaParle(60)) {
+            	reponse(60);
+            	dejaParleAuPersonnage(60);
+        	}
+        	question();
+    	} else if (zoneCourante == zones[7]) {
+        	zones[7].setNomImage("7-Cuisine_Cuisinier.jpg");
+        	modifierCarte();
+        	reponse(70);
+        	question();
+    	} else if (zoneCourante == zones[9]) {
+        	zones[9].setNomImage("9-Bureau_Mere.jpg");
+        	modifierCarte();
+        	reponse(90);
+        	question();
+    	} else if (zoneCourante == zones[11]) { 
+        	zones[11].setNomImage("11-Chambre_Fille.jpg");
+        	modifierCarte();
+        	reponse(110);
+    	} else if (zoneCourante == zones[12]) { 
+        	zones[12].setNomImage("12-Chambre_Fils.jpg");
+        	modifierCarte();
+        	reponse(120);
+        	question();
+    	} else if (zoneCourante == zones[15]) { 
+        	zones[15].setNomImage("15-Jardin_Jardinier.jpg");
+        	modifierCarte();
+        	reponse(150);
+        	question();
+    	}
+    }
+    
+    /*
+     * Cette méthode est utilisée dans traiterCommande pour accéder au switch case permettant de choisir quelle question poser au suspect
      */
     public void permissionParler() {
     	if (discussionEnCours) {
@@ -493,7 +644,7 @@ public class Jeu {
      */
     public void traiterCommande(String commandeLue) {
     	gui.afficher( "> "+ commandeLue + "\n");
-    	if (!tpPossible && !visionCartePossible && !visionInventairePossible && !discussionEnCours) {
+    	if (!tpPossible && !visionCartePossible && !visionInventairePossible && !discussionEnCours && !accuserPossible) { // Permet d'accéder aux commandes générales
     		switch (commandeLue.toUpperCase()) {
             case "?" : case "AIDE" : 
                 afficherAide(); 
@@ -521,6 +672,9 @@ public class Jeu {
             case "NE" : case "NORDEST" :
             	allerEn( "NORDEST" ); 
             	break;
+            case "JOUER" :
+            	allerEn( "JOUER" ); 
+            	break;
             case "PO" : case "POUBELLE" :
             	zoneCourante = zones[25];
             	modifierCarte();
@@ -528,6 +682,8 @@ public class Jeu {
             	break;
             case "TAB" : case "TABLEAU" :
             	allerEn( "TABLEAU" ); 
+            	gui.afficher("Pour accuser un suspect, entrez la commande [ACCUSER].");
+            	gui.afficher();
             	break;
             case "PA" : case "PARLER" :
             	parler();
@@ -558,10 +714,20 @@ public class Jeu {
             	}
             	gui.afficher();
             	break;
-            case "TP" : case "TELEPORTATION" :
+            case "TP" : case "TELEPORTATION" : // Commandes disponibles dans le mode Téléportation
             	permissionTeleportation();
             	gui.afficher("Tu peux maintenant te téléporter dans tout le manoir sauf les zones auxquelles tu n'as pas accès.\nPour sortir de ce mode entre à nouveau la commande [TP]\nTu peux te servir du plan avec la commande [CARTE] pour savoir où aller, les pièces sont numérotées.\nIl faut donc taper le numéro de la salle désirée pour s'y rendre.");
             	gui.afficher();
+            	break;
+            case "AC" : case "ACCUSER" :
+            	if (zoneCourante != zones[0]) {
+            		gui.afficher("Tu dois aller sur le Tableau dans l'Entrée pour pouvoir accuser un suspect.");
+            		gui.afficher();
+            	} else {
+            		gui.afficher("Veuillez entrer le nom de la personne que vous souhaitez mettre derrière les barreaux !");
+            		gui.afficher();
+                	permissionAccuser();
+            	}
             	break;
     		case "U CC" : case "U C C" : case "UTILISER CC" : case "UTILISER C C" : case "U CLEF CAVE" : case "UTILISER CLEF CAVE" : case "UTILISER CLEF DE LA CAVE" :
     			if (zoneCourante == zones[5]) {
@@ -582,6 +748,10 @@ public class Jeu {
     			}
             	break;
             case "Q" : case "QUITTER" :
+            	for (int i = 0; i <= 25; i++) {
+    	        	zones[i].setNomImage("26-EcranQuitter.jpg");
+    	        	modifierCarte();
+            	}
             	terminer();
             	break;
            	default : 
@@ -589,20 +759,204 @@ public class Jeu {
                 gui.afficher();
                 break;
             }
-    	} else if (discussionEnCours && !visionInventairePossible && !tpPossible && !visionCartePossible) {
-    		if (zoneCourante == zones[1]) {
-    			switch (commandeLue.toUpperCase()) {
-    			case "1" :
-    				gui.afficher(" | " + "Je suis le Majordome, je travaille ici depuis ... 27 ans déjà ? Comme le temps passe vite !\n" + " | " + "Je connais toute cette famille et leurs employés comme s'ils faisaient partie de la mienne !\n" + " | " + "Si vous avez la moindre interrogation n'hésitez pas !\n" + " | " + "Je souhaite vous aider à résoudre cette enquête au plus vite !");
+    	} else if (accuserPossible && !discussionEnCours && !visionInventairePossible && !tpPossible && !visionCartePossible) {
+    		switch (commandeLue.toUpperCase()) {
+    			case "AC" : case "ACCUSER" :
+    				permissionAccuser();
+    				teleporterJoueur(1);
+    				break;
+    			case "CUISINIER" :
+    				gui.afficher("Bravo vous avez trouvé le meurtrier ! C'est gagné !");
+    				gui.afficher();
+    			case "MAJORDOME" : case "FEMME DE CHAMBRE" : case "FEMME DE MENAGE" : case "MERE" : case "FILLE" : case "FILS" : case "JARDINIER" :
+    				gui.afficher("Vous avez perdu !");
     				gui.afficher();
     				break;
+	            case "Q" : case "QUITTER" :
+	            	for (int i = 0; i <= 25; i++) {
+	    	        	zones[i].setNomImage("26-EcranQuitter.jpg");
+	    	        	modifierCarte();
+	            	}
+	            	terminer();
+	            	break;
+	           	default : 
+	                gui.afficher("Commande inconnue");
+	                gui.afficher();
+	                break;
+    		}
+    	} else if (discussionEnCours && !visionInventairePossible && !tpPossible && !visionCartePossible && !accuserPossible) { // Commandes disponibles dans le mode Parler
+    		if (zoneCourante == zones[1]) { // MAJORDOME
+    			switch (commandeLue.toUpperCase()) {
+    			case "1" :
+    				reponse(11);
+    				break;
+    			case "2" :
+    				reponse(12);
+    				break;
+    			case "3" :
+    				reponse(13);
+    				break;
+    			case "PA" : case "PARLER" : case "RETOUR" :
+    	        	zones[1].setNomImage("1-Entree.jpg");
+    	        	modifierCarte();
+                	permissionParler();
+    	        	break;
+               	default : 
+                    gui.afficher("Commande inconnue");
+                    gui.afficher();
+                    break;
+    			}
+    		} else if (zoneCourante == zones[6]) { // FEMME DE CHAMBRE
+    			switch (commandeLue.toUpperCase()) { //TODO
+    			case "1" :
+    				reponse(61);
+    				break;
+    			case "2" :
+    				reponse(62);
+    				break;
+    			case "3" :
+    				reponse(63);
+    				break;
+    			case "4" :
+    				reponse(64);
+    				break;
+    			case "5" :
+    				reponse(65);
+    			case "PA" : case "PARLER" : case "RETOUR" :
+    	        	zones[6].setNomImage("6-SalleAManger.jpg");
+    	        	modifierCarte();
+                	permissionParler();
+    	        	break;
+               	default : 
+                    gui.afficher("Commande inconnue");
+                    gui.afficher();
+                    break;
+    			}
+    		} else if (zoneCourante == zones[7]) { // CUISINIER
+    			switch (commandeLue.toUpperCase()) { //TODO
+    			case "1" :
+    				reponse(71);
+    				break;
+    			case "2" :
+    				reponse(72);
+    				break;
+    			case "3" :
+    				reponse(73);
+    				break;
+    			case "4" :
+    				reponse(74);
+    				break;
+    			case "5" :
+    				reponse(75);
+    			case "PA" : case "PARLER" : case "RETOUR" :
+    	        	zones[7].setNomImage("7-Cuisine.jpg");
+    	        	modifierCarte();
+                	permissionParler();
+    	        	break;
+               	default : 
+                    gui.afficher("Commande inconnue");
+                    gui.afficher();
+                    break;
+    			}
+    		}  else if (zoneCourante == zones[9]) { // MERE
+    			switch (commandeLue.toUpperCase()) { //TODO
+    			case "1" :
+    				reponse(91);
+    				break;
+    			case "2" :
+    				reponse(92);
+    				break;
+    			case "3" :
+    				reponse(93);
+    				break;
+    			case "4" :
+    				reponse(94);
+    				break;
+    			case "5" :
+    				reponse(95);
+    			case "PA" : case "PARLER" : case "RETOUR" :
+    	        	zones[9].setNomImage("9-SalleAManger.jpg");
+    	        	modifierCarte();
+                	permissionParler();
+    	        	break;
+               	default : 
+                    gui.afficher("Commande inconnue");
+                    gui.afficher();
+                    break;
+    			}
+    		} else if (zoneCourante == zones[11]) { // FILLE
+    			switch (commandeLue.toUpperCase()) { //TODO
+    			case "1" :
+    				reponse(111);
+    				break;
+    			case "2" :
+    				reponse(112);
+    				break;
+    			case "3" :
+    				reponse(113);
+    				break;
+    			case "4" :
+    				reponse(116);
+    				break;
+    			case "PA" : case "PARLER" : case "RETOUR" :
+    	        	zones[11].setNomImage("11-ChambreDeLaFille.jpg");
+    	        	modifierCarte();
+                	permissionParler();
+    	        	break;
+               	default : 
+                    gui.afficher("Commande inconnue");
+                    gui.afficher();
+                    break;
+    			}
+    		} else if (zoneCourante == zones[12]) { // FILS
+    			switch (commandeLue.toUpperCase()) { //TODO
+    			case "1" :
+    				reponse(121);
+    				break;
+    			case "2" :
+    				reponse(122);
+    				break;
+    			case "3" :
+    				reponse(123);
+    				break;
+    			case "4" :
+    				reponse(126);
+    				break;
+    			case "PA" : case "PARLER" : case "RETOUR" :
+    	        	zones[12].setNomImage("12-ChambreDuFils.jpg");
+    	        	modifierCarte();
+                	permissionParler();
+    	        	break;
+               	default : 
+                    gui.afficher("Commande inconnue");
+                    gui.afficher();
+                    break;
+    			}
+    		} else if (zoneCourante == zones[15]) { // JARDINIER
+    			switch (commandeLue.toUpperCase()) { //TODO
+    			case "1" :
+    				reponse(151);
+    				break;
+    			case "2" :
+    				reponse(152);
+    				break;
+    			case "3" :
+    				reponse(153);
+    				break;
+    			case "PA" : case "PARLER" : case "RETOUR" :
+    	        	zones[15].setNomImage("15-Jardin.jpg");
+    	        	modifierCarte();
+                	permissionParler();
+    	        	break;
                	default : 
                     gui.afficher("Commande inconnue");
                     gui.afficher();
                     break;
     			}
     		}
-    	} else if (visionInventairePossible && !tpPossible && !visionCartePossible && !discussionEnCours) { 
+    		
+    	} else if (visionInventairePossible && !tpPossible && !visionCartePossible && !discussionEnCours && !accuserPossible) { // Commande disponibles dans le mode Inventaire
+    		
     		switch (commandeLue.toUpperCase() ) {
     		case "EX B" : case "EXAMINER BOUTON" :
     			verificationObjetRecupere(0);
@@ -632,12 +986,21 @@ public class Jeu {
             	revenirZonePrecedente();
             	permissionInventaire();
     			break;
+            case "Q" : case "QUITTER" :
+            	for (int i = 0; i <= 25; i++) {
+    	        	zones[i].setNomImage("26-EcranQuitter.jpg");
+    	        	modifierCarte();
+            	}
+            	terminer();
+            	break;
            	default : 
                 gui.afficher("Commande inconnue");
                 gui.afficher();
                 break;
     		}
-    	} else if (visionCartePossible && !tpPossible && !visionInventairePossible && !discussionEnCours) {
+    		
+    	} else if (visionCartePossible && !tpPossible && !visionInventairePossible && !discussionEnCours && !accuserPossible) { // Commandes disponibles dans le mode Carte
+    		
     		switch (commandeLue.toUpperCase()) {
             case "SS": case "SOUSSOL" :
                 montrerCarteJoueur(20);
@@ -657,6 +1020,10 @@ public class Jeu {
             	gui.afficher();
             	break;
             case "Q" : case "QUITTER" :
+            	for (int i = 0; i <= 25; i++) {
+    	        	zones[i].setNomImage("26-EcranQuitter.jpg");
+    	        	modifierCarte();
+            	}
             	terminer();
             	break;
            	default : 
@@ -664,7 +1031,9 @@ public class Jeu {
                 gui.afficher();
                 break;
     		}
-    	} else if (tpPossible && !visionCartePossible && !visionInventairePossible && !discussionEnCours) {
+    		
+    	} else if (tpPossible && !visionCartePossible && !visionInventairePossible && !discussionEnCours && !accuserPossible) { //Commandes disponibles dans le mode Téléporter
+    		
     		switch (commandeLue.toUpperCase()) {
             case "1":
                 teleporterJoueur(1);
@@ -734,6 +1103,10 @@ public class Jeu {
             	gui.afficher();
             	break;
             case "Q" : case "QUITTER" :
+            	for (int i = 0; i <= 25; i++) {
+    	        	zones[i].setNomImage("26-EcranQuitter.jpg");
+    	        	modifierCarte();
+            	}
             	terminer();
             	break;
            	default : 

@@ -1,7 +1,7 @@
 package jeu;
 
 /**
- * Nom de Class : Indices.
+ * Nom de Class : Indice.
  * 
  * Description : .
  * 
