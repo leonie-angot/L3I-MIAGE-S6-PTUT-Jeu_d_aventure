@@ -20,11 +20,10 @@ public class Dialogue extends Indices{
 	private Personne recepteur;
 	
 	//Essayez avec StringBuilder
-	public Dialogue(String q, String rep, Personne r, Zone z) {
+	public Dialogue(String q, String rep, Personne r) {
 		question = q;
 		reponse = rep;
 		recepteur = r;
-		zoneIndice = z;
 	    idIndice = numeroIndices;
         numeroIndices++;
 	}
@@ -37,11 +36,11 @@ public class Dialogue extends Indices{
 		return this.reponse;
 	}
 	
-	public Personne recepteur() {
-		return this.recepteur;
+	public String recepteur() {
+		return this.recepteur.getName();
 	}
 	
 	public String toString() {
-		return "J'ai posé la question : "+question()+" à "+ recepteur()+ " et il m'a repondu : "+ reponse();
+		return "La question : "+question()+" \n "+ recepteur()+ " : "+ reponse() + "\n";
 	}
 }
