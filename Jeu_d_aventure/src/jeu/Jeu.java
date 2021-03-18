@@ -530,7 +530,6 @@ public class Jeu {
     	if (zoneCourante == zones[25]) {
     		gui.afficher("Mais quelle idée d'aller dans la poubelle aussi ?!");
     		gui.afficher();
-    		terminer();
     	} else if (zoneCourante == zones[7]) {
         		gui.afficher("Vous êtes mort !");
         		gui.afficher();
@@ -538,6 +537,7 @@ public class Jeu {
     		gui.afficher("Vous avez perdu !");
     		gui.afficher();
     	}
+		terminer();
     }
     
     /*
