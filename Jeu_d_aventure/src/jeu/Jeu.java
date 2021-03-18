@@ -39,7 +39,9 @@ public class Jeu {
     
     boolean clefPorteUtilisation = false;
     boolean clefCoffreUtilisation = false;
-	
+    
+    boolean caveVisiter=false;
+    
 	private Zone zonePrecedente;
 
 	/*
@@ -62,59 +64,59 @@ public class Jeu {
 	 */
 	public void creerDialogue() { // TODO
 		//Questions
-		this.tabDialogue.add(new Dialogue(1, "1. Dites-m'en plus sur vous."));
-		this.tabDialogue.add(new Dialogue(2, "2. Que saviez-vous sur le Père et cette famille?"));
-		this.tabDialogue.add(new Dialogue(3, "3. Que faisiez-vous hier au moment du meurtre ?"));
-		this.tabDialogue.add(new Dialogue(4, "4. Est-ce que cette boucle d'oreille est à vous ?"));
-		this.tabDialogue.add(new Dialogue(5, "5. "));
-		this.tabDialogue.add(new Dialogue(6, "4. Est-ce que c'est toi qui a écrit sur le tableau dans la Cave ?"));
+		this.tabDialogue.add(new Dialogue(1, "1. Dites-m'en plus sur vous.")); //0
+		this.tabDialogue.add(new Dialogue(2, "2. Que saviez-vous sur le Père et cette famille?")); //1
+		this.tabDialogue.add(new Dialogue(3, "3. Que faisiez-vous hier au moment du meurtre ?")); //2
+		this.tabDialogue.add(new Dialogue(4, "4. Est-ce que cette boucle d'oreille est à vous ?"));//3
+		this.tabDialogue.add(new Dialogue(5, "5. "));//4
+		this.tabDialogue.add(new Dialogue(6, "4. Est-ce que c'est toi qui a écrit sur le tableau dans la Cave ?"));//5
 		
 		// Majordome
-		this.tabDialogue.add(new Dialogue(10, "Bonjour, vous devez être le détective qui travaille sur cette enquête.\n" + " | " + "En quoi puis-je vous aider ?"));
+		this.tabDialogue.add(new Dialogue(10, "Bonjour, vous devez être le détective qui travaille sur cette enquête.\n" + " | " + "En quoi puis-je vous aider ?"));//6
 		this.tabDialogue.add(new Dialogue(11, "Je suis le Majordome, je travaille ici depuis ... 27 ans déjà ? Comme le temps passe vite !\n" + 
 		" | " + "Je connais toute cette famille et leurs employés comme s'ils faisaient partie de la mienne !\n" + 
-		" | " + "Si vous avez la moindre interrogation n'hésitez pas !\n" + " | " + "Je souhaite vous aider à résoudre cette enquête au plus vite !", false));
-		this.tabDialogue.add(new Dialogue(12, "Il y avait des tensions dans cette famille... Mais comme dans toutes non ?", false));
-		this.tabDialogue.add(new Dialogue(13, "J'étais avec la Femme de Chambre, nous débarassions la table après le souper alors que la famille allait se coucher.", false));
-		this.tabDialogue.add(new Dialogue(14, "Je viens de me rappeler ! J'ai retrouvé ça hier dans le bureau du Père, tenez !", false));
+		" | " + "Si vous avez la moindre interrogation n'hésitez pas !\n" + " | " + "Je souhaite vous aider à résoudre cette enquête au plus vite !", false));//7
+		this.tabDialogue.add(new Dialogue(12, "Il y avait des tensions dans cette famille... Mais comme dans toutes non ?", false));//8
+		this.tabDialogue.add(new Dialogue(13, "J'étais avec la Femme de Chambre, nous débarassions la table après le souper alors que la famille allait se coucher.", false));//9
+		this.tabDialogue.add(new Dialogue(14, "Je viens de me rappeler ! J'ai retrouvé ça hier dans le bureau du Père, tenez !", false));//10
 		
 		// Femme de Chambre
-		this.tabDialogue.add(new Dialogue(60, "Bonjour, vous avez attrapé le meurtrier ? Mais quel malheur !\n" + " | " + "Comment est-ce que cela a pu se produire ?!"));
-		this.tabDialogue.add(new Dialogue(61, "Je suis Femme de Chambre, de Ménage, un peu tout ce que vous voulez. Ca fait presque 2 ans maintenant que je travaille ici... Quel malheur..."));
-		this.tabDialogue.add(new Dialogue(62, "La Père... Il ne méritait pas ça... Il y avait des disputes au sein de ce foyer, mais jamais rien d'aussi grave !"));
-		this.tabDialogue.add(new Dialogue(63, "Hier soir ? J'étais entrain de débarasser la table après le diner et nous rangions la cuisine avant de finir notre service."));
+		this.tabDialogue.add(new Dialogue(60, "Bonjour, vous avez attrapé le meurtrier ? Mais quel malheur !\n" + " | " + "Comment est-ce que cela a pu se produire ?!"));//11
+		this.tabDialogue.add(new Dialogue(61, "Je suis Femme de Chambre, de Ménage, un peu tout ce que vous voulez. Ca fait presque 2 ans maintenant que je travaille ici... Quel malheur..."));//12
+		this.tabDialogue.add(new Dialogue(62, "La Père... Il ne méritait pas ça... Il y avait des disputes au sein de ce foyer, mais jamais rien d'aussi grave !"));//13
+		this.tabDialogue.add(new Dialogue(63, "Hier soir ? J'étais entrain de débarasser la table après le diner et nous rangions la cuisine avant de finir notre service."));//14
 		this.tabDialogue.add(new Dialogue(64, "Oui... C'est ma boucle d'oreille, je la cherche depuis un moment !\n" + 
 		" | " + "Où l'avez-vous trouvée ?\n" + 
 		" | " + ". . .\n " + 
-		" | " + "Ah dans la chambre parentale ? C'est bizarre, j'ai du la perdre en faisant le ménage."));
+		" | " + "Ah dans la chambre parentale ? C'est bizarre, j'ai du la perdre en faisant le ménage."));//15
 		
 		// Cuisinier
-		this.tabDialogue.add(new Dialogue(70, "Bonjour, je suis le Cuisinier, vous devez être le détective." + " | " + "Que voulez-vous savoir ?"));
-		this.tabDialogue.add(new Dialogue(71, "Comme je l'ai dis, je suis Cuisinier ici depuis 4 ans maintenant..."));
-		this.tabDialogue.add(new Dialogue(72, "Cette famille avait beaucoup de problèmes, vraiment pas un foyer sain..."));
-		this.tabDialogue.add(new Dialogue(73, "J'étais entrain de rentrer chez moi, comme le diner était terminé, javais fini mon service."));
+		this.tabDialogue.add(new Dialogue(70, "Bonjour, je suis le Cuisinier, vous devez être le détective." + " | " + "Que voulez-vous savoir ?"));//16
+		this.tabDialogue.add(new Dialogue(71, "Comme je l'ai dis, je suis Cuisinier ici depuis 4 ans maintenant..."));//17
+		this.tabDialogue.add(new Dialogue(72, "Cette famille avait beaucoup de problèmes, vraiment pas un foyer sain..."));//18
+		this.tabDialogue.add(new Dialogue(73, "J'étais entrain de rentrer chez moi, comme le diner était terminé, javais fini mon service."));//19
 
 		// Mere
-		this.tabDialogue.add(new Dialogue(90, "Mon cher mari est mort ! Je vous en prie, trouvez l'assassin et mettez-le en prison !!!"));
-		this.tabDialogue.add(new Dialogue(91, "Je suis la Mère et maitenant veuve... Nous nous sommes mariés il y 18 ans... Il est parti bien trop vite... oh mon chéri..."));
-		this.tabDialogue.add(new Dialogue(92, "Nous n'étions pas une famille parfaite, loin de là... Mais nous pouvions toujours compter les uns sur les autres..."));
-		this.tabDialogue.add(new Dialogue(93, "J'étais en train de mettre les enfants au lit au moment où... où... *sanglots*"));
-		this.tabDialogue.add(new Dialogue(94, "Non ce n'est pas ma boucle d'oreille, elle est surement à la Femme de Chambre. Vous devriez-aller lui demander."));
+		this.tabDialogue.add(new Dialogue(90, "Mon cher mari est mort ! Je vous en prie, trouvez l'assassin et mettez-le en prison !!!"));//20
+		this.tabDialogue.add(new Dialogue(91, "Je suis la Mère et maitenant veuve... Nous nous sommes mariés il y 18 ans... Il est parti bien trop vite... oh mon chéri..."));//21
+		this.tabDialogue.add(new Dialogue(92, "Nous n'étions pas une famille parfaite, loin de là... Mais nous pouvions toujours compter les uns sur les autres..."));//22
+		this.tabDialogue.add(new Dialogue(93, "J'étais en train de mettre les enfants au lit au moment où... où... *sanglots*"));//23
+		this.tabDialogue.add(new Dialogue(94, "Non ce n'est pas ma boucle d'oreille, elle est surement à la Femme de Chambre. Vous devriez-aller lui demander."));//24
 		
 		// Fille
-		this.tabDialogue.add(new Dialogue(110, "Mon petit Papa... Qui a bien pu lui faire ça ?! Trouvez celui qui a tué mon père !"));
-		this.tabDialogue.add(new Dialogue(111, "Je suis la Fille, j'ai 15 ans. Mon Père était un homme bon, il ne méritait pas de mourir ainsi... *sanglots*"));
-		this.tabDialogue.add(new Dialogue(112, "Mes parents s'aimaient beaucoup, ça n'allait pas toujours entre eux, mais pour j'essayais de ne pas trop y penser..."));
-		this.tabDialogue.add(new Dialogue(113, "Ma mère venait de me mettre au lit, j'étais sur mon téléphone comme à mon habitude avant d'essayer de dormir..."));
+		this.tabDialogue.add(new Dialogue(110, "Mon petit Papa... Qui a bien pu lui faire ça ?! Trouvez celui qui a tué mon père !"));//25
+		this.tabDialogue.add(new Dialogue(111, "Je suis la Fille, j'ai 15 ans. Mon Père était un homme bon, il ne méritait pas de mourir ainsi... *sanglots*"));//26
+		this.tabDialogue.add(new Dialogue(112, "Mes parents s'aimaient beaucoup, ça n'allait pas toujours entre eux, mais pour j'essayais de ne pas trop y penser..."));//27
+		this.tabDialogue.add(new Dialogue(113, "Ma mère venait de me mettre au lit, j'étais sur mon téléphone comme à mon habitude avant d'essayer de dormir..."));//28
 		this.tabDialogue.add(new Dialogue(116, "Ces écritures sur le tableau ? Ca doit être mon Frère qui a écrit ça... Ils ne s'entendaient pas bien avec notre Père...\n" + 
-		" | " + "Il était trop exigeant avec mon frère, il en attendait toujours trop de lui..."));
+		" | " + "Il était trop exigeant avec mon frère, il en attendait toujours trop de lui..."));//29
 		
 		
 		// Fils
-		this.tabDialogue.add(new Dialogue(120, "Qui a bien pu faire ça ? Tuer mon père de sang froid... Comment peut-on faire ça ?"));
-		this.tabDialogue.add(new Dialogue(121, "Je suis le Fils, j'ai 14 ans... Que voulez-vous savoir de plus ?"));
-		this.tabDialogue.add(new Dialogue(122, "Pas grand chose, rien qui pourrait vous intéresser."));
-		this.tabDialogue.add(new Dialogue(123, "Je venais tout juste de me mettre au lit au moment où... l'incident est survenu."));
+		this.tabDialogue.add(new Dialogue(120, "Qui a bien pu faire ça ? Tuer mon père de sang froid... Comment peut-on faire ça ?"));//30
+		this.tabDialogue.add(new Dialogue(121, "Je suis le Fils, j'ai 14 ans... Que voulez-vous savoir de plus ?"));//31
+		this.tabDialogue.add(new Dialogue(122, "Pas grand chose, rien qui pourrait vous intéresser."));//32
+		this.tabDialogue.add(new Dialogue(123, "Je venais tout juste de me mettre au lit au moment où... l'incident est survenu."));//33
 		this.tabDialogue.add(new Dialogue(126, "Non ! Enfin... Oui c'est moi, mais c'est pas ce que vous croyez, je l'aimais mon père... Mais parfois il était vraiment difficile à vivre..."));
 		
 		// Jardinier
@@ -536,10 +538,10 @@ public class Jeu {
         	
         } else if (zoneCourante == zones[9] && verifierObjetPresentInventaire(2)) {
     		gui.afficher(tabDialogue.get(3).getDialogueTexte());
-    	} else if (zoneCourante == zones[11]) {
-        	
-        } else if (zoneCourante == zones[12]) {
-        	
+    	} else if (zoneCourante == zones[11] && caveVisiter==true ) {
+    		gui.afficher(tabDialogue.get(5).getDialogueTexte());
+        } else if (zoneCourante == zones[12] && caveVisiter==true) {
+        	gui.afficher(tabDialogue.get(5).getDialogueTexte());
         } else if (zoneCourante == zones[15]) {
         	
         }
@@ -610,6 +612,7 @@ public class Jeu {
         	zones[11].setNomImage("11-Chambre_Fille.jpg");
         	modifierCarte();
         	reponse(110);
+        	question();
     	} else if (zoneCourante == zones[12]) { // FILS
         	zones[12].setNomImage("12-Chambre_Fils.jpg");
         	modifierCarte();
@@ -902,6 +905,7 @@ public class Jeu {
     				break;
     			case "5" :
     				reponse(95);
+    				break;
     			case "PA" : case "PARLER" : case "RETOUR" :
     	        	zones[9].setNomImage("9-Bureau.jpg");
     	        	modifierCarte();
@@ -1172,6 +1176,10 @@ public class Jeu {
         	gui.afficher();
         	gui.afficheImage(zoneCourante.nomImage());
         }
+    	if(zoneCourante== zones[14] && caveVisiter==false)
+    	{
+    		caveVisiter=true;
+    	}
     }
     
     /*
