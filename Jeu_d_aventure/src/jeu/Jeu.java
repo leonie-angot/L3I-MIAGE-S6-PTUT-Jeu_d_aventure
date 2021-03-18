@@ -74,6 +74,8 @@ public class Jeu {
 		this.tabDialogue.add(new Dialogue(8, "6. J'ai trouvé une lettre dévoilant une relation adultère entre le Père et la Femme de Ménage, étiez-vous au courant ?"));
 		this.tabDialogue.add(new Dialogue(9, "4. Pouvez-vous m'expliquer ce que signifie cette Lettre d'Amour envers la Femme de Chambre ?"));
 		this.tabDialogue.add(new Dialogue(20, "7. Etiez-vous au courant que le Père souhaitait licencier le Cuisinier ?"));
+		this.tabDialogue.add(new Dialogue(21, "5. Est-ce que ce bouton vous appartient ?"));
+		this.tabDialogue.add(new Dialogue(22, "6. Nous avons retrouvé vos empruntes sur ce Couteau, qu'avez-vous à dire pour votre défense ?"));
 		
 		// Majordome
 		this.tabDialogue.add(new Dialogue(10, "Bonjour, vous devez être le détective qui travaille sur cette enquête.\n" + " | " + "En quoi puis-je vous aider ?", false));//6
@@ -108,7 +110,10 @@ public class Jeu {
 		this.tabDialogue.add(new Dialogue(79, "Où avez-vous trouvé ça ? Ça ne vous regarde pas ! Rendez-la moi !\n" + 
 		" | " + ". . .\n" + 
 		" | " + "Comment ça c'est une preuve ? Oui je l'aime ! A en mourir ! Elle est si belle et gentille... *soupire*"));
-
+		this.tabDialogue.add(new Dialogue(75, "Oui c'est le mien, je l'ai perdu hier, je ne m'en suis rendu compte qu'en rentrant chez moi en enlevant ma blouse."));
+		this.tabDialogue.add(new Dialogue(76, "Rien... C'est moi qui l'ai tué, c'est aussi simple que ça.\n" + 
+		" | " + "MAINTENANT C'EST TON TOUR !"));
+		
 		// Mere
 		this.tabDialogue.add(new Dialogue(90, "Mon cher mari est mort ! Je vous en prie, trouvez l'assassin et mettez-le en prison !!!", false));//20
 		this.tabDialogue.add(new Dialogue(91, "Je suis la Mère et maitenant veuve... Nous nous sommes mariés il y 18 ans... Il est parti bien trop vite... oh mon chéri..."));//21
@@ -120,6 +125,8 @@ public class Jeu {
 		" | " + "Oui j'avais vu cette lettre, et avait donc compris leur relation... Mais... *sanglots*\n" + 
 		" | " + "Je n'aurai jamais tué le Père de mes enfants pour ça ! Les priver de leur Père serait inhumain...\n"  + 
 		" | " + "J'étais triste en l'apprenant, mais pas en colère... *sanglots*"));
+		this.tabDialogue.add(new Dialogue(97, "Pas vraiment, je savais qu'il n'aimait pas la cuisine du Cuisinier, et qu'il souhaitait en trouver un nouveau.\n" + 
+		" | " + "Néanmoins je ne savais pas qu'il était prêt à passer à l'action..."));
 		
 		// Fille
 		this.tabDialogue.add(new Dialogue(110, "Mon petit Papa... Qui a bien pu lui faire ça ?! Trouvez celui qui a tué mon père !", false));//26
@@ -415,8 +422,10 @@ public class Jeu {
                 gui.afficher();
                 }
                 tabObjet.get(idTabObjet).setObjetRecupere();
-                zones[idZone].setNomImage(nomImage);
-                modifierCarte();
+                if (zoneCourante != zones[1]) {
+                    zones[idZone].setNomImage(nomImage);
+                    modifierCarte();
+                }
                 this.inventaire.add(tabObjet.get(idTabObjet));
             } 
         }
@@ -522,6 +531,12 @@ public class Jeu {
     		gui.afficher("Mais quelle idée d'aller dans la poubelle aussi ?!");
     		gui.afficher();
     		terminer();
+    	} else if (zoneCourante == zones[7]) {
+        		gui.afficher("Vous êtes mort !");
+        		gui.afficher();
+    	} else {
+    		gui.afficher("Vous avez perdu !");
+    		gui.afficher();
     	}
     }
     
@@ -551,6 +566,12 @@ public class Jeu {
     	} else if (zoneCourante == zones[7]) {
     		if (verifierObjetPresentInventaire(4)) {
     			gui.afficher(tabDialogue.get(8).getDialogueTexte());
+    		}
+    		if (verifierObjetPresentInventaire(0)) {
+    			gui.afficher(tabDialogue.get(10).getDialogueTexte());
+    		}
+    		if (verifierObjetPresentInventaire(6)) {
+    			gui.afficher(tabDialogue.get(11).getDialogueTexte());
     		}
     	} else if (zoneCourante == zones[9]) { // MERE
     		if (verifierObjetPresentInventaire(2)) {
@@ -591,13 +612,19 @@ public class Jeu {
     	}
     }
     
+    /*
+     * 
+     */
     private boolean verifDejaParle(int numeroDialogue) {
-    	for (int i = 0; i < tabDialogue.size(); i++) {
-    		if (tabDialogue.get(i).getDejaParle() == true) {
-    			return true;
-    		}
-    	}
-    	return false;
+        for (int i = 0; i < tabDialogue.size(); i++) {
+            if (tabDialogue.get(i).getNumeroDialogue() == numeroDialogue)
+            {
+                if (tabDialogue.get(i).getDejaParle() == true) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     /*
@@ -611,10 +638,7 @@ public class Jeu {
             	reponse(10);
             	dejaParleAuPersonnage(10);
         	} else if (!verifierObjetPresentInventaire(7)){
-        		reponse(14);
-            	gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(7).getNom()); 
-        		gui.afficher();
-            	this.inventaire.add(tabObjet.get(7));
+        		prendre(1, 7, "1-Entree.jpg");
         	}
         	question();
     	} else if (zoneCourante == zones[6]) { // FEMME DE CHAMBRE
@@ -938,6 +962,15 @@ public class Jeu {
     			case "4" :
     				commandeImpossible(4, 79);
     				break;
+    			case "5" :
+    				commandeImpossible(0, 75);
+    				break;
+    			case "6" :
+    				commandeImpossible(6, 76);
+    	        	zones[7].setNomImage("26-EcranMort.jpg");
+    	        	modifierCarte();
+    	        	gameOver();
+    				break;
     			case "PA" : case "PARLER" : case "RETOUR" :
     	        	zones[7].setNomImage("7-Cuisine.jpg");
     	        	modifierCarte();
@@ -969,7 +1002,7 @@ public class Jeu {
     				commandeImpossible(3, 98);
     				break;
       			case "7" :
-    				commandeImpossible(7, 98);
+    				commandeImpossible(7, 97);
     				break;
     			case "PA" : case "PARLER" : case "RETOUR" :
     	        	zones[9].setNomImage("9-Bureau.jpg");
@@ -993,7 +1026,11 @@ public class Jeu {
     				reponse(113);
     				break;
     			case "4" :
-    				reponse(116);
+    				if (caveVisitee) {
+        				reponse(116);
+    				} else {
+    					gui.afficher("Commande inconnue");
+    				}
     				break;
     			case "PA" : case "PARLER" : case "RETOUR" :
     	        	zones[11].setNomImage("11-ChambreDeLaFille.jpg");
@@ -1017,7 +1054,11 @@ public class Jeu {
     				reponse(123);
     				break;
     			case "4" :
-    				reponse(126);
+    				if (caveVisitee) {
+        				reponse(126);
+    				} else {
+    					gui.afficher("Commande inconnue");
+    				}
     				break;
     			case "PA" : case "PARLER" : case "RETOUR" :
     	        	zones[12].setNomImage("12-ChambreDuFils.jpg");
