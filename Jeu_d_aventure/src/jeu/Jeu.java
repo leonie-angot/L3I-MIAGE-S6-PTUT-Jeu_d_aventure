@@ -23,6 +23,8 @@ public class Jeu {
 	
 	ArrayList<Dialogue> tabDialogue = new ArrayList<Dialogue>();
 	
+	ArrayList<Indice> listeIndice = new ArrayList<Indice>();
+	
 	/*
 	 * Initialisation des variables pour la Téléportation et l'Affichage du Plan de la maison
 	 */
@@ -409,6 +411,7 @@ public class Jeu {
         	zones[14].setNomImage("14-Cave_vide.jpg");
         	modifierCarte();
         	this.inventaire.add(tabObjet.get(6));
+        	this.listeIndice.add(tabObjet.get(6));
     	} else {
         	gui.afficher("Il n'y a rien à récupérer ici");
         	gui.afficher();
@@ -427,6 +430,21 @@ public class Jeu {
         	gui.afficher();
     	} else {
         	gui.afficher("Votre inventaire est vide !");
+        	gui.afficher();
+    	}
+    }
+    
+    /*
+     * 
+     */
+    private void afficherIndice() {
+    	if (!this.listeIndice.isEmpty()) {
+        	gui.afficher("Voici les indices que vous avez trouvé :");
+        	gui.afficher();
+        	gui.afficher(listeIndice.toString());
+        	gui.afficher();
+    	} else {
+        	gui.afficher("Vous n'avez pas encore trouvé d'indices ! Il faut commencer à en chercher !");
         	gui.afficher();
     	}
     }
@@ -557,8 +575,7 @@ public class Jeu {
      * Cette méthode permet de parler à un suspect et affiche les choix disponibles de questions
      */
     private void parler() { // TODO
-    	// MAJORDOME
-    	if (zoneCourante == zones[1]) { 
+    	if (zoneCourante == zones[1]) { // MAJORDOME
         	zones[1].setNomImage("1-Entree_Majordome.jpg");
         	modifierCarte();
         	if (!verifDejaParle(10)) {
@@ -571,9 +588,7 @@ public class Jeu {
             	this.inventaire.add(tabObjet.get(7));
         	}
         	question();
-    	} 
-    	// FEMME DE CHAMBRE
-    	else if (zoneCourante == zones[6]) { 
+    	} else if (zoneCourante == zones[6]) { // FEMME DE CHAMBRE
         	zones[6].setNomImage("6-SalleAManger_FemmeDeMenage.jpg");
         	modifierCarte();
         	if (!verifDejaParle(60)) {
@@ -586,16 +601,16 @@ public class Jeu {
         	modifierCarte();
         	reponse(70);
         	question();
-    	} else if (zoneCourante == zones[9]) {
+    	} else if (zoneCourante == zones[9]) { 
         	zones[9].setNomImage("9-Bureau_Mere.jpg");
         	modifierCarte();
         	reponse(90);
         	question();
-    	} else if (zoneCourante == zones[11]) { 
+    	} else if (zoneCourante == zones[11]) { // FILLE
         	zones[11].setNomImage("11-Chambre_Fille.jpg");
         	modifierCarte();
         	reponse(110);
-    	} else if (zoneCourante == zones[12]) { 
+    	} else if (zoneCourante == zones[12]) { // FILS
         	zones[12].setNomImage("12-Chambre_Fils.jpg");
         	modifierCarte();
         	reponse(120);
@@ -663,6 +678,10 @@ public class Jeu {
             	} else {
                 	allerEn( "EST" ); 
             	}
+            	if (zoneCourante == zones[14]) {
+            		gui.afficher("Tiens... Qu'est-ce qui est écrit sur le tableau ?\nUn des enfants devait en vouloir au père... Je devrais aller leur demander");
+            		gui.afficher();
+            	}
             	break;
             case "O" : case "OUEST" :
             	allerEn( "OUEST" ); 
@@ -698,10 +717,13 @@ public class Jeu {
             case "PR" : case "PRENDRE" :
             	prendre();
             	break;
-            case "I" : case "INVENTAIRE" :
+            case "IV" : case "INVENTAIRE" :
             	retenirZone();
             	permissionInventaire();
             	afficherInventaire();
+            	break;
+            case "ID" : case "INDICE" :
+            	afficherIndice();
             	break;
             case "C" : case "CARTE" : 
             	retenirZone(); // Permet de retenir dans quelle zone on était pour y retourner quand on sortira de l'affichage du plan de la maison
