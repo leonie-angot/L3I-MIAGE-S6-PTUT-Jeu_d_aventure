@@ -23,6 +23,8 @@ public class Jeu {
 	
 	ArrayList<Dialogue> tabDialogue = new ArrayList<Dialogue>();
 	
+	ArrayList<Indice> tabIndice = new ArrayList<Indice>();
+	
 	ArrayList<Indice> listeIndice = new ArrayList<Indice>();
 	
 	/*
@@ -33,6 +35,7 @@ public class Jeu {
 	boolean visionInventairePossible = false;
 	boolean discussionEnCours = false;
 	boolean accuserPossible = false;
+	boolean dejaParleMere = false;
 	
     boolean clefPorteUtilisee = false;
     boolean clefCoffreUtilisee = false;
@@ -44,10 +47,24 @@ public class Jeu {
     
 	private Zone zonePrecedente;
 
+	
+	private void creerIndice() {
+		this.tabIndice.add((Indice)new Objet("Bouton de la veste du Cuisinier trouvé sur la scène de crime")); 				     		//0 fait
+		this.tabIndice.add((Indice)new Objet("Boucle d'oreille appartenant à la Femme de Ménage trouvée dans la chambre Parentale"));	//1 fait
+		this.tabIndice.add((Indice)new Objet("Lettre révélant une relation adultère entre la Femme de Chambre et le Père"));	 		//2 fait
+		this.tabIndice.add((Indice)new Objet("Lettre révélant que le Cuisinier est amoureux de la Femme de Chambre"));			 		//3 fait
+		this.tabIndice.add((Indice)new Objet("Couteau avec les empruntes du Cuisinier"));										 		//4 fait
+		this.tabIndice.add((Indice)new Objet("Lettre rédigée par le Père révélant le Licenciement du Cuisinier")); 				 		//5 fait
+		this.tabIndice.add((Indice)new Dialogue("La Mère était au courant de la relation adultère du Père"));					 		//6 fait
+		this.tabIndice.add((Indice)new Dialogue("Disputes entre le Cuisinier et le Père")); 									 		//7 fait
+		this.tabIndice.add((Indice)new Dialogue("Dispute entre le Jardinier et le Père")); 										 		//8 fait
+		this.tabIndice.add((Indice)new Dialogue("Disputes entre le Fils et le Père")); 											 		//9 fait
+	}
+	
 	/*
 	 * Initialisation des objets sur la map
 	 */
-	public void creerObjet() {
+	private void creerObjet() {
 		this.tabObjet.add(new Objet("Bouton", "Ceci est un bouton de veste, il semblerait qu'il provient d'un uniforme de travail. Je devrais demander aux employés.", zones[8]));
 		this.tabObjet.add(new Objet("Clef de la cave", "Ceci est la clef permettant d'ouvrir la porte de la cave.", zones[9]));
 		this.tabObjet.add(new Objet("Boucle d'oreille", "Une boucle d'oreille, à qui peut-elle appartenir ? Je devrais interroger la Mère ou la Femme de Chambre... ", zones[10]));
@@ -62,7 +79,7 @@ public class Jeu {
 	 * 
 	 * @author Léonie A.
 	 */
-	public void creerDialogue() { // TODO
+	private void creerDialogue() { // TODO
 		//Questions
 		this.tabDialogue.add(new Dialogue(1, "1. Dites-m'en plus sur vous."));
 		this.tabDialogue.add(new Dialogue(2, "2. Que saviez-vous sur le Père et cette famille?"));
@@ -76,6 +93,7 @@ public class Jeu {
 		this.tabDialogue.add(new Dialogue(20, "7. Etiez-vous au courant que le Père souhaitait licencier le Cuisinier ?"));
 		this.tabDialogue.add(new Dialogue(21, "5. Est-ce que ce bouton vous appartient ?"));
 		this.tabDialogue.add(new Dialogue(22, "6. Nous avons retrouvé vos empruntes sur ce Couteau, qu'avez-vous à dire pour votre défense ?"));
+		this.tabDialogue.add(new Dialogue(23, "4. J'ai cru comprendre que vous vous étiez disputé avec le Père récemment ?"));
 		
 		// Majordome
 		this.tabDialogue.add(new Dialogue(10, "Bonjour, vous devez être le détective qui travaille sur cette enquête.\n" + " | " + "En quoi puis-je vous aider ?", false));//6
@@ -106,7 +124,7 @@ public class Jeu {
 		this.tabDialogue.add(new Dialogue(70, "Bonjour, je suis le Cuisinier, vous devez être le détective." + " | " + "Que voulez-vous savoir ?", false));//16
 		this.tabDialogue.add(new Dialogue(71, "Comme je l'ai dis, je suis Cuisinier ici depuis 4 ans maintenant..."));//17
 		this.tabDialogue.add(new Dialogue(72, "Cette famille avait beaucoup de problèmes, vraiment pas un foyer sain..."));//18
-		this.tabDialogue.add(new Dialogue(73, "J'étais entrain de rentrer chez moi, comme le diner était terminé, javais fini mon service."));//19
+		this.tabDialogue.add(new Dialogue(73, "J'étais entrain de rentrer chez moi, comme le diner était terminé, j\'avais fini mon service."));//19
 		this.tabDialogue.add(new Dialogue(79, "Où avez-vous trouvé ça ? Ça ne vous regarde pas ! Rendez-la moi !\n" + 
 		" | " + ". . .\n" + 
 		" | " + "Comment ça c'est une preuve ? Oui je l'aime ! A en mourir ! Elle est si belle et gentille... *soupire*"));
@@ -150,9 +168,12 @@ public class Jeu {
 		
 		// Jardinier
 		this.tabDialogue.add(new Dialogue(150, "Bonjour, vous êtes le détective qui travaille sur cette enquête ?\n" + " | " + "J'espère que vous allez vite attraper le malade qui a commis ce crime !", false));
-		this.tabDialogue.add(new Dialogue(131, "Je suis Jardinier et Gardien dans ce manoir depuis 9 ans maintenant\n " + " | " + "J'habite donc dans cette propriété dans une annexe dans le Jardin qui m'est destinée."));
-		this.tabDialogue.add(new Dialogue(132, "Le Père et la Mère se disputaient souvent, mais il se disputait aussi beaucoup avec son Fils.\n " + " | " + "C'était un homme dur et exigeant, souvent d'humeur éxecrable..."));
-		this.tabDialogue.add(new Dialogue(133, "J'étais dans ma Chambre à mon habitude, entrain de me préparer à manger."));
+		this.tabDialogue.add(new Dialogue(151, "Je suis Jardinier et Gardien dans ce manoir depuis 9 ans maintenant\n" + " | " + "J'habite donc dans cette propriété dans une annexe dans le Jardin qui m'est destinée."));
+		this.tabDialogue.add(new Dialogue(152, "Le Père et la Mère se disputaient souvent, mais il se disputait aussi beaucoup avec son Fils.\n" + " | " + "C'était un homme dur et exigeant, souvent d'humeur éxecrable..."));
+		this.tabDialogue.add(new Dialogue(153, "J'étais dans ma Chambre à mon habitude, entrain de me préparer à manger."));
+		this.tabDialogue.add(new Dialogue(154, "Oui, l'autre jour il était rentré dans une colère noire parce que j'avais coupé trop court un bégoniat, mais il était envahit de pucerons !\n" + 
+		" | " + "Vous savez, si je ne l'avais pas fait, tous les autres plants auraient été contaminés... Ce si beau jardin... C'était hors de question !\n" + 
+		" | " + "Quelqu'un devait agir !"));
 	}
 	
 	/**
@@ -307,6 +328,7 @@ public class Jeu {
         
         creerObjet();
         creerDialogue();
+        creerIndice();
     }
 
     /*
@@ -416,15 +438,21 @@ public class Jeu {
             if (zoneCourante == zones[idZone] && tabObjet.get(idTabObjet).getObjetRecupere() == false) {
                 gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(idTabObjet).getNom()); 
                 gui.afficher();
-                if(idZone==14)
-                {
-                gui.afficher("Ce couteau est couvert de sang. Peut-être l'arme du crime ? Il faut l'examiner, c'est élémentaire mon cher Watson !"); 
-                gui.afficher();
-                }
+                if(idZone==14) {
+	                gui.afficher("Ce couteau est couvert de sang. Peut-être l'arme du crime ? Il faut l'examiner, c'est élémentaire mon cher Watson !"); 
+	                gui.afficher();
+	                recupererIndice(4);
+                } else if(idZone==15) {
+	                gui.afficher("Pourquoi est-ce que la clef se trouve ici ? Étrange..."); 
+	                gui.afficher();
+                }                 
                 tabObjet.get(idTabObjet).setObjetRecupere();
                 if (zoneCourante != zones[1]) {
                     zones[idZone].setNomImage(nomImage);
                     modifierCarte();
+                }
+                if (idZone == 16 && idTabObjet == 3) {
+                	recupererIndice(2);
                 }
                 this.inventaire.add(tabObjet.get(idTabObjet));
             } 
@@ -450,16 +478,19 @@ public class Jeu {
     /*
      * 
      */
-    private void afficherIndice() {
+    private void afficherIndice() { //TODO
     	if (!this.listeIndice.isEmpty()) {
         	gui.afficher("Voici les indices que vous avez trouvé :");
-        	gui.afficher();
-        	gui.afficher(listeIndice.toString());
+        	gui.afficher(listeIndice.toString().replace("[", "").replace("]",""));
         	gui.afficher();
     	} else {
-        	gui.afficher("Vous n'avez pas encore trouvé d'indices ! Il faut commencer à en chercher !");
+        	gui.afficher("Vous n'avez pas encore trouvé d'indices ! Il faut commencer à en chercher !\nNon mais c'est quoi ce détective de pacotille ?!");
         	gui.afficher();
     	}
+    }
+    
+    private void recupererIndice(int idIndice) {
+    	listeIndice.add(tabIndice.get(idIndice));
     }
     
     /*
@@ -592,6 +623,8 @@ public class Jeu {
 
     	} else if (zoneCourante == zones[12] && caveVisitee==true) { // FILS
     		gui.afficher(tabDialogue.get(5).getDialogueTexte());
+        } else if (zoneCourante == zones[15] && dejaParleMere==true) {
+        	gui.afficher(tabDialogue.get(12).getDialogueTexte());
         }
     }
     
@@ -639,6 +672,7 @@ public class Jeu {
             	dejaParleAuPersonnage(10);
         	} else if (!verifierObjetPresentInventaire(7)){
         		prendre(1, 7, "1-Entree.jpg");
+        		recupererIndice(5);
         	}
         	question();
     	} else if (zoneCourante == zones[6]) { // FEMME DE CHAMBRE
@@ -907,6 +941,7 @@ public class Jeu {
     				break;
     			case "4" :
     				commandeImpossible(4,14);
+    				recupererIndice(3);
     				break;
     			case "7" :
     				commandeImpossible(7, 16);
@@ -934,6 +969,7 @@ public class Jeu {
     				break;
     			case "4" :
     				commandeImpossible(2, 64);
+    				recupererIndice(1);
     				break;
     			case "5" :
     				commandeImpossible(3, 67);
@@ -964,6 +1000,7 @@ public class Jeu {
     				break;
     			case "5" :
     				commandeImpossible(0, 75);
+    				recupererIndice(0);
     				break;
     			case "6" :
     				commandeImpossible(6, 76);
@@ -997,9 +1034,12 @@ public class Jeu {
     				break;
     			case "5" :
     				reponse(95);
+    				dejaParleMere = true;
+    				recupererIndice(7);
     				break;
     			case "6" :
     				commandeImpossible(3, 98);
+    				recupererIndice(6);
     				break;
       			case "7" :
     				commandeImpossible(7, 97);
@@ -1028,9 +1068,14 @@ public class Jeu {
     			case "4" :
     				if (caveVisitee) {
         				reponse(116);
+        				recupererIndice(9);
     				} else {
     					gui.afficher("Commande inconnue");
     				}
+    				break;
+    			case "5" :
+    				reponse(115);
+    				recupererIndice(8);
     				break;
     			case "PA" : case "PARLER" : case "RETOUR" :
     	        	zones[11].setNomImage("11-ChambreDeLaFille.jpg");
@@ -1056,6 +1101,7 @@ public class Jeu {
     			case "4" :
     				if (caveVisitee) {
         				reponse(126);
+        				recupererIndice(9);
     				} else {
     					gui.afficher("Commande inconnue");
     				}
@@ -1080,6 +1126,14 @@ public class Jeu {
     				break;
     			case "3" :
     				reponse(153);
+    				break;
+    			case "4" :
+    				if (dejaParleMere) {
+        				reponse(154);
+    				} else {
+    					gui.afficher("Commande inconnue");
+    					gui.afficher();
+    				}
     				break;
     			case "PA" : case "PARLER" : case "RETOUR" :
     	        	zones[15].setNomImage("15-Jardin.jpg");

@@ -16,6 +16,7 @@ public class Dialogue extends Indice{
 	
 	private int numeroDialogue;
 	private String dialogueTexte;
+	private String dialogueIndice;
 	boolean dejaParle;
 
 	public Dialogue(int numeroDialogue, String dialogueTexte){
@@ -27,6 +28,13 @@ public class Dialogue extends Indice{
 		this.numeroDialogue = numeroDialogue ;
 	    this.dialogueTexte = " | " + dialogueTexte + "\n";
 	    this.dejaParle = dejaParle;
+	}
+	
+	/*
+	 * On utilise cette surcharge pour pouvoir créer des Indices qui seront visibles avec la commande [INDICE]
+	 */
+	public Dialogue(String dialogueIndice) {
+		this.dialogueIndice = dialogueIndice;
 	}
 	
 	public int getNumeroDialogue() {
@@ -44,5 +52,11 @@ public class Dialogue extends Indice{
 	public void setDejaParle() {
 		this.dejaParle = true;
 	}
+	
+	@Override
+	public String toString() {
+		return "\n" + "(Indice) " + this.dialogueIndice ;
+	}
+	
 	
 }

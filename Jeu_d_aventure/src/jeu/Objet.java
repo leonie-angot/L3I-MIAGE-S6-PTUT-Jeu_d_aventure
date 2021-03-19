@@ -26,6 +26,13 @@ public class Objet extends Indice {
         this.zoneIndice = zone;
     }
 
+    /*
+     * Surcharge utilisée pour la création d'indices visibles avec la commande [INDINCE]
+     */
+    public Objet(String descriptionObjet) {
+    	this.descriptionObjet = descriptionObjet;
+    }
+    
 	/*
 	 * 
 	 */
@@ -50,6 +57,13 @@ public class Objet extends Indice {
 	/*
 	 * 
 	 */
+	public void setDescriptionObjet(String nouvelleDescription) {
+		this.descriptionObjet = nouvelleDescription;
+	}
+	
+	/*
+	 * 
+	 */
 	public void setObjetRecupere() {
 		this.objetRecupere = true;
 	}
@@ -58,7 +72,11 @@ public class Objet extends Indice {
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
     public String toString() {
+		if (nomObjet == null) {
+			return "\n" + "(Indice) " + descriptionObjet ;
+		}
     	return nomObjet;
     }
     
