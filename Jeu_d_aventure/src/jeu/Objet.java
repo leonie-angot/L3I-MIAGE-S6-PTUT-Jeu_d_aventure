@@ -16,6 +16,7 @@ public class Objet extends Indice {
 	
     private String nomObjet ;
     private String descriptionObjet ;
+    private boolean indiceRecup=false;
 
     /*
      * 
@@ -68,7 +69,7 @@ public class Objet extends Indice {
 		this.objetRecupere = true;
 	}
     
-	/*
+	/** 
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -80,4 +81,14 @@ public class Objet extends Indice {
     	return nomObjet;
     }
     
+    /**
+     *@author Ylli P
+     */
+    public void setIndiceRecup() {
+		this.indiceRecup=true;
+	}
+	public boolean getIndiceRecup()
+	{
+		return this.indiceRecup;
+	}
 }

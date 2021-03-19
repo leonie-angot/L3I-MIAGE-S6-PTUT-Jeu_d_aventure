@@ -490,7 +490,24 @@ public class Jeu {
     }
     
     private void recupererIndice(int idIndice) {
-    	listeIndice.add(tabIndice.get(idIndice));
+        if(this.listeIndice.isEmpty()==true)
+    	{
+    		gui.afficher("==>Vous avez recupérer un indice");
+    		this.listeIndice.add(this.tabIndice.get(idIndice));
+    		this.tabIndice.get(idIndice).setIndiceRecup();
+    	}
+    	else
+    	{
+    		for(int i=0;i<listeIndice.size();i++)
+    		{
+    				if(listeIndice.get(i).toString()==tabIndice.get(idIndice).toString() && tabIndice.get(idIndice).getIndiceRecup()==false)
+        			{
+    					this.listeIndice.add(this.tabIndice.get(idIndice));
+    					this.tabIndice.get(idIndice).setIndiceRecup();
+        			}
+     		}
+    	}
+    	
     }
     
     /*
