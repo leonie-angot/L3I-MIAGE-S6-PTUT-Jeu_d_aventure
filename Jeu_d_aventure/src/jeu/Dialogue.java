@@ -9,7 +9,7 @@ package jeu;
  * 
  * Date : 16/03/2021.
  * 
- * @author Léonie A. et Ylli P.
+ * @author Lï¿½onie A. et Ylli P.
  */
 
 public class Dialogue extends Indice{
@@ -32,7 +32,7 @@ public class Dialogue extends Indice{
 	}
 	
 	/*
-	 * On utilise cette surcharge pour pouvoir créer des Indices qui seront visibles avec la commande [INDICE]
+	 * On utilise cette surcharge pour pouvoir creer des Indices qui seront visibles avec la commande [INDICE]
 	 */
 	public Dialogue(String dialogueIndice) {
 		this.dialogueIndice = dialogueIndice;
