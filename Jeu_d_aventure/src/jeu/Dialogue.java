@@ -18,6 +18,7 @@ public class Dialogue extends Indice{
 	private String dialogueTexte;
 	private String dialogueIndice;
 	boolean dejaParle;
+    private boolean indiceRecup=false;
 
 	public Dialogue(int numeroDialogue, String dialogueTexte){
 		this.numeroDialogue = numeroDialogue ;

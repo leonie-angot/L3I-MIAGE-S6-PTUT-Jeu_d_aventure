@@ -931,11 +931,19 @@ public class Jeu {
     			case "CUISINIER" :
     				gui.afficher("Bravo vous avez trouvé le meurtrier ! C'est gagné !");
     				gui.afficher();
+    				for (int i = 0; i < 26; i++) {
+        	        	zones[i].setNomImage("26-EcranGagné.jpg");
+    				}
+    	        	modifierCarte();
     				terminer();
     				break;
     			case "MAJORDOME" : case "FEMME DE CHAMBRE" : case "FEMME DE MENAGE" : case "MERE" : case "FILLE" : case "FILS" : case "JARDINIER" :
-    				gui.afficher("Vous avez perdu ! Ce n'était pas la bonne personne !\nRecommencez !");
+    				gui.afficher("Vous avez perdu ! Ce n'était pas la bonne personne !\nRecommencez !\nQuel mauvais détective quand même...");
     				gui.afficher();
+    				for (int i = 0; i < 26; i++) {
+        	        	zones[i].setNomImage("26-EcranPerdu.jpg");
+    				}
+    	        	modifierCarte();
     				terminer();
     				break;
 	            case "Q" : case "QUITTER" :

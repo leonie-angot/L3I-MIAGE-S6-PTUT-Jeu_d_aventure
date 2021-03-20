@@ -10,12 +10,13 @@ package jeu;
  * 
  * Date : 23/02/2021.
  * 
- * @author LÃ©onie A., Sami B., Tarik D. et Ylli P.
+ * @author Léonie A., Sami B., Tarik D. et Ylli P.
  */
 public class Objet extends Indice {
 	
     private String nomObjet ;
     private String descriptionObjet ;
+    private boolean indiceRecup=false;
 
     /*
      * 
@@ -27,7 +28,7 @@ public class Objet extends Indice {
     }
 
     /*
-     * Surcharge utilisÃ©e pour la crÃ©ation d'indices visibles avec la commande [INDINCE]
+     * Surcharge utilisée pour la création d'indices visibles avec la commande [INDINCE]
      */
     public Objet(String descriptionObjet) {
     	this.descriptionObjet = descriptionObjet;
@@ -41,14 +42,14 @@ public class Objet extends Indice {
 	}
 	
 	/*
-	 * Permet de rÃ©cupÃ©rer le nom de l'Objet
+	 * Permet de récupérer le nom de l'Objet
 	 */
 	public String getNom() {
 		return this.nomObjet;
 	}
 	
 	/*
-	 * Permet de rÃ©cupÃ©rer le nom de l'Objet
+	 * Permet de récupérer le nom de l'Objet
 	 */
 	public String getDescription() {
 		return this.descriptionObjet;
