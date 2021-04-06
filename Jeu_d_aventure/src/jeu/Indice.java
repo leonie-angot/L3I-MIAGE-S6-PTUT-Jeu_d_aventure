@@ -9,7 +9,7 @@ package jeu;
  * 
  * Date : 23/02/2021.
  * 
- * @author Tarik D et Sami B
+ * @author 
  */
 
 public abstract class Indice {

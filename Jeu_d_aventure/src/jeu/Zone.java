@@ -17,6 +17,7 @@ public class Zone
 {
     private String description;
     private String nomImage;
+    
     /**
      * Les sorties de notre zone avec un clé de type String représente le nom de la sortie 
      * et une valeur de type Zone représente la zone voisine.
@@ -52,8 +53,9 @@ public class Zone
         return nomImage;
     }
      
-    /*
-     * 
+    /**
+     * Change le nom de l'image
+     * @param nomNouvelleImage le nouveau nom de l'image
      */
     public void setNomImage(String nomNouvelleImage) {
     	this.nomImage = nomNouvelleImage;
@@ -61,6 +63,7 @@ public class Zone
     
     /**
      * Renvoie la description de notre Zone.
+     * @return description de la zone
      */
     public String toString() {
     	return description;
