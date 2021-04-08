@@ -223,7 +223,7 @@ public class Jeu {
 	/**
 	 * Creation un tableau vide des 27 zones du jeu
 	 */
-	Zone [] zones = new Zone [27];
+	Zone [] zones = new Zone [28];
 
 	/**
 	 * Cree et initialise les zones.
@@ -258,6 +258,7 @@ public class Jeu {
 		zones[24] = new Zone("l'Inventaire","24-Inventaire.jpg");
 		zones[25] = new Zone("la Poubelle","25-Poubelle.jpg");
 		zones[26] = new Zone("l'Accueil","26-EcranDAccueil.jpg");
+		zones[27] = new Zone("Règles du jeu","26-ReglesDuJeu.jpg");
 
 		zones[0].ajouteSortie(Sortie.SUD, zones[1]); 		// Depuis le Tableau aller dans l'Entrée
 
@@ -339,7 +340,9 @@ public class Jeu {
 		zones[23].ajouteSortie(Sortie.REZDECHAUSSEE, zones[21]);
 		zones[23].ajouteSortie(Sortie.PREMIERETAGE, zones[22]);
 
-		zones[26].ajouteSortie(Sortie.JOUER, zones[1]);
+		zones[26].ajouteSortie(Sortie.JOUER, zones[27]);
+		
+		zones[27].ajouteSortie(Sortie.JOUER, zones[1]);
 
 		zoneCourante = zones[26];
 
@@ -1048,7 +1051,7 @@ public class Jeu {
 				teleporterJoueur(1);
 				break;
 			case "CUISINIER" :
-				gui.afficher("Bravo vous avez trouve le meurtrier ! C'est gagne !");
+				gui.afficher("Bravo vous avez trouvé le meurtrier ! C'est gagné !");
 				gui.afficher();
 				for (int i = 0; i < 26; i++) {
 					zones[i].setNomImage("26-EcranGagné.jpg");
