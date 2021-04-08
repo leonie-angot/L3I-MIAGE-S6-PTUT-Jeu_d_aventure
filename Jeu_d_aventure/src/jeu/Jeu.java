@@ -1,6 +1,14 @@
 package jeu;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import java.net.URL;
+import java.text.ParseException;
 
 /**
  * Nom de classe : Jeu.
@@ -358,31 +366,31 @@ public class Jeu {
 		gui.afficheImage(zoneCourante.nomImage());
 	}
 
-    /**
-     * Donne ou enlève la permission au joueur de voir la carte
-     */
+	/**
+	 * Donne ou enlève la permission au joueur de voir la carte
+	 */
 	private void permissionCarte() {
 		visionCartePossible = (visionCartePossible) ? false : true;
 	}
 
-    /**
-     * Donne ou enlève la permission au joueur de voir son inventaire
-     */
+	/**
+	 * Donne ou enlève la permission au joueur de voir son inventaire
+	 */
 	private void permissionInventaire() {
 		visionInventairePossible = (visionInventairePossible) ? false : true;
 	}
 
-    /**
-     * Donne ou enlève la permission au joueur d'accuser quelqu'un
-     */
+	/**
+	 * Donne ou enlève la permission au joueur d'accuser quelqu'un
+	 */
 	private void permissionAccuser() {
 		accuserPossible = (accuserPossible) ? false : true;
 	}
 
-    /**
-     * Permet de montrer le plan au Joueur
-     * @param idCarte l'id de la Zone cible
-     */
+	/**
+	 * Permet de montrer le plan au Joueur
+	 * @param idCarte l'id de la Zone cible
+	 */
 	private void montrerCarteJoueur(int idCarte) {
 		zoneCourante = zones[idCarte];
 		gui.afficher(zoneCourante.descriptionLongue());
@@ -390,9 +398,9 @@ public class Jeu {
 		gui.afficheImage(zoneCourante.nomImage());
 	}
 
-    /**
-     * Permet de retenir dans quelle Zone le joueur se trouvait avant de regarder le plan du manoir
-     */
+	/**
+	 * Permet de retenir dans quelle Zone le joueur se trouvait avant de regarder le plan du manoir
+	 */
 	private void retenirZone() {
 		for (int i = 1; i <= 24; i++) {
 			if (zoneCourante == zones[i]) {
@@ -401,9 +409,9 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Permet de faire retourner le joueur à sa position initiale avant de consulter le plan du manoir
-     */
+	/**
+	 * Permet de faire retourner le joueur à sa position initiale avant de consulter le plan du manoir
+	 */
 	private void revenirZonePrecedente() {
 		for (int i = 1; i <= 24; i++) {
 			if (zonePrecedente == zones[i]) {
@@ -413,10 +421,10 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * En fonction de la zone courante du joueur on filtre les zones où se trouve des objets à recuperer
-     * en appelant la methode prendre avec l'id de la zone, id de l'objet et le nom d'image sans l'objet
-     */
+	/**
+	 * En fonction de la zone courante du joueur on filtre les zones où se trouve des objets à recuperer
+	 * en appelant la methode prendre avec l'id de la zone, id de l'objet et le nom d'image sans l'objet
+	 */
 	private void utiliserPrendre()
 	{
 		if(zoneCourante == zones[8] || zoneCourante == zones[9] ||zoneCourante == zones[10] || zoneCourante == zones[14] || zoneCourante == zones[15] || zoneCourante == zones[16] ||zoneCourante == zones[18]) 
@@ -434,14 +442,14 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Avant de recuperer l'objet, En fonction de l'id de la zone où se trouve l'objet on verifier si on est dans cette zone
-     * avec notre variable zoneCourante aprés cette verification on cherche si on a deja recuperer
-     * ce objet ou pas
-     * @param idZone l'id de la zone où se trouve l'objet
-     * @param idTabObjet l'id d'objet à recuperer
-     * @param nomImage le nom de l'image sans objet
-     */
+	/**
+	 * Avant de recuperer l'objet, En fonction de l'id de la zone où se trouve l'objet on verifier si on est dans cette zone
+	 * avec notre variable zoneCourante aprés cette verification on cherche si on a deja recuperer
+	 * ce objet ou pas
+	 * @param idZone l'id de la zone où se trouve l'objet
+	 * @param idTabObjet l'id d'objet à recuperer
+	 * @param nomImage le nom de l'image sans objet
+	 */
 	private void prendre(int idZone, int idTabObjet, String nomImage) {
 		{
 			for (int i = 0; i < inventaire.size(); i++) {
@@ -489,9 +497,9 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Afficher les objets recuperer par le joueur
-     */
+	/**
+	 * Afficher les objets recuperer par le joueur
+	 */
 	private void afficherInventaire() {
 		montrerCarteJoueur(24);
 		if (!this.inventaire.isEmpty()) {
@@ -505,9 +513,9 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Affiche les indices que le joueur a trouvé
-     */
+	/**
+	 * Affiche les indices que le joueur a trouvé
+	 */
 	private void afficherIndice() { //TODO
 		if (!this.listeIndice.isEmpty()) {
 			gui.afficher("Voici les indices que vous avez trouvÃ© :");
@@ -518,11 +526,11 @@ public class Jeu {
 			gui.afficher();
 		}
 	}
-	
-    /**
-    * Permet de récupérer l'indice donnée en parametre à condiction que ce dernier n'est pas recuperé avant
-    * @param idIndice l'id de l'indice à ajouter dans la liste des indices
-    */
+
+	/**
+	 * Permet de récupérer l'indice donnée en parametre à condiction que ce dernier n'est pas recuperé avant
+	 * @param idIndice l'id de l'indice à ajouter dans la liste des indices
+	 */
 	private void recupererIndice(int idIndice) {
 
 		if(this.listeIndice.isEmpty()==true)
@@ -541,10 +549,10 @@ public class Jeu {
 
 	}
 
-    /**
-     * Verifier si l'objet passé en parametre a recuperé ou non et on affiche sa desicription s'il existe
-     * @param numObjet le numero de l'objet
-     */
+	/**
+	 * Verifier si l'objet passé en parametre a recuperé ou non et on affiche sa desicription s'il existe
+	 * @param numObjet le numero de l'objet
+	 */
 	private void verificationObjetRecupere(int numObjet) {
 		if (verifierObjetPresentInventaire(numObjet)) {
 			gui.afficher(tabObjet.get(numObjet).getDescription());
@@ -555,11 +563,11 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Affiche true si l'objet donné en parametre existe dans l'inventaire du joueur, sinon false
-     * @param numObjet numero de l'objet à recuperer
-     * @return objetPresentInventaire variable boolean vaut true ou false 
-     */
+	/**
+	 * Affiche true si l'objet donné en parametre existe dans l'inventaire du joueur, sinon false
+	 * @param numObjet numero de l'objet à recuperer
+	 * @return objetPresentInventaire variable boolean vaut true ou false 
+	 */
 	private boolean verifierObjetPresentInventaire(int numObjet) {
 		boolean objetPresentInventaire = false; 
 		for (int i = 0; i < inventaire.size() && objetPresentInventaire == false; i++) {
@@ -571,10 +579,10 @@ public class Jeu {
 		return objetPresentInventaire;
 	}
 
-    /**
-     * Utiliser la clef de coffre si la clef est dans l'inventaire mais non utilisé et la porte est dévérouillée, sinon vous devez d'abord ouvrir la porte ou trouver la clef de coffre
-     * @param j 
-     */
+	/**
+	 * Utiliser la clef de coffre si la clef est dans l'inventaire mais non utilisé et la porte est dévérouillée, sinon vous devez d'abord ouvrir la porte ou trouver la clef de coffre
+	 * @param j 
+	 */
 	private void utiliserClef(int j) {
 		boolean clefPresenteInventaire = false; 
 		for (int i = 0; i < inventaire.size() && clefPresenteInventaire == false; i++) {
@@ -606,9 +614,9 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Permet de terminer le jeu
-     */
+	/**
+	 * Permet de terminer le jeu
+	 */
 	private void gameOver() {
 		if (zoneCourante == zones[25]) {
 			gui.afficher("Mais quelle idÃ©e d'aller dans la poubelle aussi ?!");
@@ -623,10 +631,10 @@ public class Jeu {
 		terminer();
 	}
 
-    /**
-     * En fonction de la zone courante et des objets presents dans l'inventaire
-     * on affiche une question
-     */
+	/**
+	 * En fonction de la zone courante et des objets presents dans l'inventaire
+	 * on affiche une question
+	 */
 	private void question() { //TODO
 		for (int i = 0; i < tabDialogue.size(); i++) {
 			if (tabDialogue.get(i).getNumeroDialogue() == 1 || tabDialogue.get(i).getNumeroDialogue() == 2 || tabDialogue.get(i).getNumeroDialogue() == 3) {
@@ -681,10 +689,10 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * En fonction de numero de dialogue donné en parametre en affiche une reponse
-     * @param numeroDialogue 
-     */
+	/**
+	 * En fonction de numero de dialogue donné en parametre en affiche une reponse
+	 * @param numeroDialogue 
+	 */
 	private void reponse(int numeroDialogue) {
 		for (int i = 0; i < tabDialogue.size(); i++) {
 			if (tabDialogue.get(i).getNumeroDialogue() == numeroDialogue)
@@ -692,10 +700,10 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Changer l'etat du dialogue de false à true
-     * @param numeroDialogue numero de dialogue
-     */
+	/**
+	 * Changer l'etat du dialogue de false à true
+	 * @param numeroDialogue numero de dialogue
+	 */
 	private void dejaParleAuPersonnage(int numeroDialogue) {
 		for (int i = 0; i < tabDialogue.size(); i++) {
 			if (tabDialogue.get(i).getNumeroDialogue() == numeroDialogue)
@@ -703,11 +711,11 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Affiche true si le dialogue est déjà affiché, sinon false
-     * @param numeroDialogue numero de dialogue
-     * @param true pour un dialogue déja passé
-     */
+	/**
+	 * Affiche true si le dialogue est déjà affiché, sinon false
+	 * @param numeroDialogue numero de dialogue
+	 * @param true pour un dialogue déja passé
+	 */
 	private boolean verifDejaParle(int numeroDialogue) {
 		for (int i = 0; i < tabDialogue.size(); i++) {
 			if (tabDialogue.get(i).getNumeroDialogue() == numeroDialogue)
@@ -720,9 +728,9 @@ public class Jeu {
 		return false;
 	}
 
-    /**
-     * Cette méthode permet de parler à un suspect et affiche les choix disponibles de questions
-     */
+	/**
+	 * Cette méthode permet de parler à un suspect et affiche les choix disponibles de questions
+	 */
 	private void parler() { // TODO
 		if (zoneCourante == zones[1]) { // MAJORDOME
 			zones[1].setNomImage("1-Entree_Majordome.jpg");
@@ -786,9 +794,9 @@ public class Jeu {
 		}
 	}
 
-    /*
-     * Cette méthode est utilisée dans traiterCommande pour accéder au switch case permettant de choisir quelle question poser au suspect
-     */
+	/*
+	 * Cette méthode est utilisée dans traiterCommande pour accéder au switch case permettant de choisir quelle question poser au suspect
+	 */
 	public void permissionParler() {
 		if (discussionEnCours) {
 			discussionEnCours = false;
@@ -797,17 +805,17 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Affiche la localisation du joueur
-     */
+	/**
+	 * Affiche la localisation du joueur
+	 */
 	private void afficherLocalisation() {
 		gui.afficher( zoneCourante.descriptionLongue());
 		gui.afficher();
 	}
 
-    /**
-     * Affiche un message de bienvenue
-     */
+	/**
+	 * Affiche un message de bienvenue
+	 */
 	private void afficherMessageDeBienvenue() {
 		gui.afficher("Bienvenue !");
 		gui.afficher();
@@ -817,11 +825,11 @@ public class Jeu {
 		gui.afficheImage(zoneCourante.nomImage());
 	}
 
-    /**
-     * Affiche la reponse sur une question si l'objet est dans l'inventaire sinon la commande est inconnue
-     * @param numeroObjet numero de l'objet
-     * @param numeroDialogue numero de dialogue
-     */
+	/**
+	 * Affiche la reponse sur une question si l'objet est dans l'inventaire sinon la commande est inconnue
+	 * @param numeroObjet numero de l'objet
+	 * @param numeroDialogue numero de dialogue
+	 */
 	private void commandeImpossible(int numeroObjet, int numeroDialogue) {
 		if (!verifierObjetPresentInventaire(numeroObjet)) {
 			gui.afficher("Commande inconnue");
@@ -831,10 +839,53 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Traite la commande lue en parametre
-     * @param commandeLue la commande saisie par l'utilisateur.
-     */
+	/*
+	 * Méthode permetant de récupérer l'ensemble des lignes présentes dans le texte
+	 */
+	private String getStringFromFile() throws URISyntaxException,FileNotFoundException
+    {
+        String textFromFile="";
+        URL  u = this.getClass().getClassLoader().getResource("jeu/text/test.txt");
+        URI uri;
+        uri = u.toURI();
+        File file = new File(uri);
+        Scanner s= new Scanner(file);
+            while(s.hasNext())
+            {
+                textFromFile=textFromFile+s.nextLine();
+            }
+        return textFromFile;
+    }
+
+	/*
+	 * Méthode permettant de tester les fonctions du jeu jusqu'à obtention de la victoire
+	 */
+    private void Test() throws URISyntaxException,FileNotFoundException 
+    {
+        String s=getStringFromFile();
+        int i=0;
+        String test="";
+             while(i<s.length())
+             {
+                 if(s.charAt(i)==';')
+                 {
+                     gui.executerCommande(test);
+                     i++;
+                     test="";
+                 }
+                 else
+                 {
+                 test=test+s.charAt(i);
+                 i++;
+                 }
+             }
+
+    }
+	
+	/**
+	 * Traite la commande lue en parametre
+	 * @param commandeLue la commande saisie par l'utilisateur.
+	 */
 	public void traiterCommande(String commandeLue) {
 		gui.afficher( "> "+ commandeLue + "\n");
 		if (!tpPossible && !visionCartePossible && !visionInventairePossible && !discussionEnCours && !accuserPossible) { // Permet d'accÃ©der aux commandes gÃ©nÃ©rales
@@ -918,6 +969,16 @@ public class Jeu {
 					montrerCarteJoueur(23);
 				}
 				gui.afficher();
+				break;
+			case "T": case "TEST":
+				try
+				{
+					Test();
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
 				break;
 			case "TP" : case "TELEPORTATION" : // Commandes disponibles dans le mode TÃ©lÃ©portation
 				permissionTeleportation();
@@ -1385,9 +1446,9 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Affiche la description de chaque commande autorisée
-     */
+	/**
+	 * Affiche la description de chaque commande autorisée
+	 */
 	private void afficherAide() {
 		gui.afficher("Etes-vous perdu ?");
 		gui.afficher();
@@ -1397,10 +1458,10 @@ public class Jeu {
 		gui.afficher();
 	}
 
-    /**
-     * Changement de la localisation du joueur si la sortie demandée existe
-     * @param direction La sortie demandée par le joueur
-     */
+	/**
+	 * Changement de la localisation du joueur si la sortie demandée existe
+	 * @param direction La sortie demandée par le joueur
+	 */
 	private void allerEn(String direction) {
 		Zone nouvelle = zoneCourante.obtientSortie(direction);
 		if ( nouvelle == null ) {
@@ -1419,18 +1480,18 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Modifier la carte en fonction de la zone courante
-     */
+	/**
+	 * Modifier la carte en fonction de la zone courante
+	 */
 	private void modifierCarte() {
 		gui.afficheImage(zoneCourante.nomImage());
 	}
 
-    /**
-     * Affiche le dialogue si la zone donnée en parametre est la zone courante
-     * @param z zone
-     * @param dialogue chaine de caractère à afficher
-     */
+	/**
+	 * Affiche le dialogue si la zone donnée en parametre est la zone courante
+	 * @param z zone
+	 * @param dialogue chaine de caractère à afficher
+	 */
 	public void parler(Zone z, String dialogue)
 	{
 		if(z==zoneCourante)
@@ -1439,9 +1500,9 @@ public class Jeu {
 		}
 	}
 
-    /**
-     * Quitte le jeu
-     */
+	/**
+	 * Quitte le jeu
+	 */
 	private void terminer() {
 		gui.afficher( "Au revoir...");
 		gui.enable( false);

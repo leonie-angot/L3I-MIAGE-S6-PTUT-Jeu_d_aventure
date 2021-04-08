@@ -138,4 +138,16 @@ public class GUI implements ActionListener
         entree.setText("");
         jeu.traiterCommande( commandeLue);
     }
+    
+    /** 
+     * Permet de simuler l'action d'un utilisateur coté machine, c'est la machine qui l'exécute au lieu de l'utilisateur
+     * @param String s le texte extrait du fichier
+     */
+    public void executerCommande(String s)
+    {
+        entree.setText(s);
+        String commandeLue = entree.getText();
+        entree.setText("");
+        jeu.traiterCommande(commandeLue);
+    }
 }
