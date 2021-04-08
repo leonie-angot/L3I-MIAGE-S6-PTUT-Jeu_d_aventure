@@ -15,7 +15,7 @@ import java.util.List;
  * @author 
  */
 public enum Commande {
-	NORD("N", "NORD (aller à  la sortie nord)"), 
+	NORD("N", " NORD (aller à  la sortie nord)"), 
 	NORDOUEST("N", "NORD OUEST (aller à  la sortie nord ouest)"),
 	NORDEST("N", "NORD EST (aller à  la sortie nord est)"),
 	SUD("S", "SUD (aller à  la sortie sud)"), 
@@ -28,7 +28,7 @@ public enum Commande {
 	INVENTAIRE("IV", "INVENTAIRE (permet d'afficher l'inventaire"),
 	INDICE("ID", "INDICE (permet d'afficher la liste des indices récupérés"),
 	UTILISER("U", "UTILISER (utiliser l'objet)"),
-	RETOUR("R", "RETOUR (permet de revenir à la zone précédente ou de sortir du mode ACCUSER, TP ou CARTE"),
+	RETOUR("R", "RETOUR (permet de revenir à la zone précédente ou de sortir des modes ACCUSER ou TP ou CARTE"),
 	CARTE("C", "CARTE (afficher le plan de la maison"),
 	AIDE("?", "? (aide)"), 
 	QUITTER("Q", "QUITTER (quitter)");
@@ -52,7 +52,7 @@ public enum Commande {
 	 */
 	@Override
 	public String toString() { 
-		return name();
+		return name() + "\n";
 	}
 	
 	/**
