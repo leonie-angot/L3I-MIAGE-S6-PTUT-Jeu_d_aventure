@@ -460,9 +460,10 @@ public class Jeu {
 			}
 
 			if(zoneCourante == zones[14] && idZone == 14) {
-				if(tabObjet.get(idTabObjet).getObjetRecupere() == false && idTabObjet==6
-						&& clefCoffreUtilisee==true)
+				if(tabObjet.get(idTabObjet).getObjetRecupere() == false && idTabObjet==6 && clefCoffreUtilisee==true)
 				{
+					zones[14].setNomImage("14-Cave_vide.jpg");
+					modifierCarte();
 					gui.afficher("==> Tu viens de récupérer : " + tabObjet.get(idTabObjet).getNom()); 
 					gui.afficher();
 					gui.afficher("Ce couteau est couvert de sang. Peut-être l'arme du crime ? Il faut l'examiner, c'est élémentaire mon cher Watson !"); 
@@ -486,10 +487,8 @@ public class Jeu {
 					gui.afficher();
 				}                 
 				tabObjet.get(idTabObjet).setObjetRecupere();
-				if (zoneCourante != zones[1]) {
-					zones[idZone].setNomImage(nomImage);
-					modifierCarte();
-				}
+				zones[idZone].setNomImage(nomImage);
+				modifierCarte();
 				if (idZone == 16 && idTabObjet == 3) {
 					recupererIndice(2);
 				}
@@ -1002,14 +1001,11 @@ public class Jeu {
 				if (zoneCourante != zones[0]) {
 					gui.afficher("Tu dois aller sur le Tableau dans l'Entrée pour pouvoir accuser un suspect.");
 					gui.afficher();
-				} else if (listeIndice.size() < 3) {
+				} else if (listeIndice.size() < 3 && verifierObjetPresentInventaire(6) == false) {
 					gui.afficher("Vous n'avez pas assez d'indice pour accuser un suspect !\n");
-					gui.afficher("Vous vous voulez accuser un inocent ou quoi ?!\n");
-					if (!verifierObjetPresentInventaire(4)) {
-						gui.afficher("Commencez par essayer de trouver l'arme du crime !");
-					}
+					gui.afficher("Vous vous voulez accuser un inocent ou quoi ?!");
 					gui.afficher();
-				} else if (verifierObjetPresentInventaire(4) && listeIndice.size() >= 3){
+				} else if (listeIndice.size() >= 3 && verifierObjetPresentInventaire(6) == true) {
 					gui.afficher("Veuillez entrer le nom de la personne que vous souhaitez mettre derrière les barreaux !");
 					gui.afficher();
 					permissionAccuser();
