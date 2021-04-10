@@ -15,18 +15,23 @@ import java.util.List;
  * @author 
  */
 public enum Commande {
-	NORD("N", "N (aller Ã  la sortie nord)"), 
-	NORDOUEST("N", "NO (aller Ã  la sortie nord ouest)"),
-	NORDEST("N", "NE (aller Ã  la sortie nord est)"),
-	SUD("S", "S (aller Ã  la sortie sud)"), 
-	EST("E", "E (aller Ã  la sortie est)"), 
-	OUEST("O", "O (aller Ã  la sortie ouest)"),
-	TABLEAU("N", "T (aller au tableau)"),
-	INVENTAIRE("I", "I (afficher votre inventaire)"),
-	RECUPERER("R", "R (recuperer l\'objet)"),
-	PARLER("P", "P (parler avec la personne)"),
+	NORD("N", " NORD (aller à  la sortie nord)"), 
+	NORDOUEST("N", "NORD OUEST (aller à  la sortie nord ouest)"),
+	NORDEST("N", "NORD EST (aller à  la sortie nord est)"),
+	SUD("S", "SUD (aller à  la sortie sud)"), 
+	EST("E", "EST (aller à  la sortie est)"), 
+	OUEST("O", "OUEST (aller à  la sortie ouest)"),
+	TABLEAU("TAB", "TABLEAU (aller au tableau)"),
+	TELEPORTATION("TP", "TELEPORTATION (se teleporter)"),
+	PARLER("PA", "PARLER (parler avec un pnj)"),
+	PRENDRE("PR", "PRENDRE (prendre l'objet)"),
+	INVENTAIRE("IV", "INVENTAIRE (permet d'afficher l'inventaire"),
+	INDICE("ID", "INDICE (permet d'afficher la liste des indices récupérés"),
+	UTILISER("U", "UTILISER (utiliser l'objet)"),
+	RETOUR("R", "RETOUR (permet de revenir à la zone précédente ou de sortir des modes ACCUSER ou TP ou CARTE"),
+	CARTE("C", "CARTE (afficher le plan de la maison"),
 	AIDE("?", "? (aide)"), 
-	QUITTER("Q", "Q (quitter)");
+	QUITTER("Q", "QUITTER (quitter)");
 
 	private String abreviation;
 	private String description;
@@ -47,7 +52,7 @@ public enum Commande {
 	 */
 	@Override
 	public String toString() { 
-		return name();
+		return name() + "\n";
 	}
 	
 	/**

@@ -9,18 +9,16 @@ package jeu;
  * 
  * Date : 23/02/2021.
  * 
- * @author Tarik D et Sami B
+ * @author 
  */
 public class Personne {
-	
+
 	private String namePersonne;
-
 	
-	public Personne(String nom) {
-		namePersonne = nom;
-	}
-
-	
+	/**
+	 * Renvoie le nom de la personne
+	 * @return namePersonne le nom de la personne 
+	 */
 	public String getName() {
 		return namePersonne;
 	}

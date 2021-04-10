@@ -1,12 +1,11 @@
 package jeu;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Nom de Class : Zone.
  * 
- * Description : La Classe Zone est utilisÃ©e pour crÃ©er une zone avec
- * une description, nom de l'image et ses diffÃ©rentes sorties.
+ * Description : La Classe Zone est utilisée pour créer une zone avec
+ * une description, nom de l'image et ses différentes sorties.
  * 
  * Version : 1.0.
  * 
@@ -18,40 +17,16 @@ public class Zone
 {
     private String description;
     private String nomImage;
-    private Personne personne;
+    
     /**
-     * Les sorties de notre zone avec un clÃ© de type String reprÃ©sente le nom de la sortie 
-     * et une valeur de type Zone reprÃ©sente la zone voisine.
+     * Les sorties de notre zone avec un clé de type String représente le nom de la sortie 
+     * et une valeur de type Zone représente la zone voisine.
      */
     private HashMap<String,Zone> sorties;   
-    public ArrayList<Indices> indices = new ArrayList<Indices>();
-    
-    public void ajouteIndice(Indices in) {
-    	indices.add(in);
-    }
-    
-    public String descriptionIndices()  {
-    	String x = "";
-    	boolean d = false;
-    	boolean o = false;
-    	for(int i = 0 ; i < indices.size(); i++) {
-    		if(indices.get(i).getClass().equals(Dialogue.class) && d == false) {
-    			x += "Parlez ";
-    			d = true;
-    		}
-    		
-    		if(indices.get(i).getClass().equals(Objet.class) && o == false) {
-    				x += "Recuperez ";
-    				o = true;
-    		}
-    		
-    	}
-        return "[" + x + "]";
-    }
-    
+
     /**
      * Cree une zone dont la description et l'image sont donnee en parametre.
-     * Cree une HashMap vide reprÃ©sente les sorties.
+     * Cree une HashMap vide représente les sorties.
      * @param description la description de la zone.
      * @param image l'image de la Zone.
      */ 
@@ -59,18 +34,14 @@ public class Zone
         this.description = description;
         nomImage = image;
         sorties = new HashMap<>();
-        indices = new ArrayList<Indices>();
     }
     
-    public Zone(String description, String image, Personne p) {
-        this(description, image);
-        personne = p;
+    public int sizeOfSorties() {
+    	return sorties.size();
     }
-
     
-
     /**
-     * Ajoute une sortie Ã  notre Zone dont la sortie et la zone voisine sont donnee en parametre.
+     * Ajoute une sortie à notre Zone dont la sortie et la zone voisine sont donnee en parametre.
      * @param sortie La sortie.
      * @param zoneVoisine La zone voisine.
      */
@@ -87,26 +58,35 @@ public class Zone
     }
      
     /**
+     * Change le nom de l'image
+     * @param nomNouvelleImage le nouveau nom de l'image
+     */
+    public void setNomImage(String nomNouvelleImage) {
+    	this.nomImage = nomNouvelleImage;
+    }
+    
+    /**
      * Renvoie la description de notre Zone.
+     * @return description de la zone
      */
     public String toString() {
-        return description;
+    	return description;
     }
 
     /**
-     * Renvoie la description et les diffÃ©rentes sorties de la Zone.
+     * Renvoie la description et les différentes sorties de la Zone.
      * @return une description longue.
      */
     public String descriptionLongue()  {
-        return "Vous ÃƒÂªtes dans " + description + "\nSorties : " + sorties();
+        return "Vous êtes dans " + description + "\nSorties : " + sorties();
     }
 
     /**
      * Renvoie l'ensemble des noms des sorties de la Zone
-     * @return les clÃ©s representent les noms de la Zone.
+     * @return les clés representent les noms de la Zone.
      */
     private String sorties() {
-        return sorties.keySet().toString();
+    	return sorties.keySet().toString();
     }
 
     /**
@@ -115,11 +95,6 @@ public class Zone
      * @return la sortie de type Zone
      */
     public Zone obtientSortie(String direction) {
-    	return sorties.get(direction);
-    }
-    
-    public Personne getPersonne() {
-    	return personne;
+        return sorties.get(direction);
     }
 }
-

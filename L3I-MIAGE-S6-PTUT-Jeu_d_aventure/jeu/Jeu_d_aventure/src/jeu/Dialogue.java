@@ -1,46 +1,107 @@
 package jeu;
 
-
 /**
  * Nom de Class : Dialogue.
  * 
- * Description : .
+ * Description : Represente les dialogues du jeu
  * 
  * Version : 1.0.
  * 
- * Date : 23/02/2021.
+ * Date : 16/03/2021.
  * 
- * @author Tarik D et Sami B
+ * @author 
  */
-public class Dialogue extends Indices{
 
-	private String question;
-	private String reponse;
+public class Dialogue extends Indice{
 	
-	private Personne recepteur;
-	
-	//Essayez avec StringBuilder
-	public Dialogue(String q, String rep, Personne r) {
-		question = q;
-		reponse = rep;
-		recepteur = r;
-	    idIndice = numeroIndices;
-        numeroIndices++;
+	private int numeroDialogue;
+	private String dialogueTexte;
+	private String dialogueIndice;
+	boolean dejaParle;
+    private boolean indiceRecup=false;
+
+    /**
+     * Crée un dialogue dont le numero du dialogue et le texte de ce dernier sont donnee en parametre.
+     * @param numeroDialogue numero du dialogue
+     * @param dialogueTexte le texte du dialogue
+     */
+	public Dialogue(int numeroDialogue, String dialogueTexte){
+		this.numeroDialogue = numeroDialogue ;
+	    this.dialogueTexte = " | " + dialogueTexte + "\n";
 	}
 	
-	public String question() {
-		return this.question;
+	 /**
+     * Crée un dialogue dont le numero du dialogue,le texte et l'etat de ce dernier sont donnee en parametre.
+     * @param numeroDialogue numero du dialogue
+     * @param dialogueTexte le texte du dialogue
+     * @param dejaParle l'etat du dialogue
+     */
+	public Dialogue(int numeroDialogue, String dialogueTexte, boolean dejaParle){
+		this.numeroDialogue = numeroDialogue ;
+	    this.dialogueTexte = " | " + dialogueTexte + "\n";
+	    this.dejaParle = dejaParle;
 	}
 	
-	public String reponse() {
-		return this.reponse;
+	/**
+	 * On utilise cette surcharge pour pouvoir creer des Indices qui seront visibles avec la commande [INDICE]
+	 * @param dialogueIndice  
+	 */
+	public Dialogue(String dialogueIndice) {
+		this.dialogueIndice = dialogueIndice;
 	}
 	
-	public String recepteur() {
-		return this.recepteur.getName();
+	/**
+	 * Renvoie le numero du dialogue
+	 * @return numero du dialogue
+	 */
+	public int getNumeroDialogue() {
+		return this.numeroDialogue;
 	}
 	
+	/**
+	 * Renvoie le dialogue
+	 * @return texte du dialogue
+	 */
+	public String getDialogueTexte() {
+		return this.dialogueTexte;
+	}
+	
+	/**
+	 * Renvoie l'etat du dialogue vaut true si le dialogue est déjà affiché
+	 * @return etat dialogue
+	 */
+	public boolean getDejaParle() {
+		return this.dejaParle;
+	}
+	
+	/**
+	 * Change l'etat du dialogue au true
+	 */
+	public void setDejaParle() {
+		this.dejaParle = true;
+	}
+	
+	/**
+	 * Affiche l'indice du dialogue
+	 * @return indice du dialogue
+	 */
+	@Override
 	public String toString() {
-		return "La question : "+question()+" \n "+ recepteur()+ " : "+ reponse() + "\n";
+		return "\n" + "(Indice) " + this.dialogueIndice ;
+	}
+	
+	/**
+     * Change l'etat d'indice à true
+     */
+    public void setIndiceRecup() {
+		this.indiceRecup=true;
+	}
+    /**
+     * Renvoie true si l'indice est recuperé
+     * @return etat indice
+     */
+	public boolean getIndiceRecup()
+	{
+		return this.indiceRecup;
 	}
 }
