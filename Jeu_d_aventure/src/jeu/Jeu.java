@@ -1160,9 +1160,11 @@ public class Jeu {
 					break;
 				case "6" :
 					commandeImpossible(6, 76);
+					if (verifierObjetPresentInventaire(6)) {
 					zones[7].setNomImage("26-EcranMort.jpg");
 					modifierCarte();
 					gameOver();
+					}
 					break;
 				case "PA" : case "PARLER" : case "RETOUR" : case "R" :
 					zones[7].setNomImage("7-Cuisine.jpg");
