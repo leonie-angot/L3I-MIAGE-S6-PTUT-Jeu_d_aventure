@@ -16,7 +16,7 @@ public class Dialogue extends Indice{
 	
 	private int numeroDialogue;
 	private String dialogueTexte;
-	private String dialogueIndice;
+	public String dialogueIndice;
 	boolean dejaParle;
     private boolean indiceRecup=false;
 

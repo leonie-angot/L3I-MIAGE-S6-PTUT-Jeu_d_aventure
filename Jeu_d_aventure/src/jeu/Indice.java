@@ -19,6 +19,6 @@ public abstract class Indice {
 	protected String nomIndice;
 	protected String descriptionIndice;
 	protected boolean objetRecupere = false;
-	abstract protected boolean getIndiceRecup();
+	public abstract boolean getIndiceRecup();
 	abstract protected void setIndiceRecup();
 }
