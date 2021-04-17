@@ -7,34 +7,34 @@ import java.net.URL;
 
 /**
  * Nom de classe : GUI.
- * 
+ *
  * Description : La classe GUI est utilisée pour creer un interface utilisateur graphique.
- * 
- * Version : 1.0.
- * 
- * Date : 06/02/2021.
- * 
- * @author 
+ *
+ * Version : 2.0.
+ *
+ * Date : 17/04/2021.
+ *
+ * @author Léonie A., Sami B., Tarik D., Ylli P.
  */
 public class GUI implements ActionListener
 {
 	private Jeu jeu;
-	
+
     /**
      * Fenêtre principale qui possède un titre, une taille modifiable et éventuellement un menu.
      */
     private JFrame fenetre;
-    
+
     /**
      * Zone d'édition de texte comportant une seule ligne.
      */
     private JTextField entree;
-    
+
     /**
      * Composant qui permet la saisie en mode multiligne de texte simple.
      */
     private JTextArea texte;
-    
+
     /**
      * Composant qui est capable d'afficher du texte aussi que une image.
      */
@@ -44,27 +44,28 @@ public class GUI implements ActionListener
      * Crée un Interface utilisateur graphique pour le jeu donnee en parametre.
      * @param j de type Jeu
      */
-    public GUI(Jeu j) 
+    public GUI(Jeu j)
     {
         jeu = j;
         creerGUI();
     }
 
     /**
-     * Ajoute de text donnee au parametre et déplacer le curseur 
+     * Ajoute de text donnee au parametre et déplacer le curseur
      * dans le texte à la position précisé en paramètre de la fonction setCaretPosition
-     * @param s chaine de caractere à afficher 
+     * @param s chaine de caractere à afficher
      */
-    public void afficher(String s) 
+    public void afficher(String s)
     {
         texte.append(s);
         texte.setCaretPosition(texte.getDocument().getLength());
     }
-    
+
     /**
      * Retour à la ligne
      */
-    public void afficher() {
+    public void afficher() 
+    {
         afficher("\n");
     }
 
@@ -72,12 +73,12 @@ public class GUI implements ActionListener
      * Affiche l'image donnee en parametre.
      * @param nomImage de type String represente le nom de l'image.
      */
-   public void afficheImage( String nomImage) 
+   public void afficheImage(String nomImage)
    {
 	   	URL imageURL = this.getClass().getClassLoader().getResource("jeu/images/" + nomImage);
-	   	if( imageURL != null ) 
+	   	if (imageURL != null)
 	   	{
-        	image.setIcon( new ImageIcon( imageURL ));
+        	image.setIcon(new ImageIcon(imageURL));
             fenetre.pack();
         }
    }
@@ -87,25 +88,29 @@ public class GUI implements ActionListener
     * Arrête le curseur de clignoter si le parametre ok est false.
     * @param ok de type boolean
     */
-    public void enable(boolean ok) {
+    public void enable(boolean ok)
+    {
         entree.setEditable(ok);
-        if ( ! ok )
+        if (!ok)
+        {
             entree.getCaret().setBlinkRate(0);
+        }
     }
 
     /**
      * Cree l'interface utilisateur graphique.
      */
-    private void creerGUI() {
+    private void creerGUI()
+    {
         fenetre = new JFrame("Jeu");
-        
+
         entree = new JTextField(34);
 
         texte = new JTextArea();
         texte.setEditable(false);
         JScrollPane listScroller = new JScrollPane(texte);
         listScroller.setPreferredSize(new Dimension(200, 200));
-        listScroller.setMinimumSize(new Dimension(100,100));
+        listScroller.setMinimumSize(new Dimension(100, 100));
 
         JPanel panel = new JPanel();
         image = new JLabel();
@@ -116,7 +121,7 @@ public class GUI implements ActionListener
         panel.add(entree, BorderLayout.SOUTH);
 
         fenetre.getContentPane().add(panel, BorderLayout.CENTER);
-        
+
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         entree.addActionListener(this);
@@ -126,22 +131,28 @@ public class GUI implements ActionListener
         entree.requestFocus();
     }
 
-    public void actionPerformed(ActionEvent e) {
+    /**
+     * Permet d'executer la commande lors d'un evenement
+     * @param e
+     */
+    public void actionPerformed(ActionEvent e)
+    {
         executerCommande();
     }
 
     /**
      * Executer la commande lue dans la zone text.
      */
-    private void executerCommande() {
+    private void executerCommande()
+    {
         String commandeLue = entree.getText();
         entree.setText("");
-        jeu.traiterCommande( commandeLue);
+        jeu.traiterCommande(commandeLue);
     }
-    
-    /** 
+
+    /**
      * Permet de simuler l'action d'un utilisateur coté machine, c'est la machine qui l'exécute au lieu de l'utilisateur
-     * @param String s le texte extrait du fichier
+     * @param s
      */
     public void executerCommande(String s)
     {

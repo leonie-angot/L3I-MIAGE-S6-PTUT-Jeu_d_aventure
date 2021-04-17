@@ -3,20 +3,21 @@ package jeu;
 
 /**
  * Nom de Class : Objet.
- * 
+ *
  * Description : Represente les objets à recuperer par le joueur.
- * 
- * Version : 1.0.
- * 
- * Date : 23/02/2021.
- * 
- * @author Léonie A., Sami B., Tarik D. et Ylli P.
+ *
+ * Version : 2.0.
+ *
+ * Date : 17/04/2021.
+ *
+ * @author Léonie A., Sami B., Tarik D., Ylli P.
  */
-public class Objet extends Indice {
-	
+public class Objet extends Indice
+{
+
     private String nomObjet ;
     private String descriptionObjet ;
-    private boolean indiceRecup=false;
+    private boolean indiceRecup = false;
 
     /**
      * Crée un objet dont le nom d'objet, sa description et la zone où il est, sont donnee en parametre.
@@ -24,7 +25,8 @@ public class Objet extends Indice {
      * @param descriptionObjet discription d'objet
      * @param zone zone d'objet
      */
-    public Objet(String nomObjet, String descriptionObjet, Zone zone){
+    public Objet(String nomObjet, String descriptionObjet, Zone zone)
+    {
         this.nomObjet = nomObjet ;
         this.descriptionObjet = descriptionObjet;
         this.zoneIndice = zone;
@@ -34,67 +36,76 @@ public class Objet extends Indice {
      * Surcharge utilisée pour la création d'indices visibles avec la commande [INDINCE]
      * @param descriptionObjet discription d'objet
      */
-    public Objet(String descriptionObjet) {
+    public Objet(String descriptionObjet)
+    {
     	this.descriptionObjet = descriptionObjet;
     }
-    
+
 	/**
 	 * Renvoie true si l'objet est recuperé
-	 * @return 
+	 * @return un boolean
 	 */
-	public boolean getObjetRecupere() {
+	public boolean getObjetRecupere()
+	{
 		return this.objetRecupere;
 	}
-	
+
 	/**
 	 * Permet de récupérer le nom de l'Objet
 	 * @return le nom de l'Objet
 	 */
-	public String getNom() {
+	public String getNom()
+	{
 		return this.nomObjet;
 	}
-	
+
 	/**
 	 * Permet de récupérer la description de l'Objet
 	 * @return decription objet
 	 */
-	public String getDescription() {
+	public String getDescription()
+	{
 		return this.descriptionObjet;
 	}
-	
+
 	/**
 	 * Change la description d'un objet
 	 */
-	public void setDescriptionObjet(String nouvelleDescription) {
+	public void setDescriptionObjet(String nouvelleDescription)
+	{
 		this.descriptionObjet = nouvelleDescription;
 	}
-	
+
 	/**
 	 * Change l'etat de recuperation d'objet à true
 	 */
-	public void setObjetRecupere() {
+	public void setObjetRecupere()
+	{
 		this.objetRecupere = true;
 	}
-    
-	/** 
+
+	/**
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-    public String toString() {
-		if (nomObjet == null) {
+    public String toString()
+	{
+		if (nomObjet == null)
+		{
 			return "\n" + "(Indice) " + descriptionObjet ;
 		}
     	return nomObjet;
     }
-    
+
     /**
      * Change l'etat de recuperation d'indice à true
      */
-    public void setIndiceRecup() {
-		this.indiceRecup=true;
+    public void setIndiceRecup()
+    {
+		this.indiceRecup = true;
 	}
-    
+
     /**
      * Renvoie true si l'indice est recuperé, false sinon
      * @return etat de recuperation d'indice

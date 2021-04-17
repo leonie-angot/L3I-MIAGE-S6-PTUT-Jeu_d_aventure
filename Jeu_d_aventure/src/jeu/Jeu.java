@@ -16,11 +16,11 @@ import java.text.ParseException;
  * Description : La classe jeu est utilisée pour interagir avec 
  * les personnages et les éléments de notre jeu.
  * 
- * Version : 1.0.
+ * Version : 2.0.
  * 
- * Date : 06/02/2021.
- * 
- * @author 
+ * Date : 17/04/2021.
+ *
+ * @author Léonie A., Sami B., Tarik D., Ylli P.
  */
 public class Jeu {
 
@@ -67,7 +67,7 @@ public class Jeu {
 
 	/**
 	 * renvoie le nombre des dialogues
-	 * @return 
+	 * @return
 	 */
 	public int getNbDialogues() {
 		return tabDialogue.size();
@@ -136,7 +136,8 @@ public class Jeu {
 	/**
 	 * Initialisation des indices du jeu
 	 */
-	private void creerIndice() {
+	private void creerIndice() 
+	{
 		this.tabIndice.add((Indice)new Objet("Bouton de la veste du Cuisinier trouvé sur la scene de crime")); 				     			//0 fait
 		this.tabIndice.add((Indice)new Objet("Boucle d'oreille appartenant à la Femme de Ménage trouvée dans la chambre Parentale"));		//1 fait
 		this.tabIndice.add((Indice)new Objet("Lettre révélant une relation adultère entre la Femme de Chambre et le Père"));	 			//2 fait
@@ -152,7 +153,8 @@ public class Jeu {
 	/*
 	 * Initialisation des objets sur la map
 	 */
-	private void creerObjet() {
+	private void creerObjet() 
+	{
 		this.tabObjet.add(new Objet("Bouton", "Ceci est un bouton de veste, il semblerait qu'il provient d'un uniforme de travail. Je devrais demander aux employés.", zones[8]));
 		this.tabObjet.add(new Objet("Clef de la cave", "Ceci est la clef permettant d'ouvrir la porte de la cave.", zones[9]));
 		this.tabObjet.add(new Objet("Boucle d'oreille", "Une boucle d'oreille, à  qui peut-elle appartenir ? Je devrais interroger la Mère ou la Femme de Chambre... ", zones[10]));
@@ -279,6 +281,9 @@ public class Jeu {
 	 */
 	public Jeu() {
 		creerCarte();
+		creerObjet();
+		creerDialogue();
+		creerIndice();
 		gui = null;
 	}
 
@@ -298,7 +303,8 @@ public class Jeu {
 	 * Associe à chaque zone ses sorties.
 	 * Initialisation de la zone courante avec la zone de depart
 	 */
-	private void creerCarte() {
+	private void creerCarte() 
+	{
 		zones[0] = new Zone("le Tableau des Suspects", "0-Tableau.jpg" );
 		zones[1] = new Zone("l'Entree", "1-Entree.jpg" );
 		zones[2] = new Zone("le Couloir Ouest", "2-CouloirWest.jpg" );
@@ -414,9 +420,6 @@ public class Jeu {
 
 		zoneCourante = zones[26];
 
-		creerObjet();
-		creerDialogue();
-		creerIndice();
 	}
 
 	/**
@@ -472,7 +475,8 @@ public class Jeu {
 	/**
 	 * Permet de retenir dans quelle Zone le joueur se trouvait avant de regarder le plan du manoir
 	 */
-	public void retenirZone() {
+	public void retenirZone() 
+	{
 		for (int i = 1; i <= 24; i++) {
 			if (zoneCourante == zones[i]) {
 				zonePrecedente = zones[i];
@@ -483,7 +487,8 @@ public class Jeu {
 	/**
 	 * Permet de faire retourner le joueur à sa position initiale avant de consulter le plan du manoir
 	 */
-	public void revenirZonePrecedente() {
+	public void revenirZonePrecedente() 
+	{
 		for (int i = 1; i <= 24; i++) {
 			if (zonePrecedente == zones[i]) {
 				zoneCourante = zones[i];
