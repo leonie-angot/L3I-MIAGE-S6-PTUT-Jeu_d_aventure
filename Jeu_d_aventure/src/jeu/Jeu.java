@@ -35,11 +35,11 @@ public class Jeu {
 	/** 
 	 * ArrayList répertoriant les différents Dialogues
 	 */
-	ArrayList<Dialogue> tabDialogue = new ArrayList<Dialogue>();
+	public ArrayList<Dialogue> tabDialogue = new ArrayList<Dialogue>();
 	/** 
 	 * ArrayList répertoriant les Indices du jeu
 	 */
-	ArrayList<Indice> tabIndice = new ArrayList<Indice>();
+	public ArrayList<Indice> tabIndice = new ArrayList<Indice>();
 	/** 
 	 * ArrayList répertoriant les Indices que le joueur a trouvé
 	 */
@@ -129,6 +129,10 @@ public class Jeu {
 		return this.listeIndice.size();
 	}
 
+	public void setZoneCourante(Zone z){
+        zoneCourante=z;
+    }
+	
 	/**
 	 * Initialisation des indices du jeu
 	 */
@@ -710,7 +714,7 @@ public class Jeu {
 	 * En fonction de la zone courante et des objets presents dans l'inventaire
 	 * on affiche une question
 	 */
-	private void question() {
+	public void question() {
 		for (int i = 0; i < tabDialogue.size(); i++) {
 			if (tabDialogue.get(i).getNumeroDialogue() == 1 || tabDialogue.get(i).getNumeroDialogue() == 2 || tabDialogue.get(i).getNumeroDialogue() == 3) {
 				gui.afficher(tabDialogue.get(i).getDialogueTexte());

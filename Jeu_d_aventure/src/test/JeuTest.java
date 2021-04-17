@@ -1,4 +1,4 @@
-package Jeu;
+package test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
@@ -7,9 +7,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import jeu.Dialogue;
 import jeu.GUI;
 import jeu.Jeu;
-import sun.applet.Main;
+import jeu.Zone;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -184,8 +185,10 @@ class JeuTest {
         String zc=z.descriptionLongue();
         assertEquals(zc,z.descriptionLongue());
     }
-    @Test
-   /* void  afficherMessageDeBienvenue(){
+    
+    
+   /* @Test
+    void  afficherMessageDeBienvenue(){
         gui.afficher("Bienvenue");
         assertEquals("Bienvenue",gui.afficher("Bienvenue"));
     }*/
