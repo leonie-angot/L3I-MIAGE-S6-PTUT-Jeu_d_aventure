@@ -1252,7 +1252,7 @@ public class Jeu
 				}
 				gui.afficher();
 				break;
-			case "T": case "test":
+			case "T": case "TEST":
 				try
 				{
 					test();
