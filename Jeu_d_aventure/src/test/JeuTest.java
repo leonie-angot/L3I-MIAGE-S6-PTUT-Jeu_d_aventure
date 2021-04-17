@@ -1,4 +1,4 @@
-package tests;
+package Jeu;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
@@ -134,7 +134,7 @@ class JeuTest {
     }
     @Test
     void testQuestion(){
-        String qst="Bonjour, vous devez être le détective qui travaille sur cette enquête.\\n\" + \" | \" + \"En quoi puis-je vous aider ?\"";
+        String qst="Bonjour, vous devez Ãªtre le dÃ©tective qui travaille sur cette enquÃªte.\\n\" + \" | \" + \"En quoi puis-je vous aider ?\"";
         Zone z=new Zone("l'Entree", "1-Entree.jpg" );
         jeu.setZoneCourante(z);
         jeu.question();
@@ -143,7 +143,7 @@ class JeuTest {
     @Test
     void testReponse(){
         int n=3;
-        String test="4. Est-ce que cette boucle d'oreille est à  vous ?";
+        String test="4. Est-ce que cette boucle d'oreille est Ã Â  vous ?";
         assertEquals(test,jeu.tabDialogue.get(n).getDialogueTexte());
     }
 
